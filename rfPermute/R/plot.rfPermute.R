@@ -3,6 +3,7 @@
 #' each predictor variable from the object produced by a 
 #' call to \code{rfPermute}.
 #' ---extra line
+#' ---- another line
 #'
 #' @title Plot Random Forest importance null distributions.
 #' @export plot.rfPermute
