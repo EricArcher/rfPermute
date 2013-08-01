@@ -1,0 +1,17 @@
+dir()
+library(devtools)
+check("rfPermute")
+x <- options("mc.cores")
+str(x)
+x <- options
+x
+x <- options()
+str(x)
+x <- options$mc.cores
+x <- options("width")
+str(x)
+x <- options("width")[[1]]
+str(x)
+check("rfPermute")
+check("rfPermute")
+check("rfPermute")
