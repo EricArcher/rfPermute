@@ -26,8 +26,8 @@
   significant p-values as estimated in rfPermute.
 }
 \details{
-  The function will generate an panel of plots, one for
-  each importance type.
+  The function will generate a panel of plots, one for each
+  importance type.
 }
 \author{
   Eric Archer <eric.archer@noaa.gov>

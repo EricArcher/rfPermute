@@ -2,7 +2,7 @@
 #'
 #' @title Plot proximity scores from a Random Forest object.
 #' @export proximity.plot
-#' @usage proximity.plot(rf, dim.x = 1, dim.y = 2, legend.loc = NULL, grp.cols = NULL)
+#' @usage proximity.plot(rf, dim.x = 1, dim.y = 2, legend.loc = NULL, grp.cols = NULL, circle.size = 4)
 #' @param rf A \code{randomForest} object.
 #' @param dim.x,dim.y Numeric values giving x and y dimensions to plot from multidimensional scaling of proximity scores.
 #' @param legend.loc Character keyword specifying location of legend. See \link{legend}.
@@ -14,10 +14,10 @@
 #' @author Eric Archer <eric.archer@@noaa.gov>
 
 proximity.plot <- function(rf, dim.x = 1, dim.y = 2, legend.loc = NULL, grp.cols = NULL, circle.size = 4) {
-  stopifnot(require(rfPermute, quietly = TRUE))
   prox.cmd <- cmdscale(1 - rf$proximity, k = max(c(dim.x, dim.y)))[, c(dim.x, dim.y)]
   if(is.null(grp.cols)) grp.cols <- rainbow(length(levels(rf$y)))
-  plot(prox.cmd[, 1], prox.cmd[, 2], bg = grp.cols[as.numeric(rf$y)], pch = 21, 
+  bg.col <- grp.cols[as.numeric(rf$y)]
+  plot(prox.cmd[, 1], prox.cmd[, 2], bg = bg.col, pch = 21, 
        xlab = paste("Dimension", dim.x), ylab = paste("Dimension", dim.y)
   )
   
@@ -31,7 +31,10 @@ proximity.plot <- function(rf, dim.x = 1, dim.y = 2, legend.loc = NULL, grp.cols
   
   if(!is.null(circle.size) & is.numeric(circle.size)) {
     correct <- rf$y == rf$predicted
-    points(prox.cmd[correct, 1], prox.cmd[correct, 2], col = "black", pch = 1, cex = circle.size)
+    pt.col <- bg.col[correct]
+    pt.col <- grp.cols[as.numeric(rf$predicted)]
+    points(prox.cmd[, 1], prox.cmd[, 2], col = pt.col, pch = 1, cex = circle.size)
+    #points(prox.cmd[correct, 1], prox.cmd[correct, 2], col = pt.col, pch = 1, cex = circle.size)
   }
   
   invisible(prox.cmd)

@@ -3,7 +3,7 @@
 \title{Plot proximity scores from a Random Forest object.}
 \usage{
   proximity.plot(rf, dim.x = 1, dim.y = 2, legend.loc =
-    NULL, grp.cols = NULL)
+    NULL, grp.cols = NULL, circle.size = 4)
 }
 \arguments{
   \item{rf}{A \code{randomForest} object.}
