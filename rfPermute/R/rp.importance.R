@@ -29,7 +29,7 @@ rp.importance <- function(x, sort.by = "MeanDecreaseAccuracy", decreasing = T) {
   pval <- x$null.dist$pval
   colnames(pval) <- paste(colnames(pval), ".pval", sep = "")
   pred <- rownames(imp)
-  vals <- do.call(cbind, lapply(1:ncol(imp), function(i) cbind(imp[, i, drop = F], pval[, i, drop = F])))
+  vals <- do.call(cbind, lapply(1:ncol(imp), function(i) cbind(imp[, i, drop = FALSE], pval[, i, drop = FALSE])))
   
   not.found <- sort.by[!(sort.by %in% colnames(vals))]
   if(length(not.found) > 0) {
@@ -37,9 +37,9 @@ rp.importance <- function(x, sort.by = "MeanDecreaseAccuracy", decreasing = T) {
     stop(paste("sort.by: ", not.found, " not found", sep = ""))
   }
   
-  order.list <- lapply(sort.by, function(i) vals[, i])
+  order.list <- lapply(sort.by, function(i) vals[, i, drop = FALSE])
   order.list <- c(order.list, decreasing = decreasing)
-  imp <- vals[do.call(order, order.list), ]
+  imp <- vals[do.call(order, order.list), , drop = FALSE]
   class(imp) <- c("rp.importance", class(imp))
   imp
 }
