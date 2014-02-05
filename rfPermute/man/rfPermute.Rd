@@ -4,12 +4,11 @@
 \alias{rfPermute.formula}
 \title{Estimate permutation p-values for importance metrics.}
 \usage{
-  rfPermute(x, ...)
+rfPermute(x, ...)
 
-  \method{rfPermute}{default}(x, y, \dots, nrep = 100)
+\method{rfPermute}{default}(x, y, \dots, nrep = 100)
 
-  \method{rfPermute}{formula}(formula, data = NULL, \dots,
-    subset, na.action = na.fail, nrep = 100)
+\method{rfPermute}{formula}(formula, data = NULL, \dots, subset, na.action = na.fail, nrep = 100)
 }
 \arguments{
   \item{x,y,formula,data,subset,na.action,\dots}{See
@@ -20,37 +19,37 @@
   (default = 100).}
 }
 \value{
-  An \code{rfPermute} object which contains all of the
-  components of a \code{randomForest} object plus:
-  \item{null.dist}{A list containing three matrices. The
-  first two matrices are null distributions for the
-  importance metrics (\%IncMSE and IncNodePurity for
-  regression models, and MeanDecreaseAccuracy and
-  MeanDecreaseGini for classification models) and have
-  \code{nrep} rows and one column for each predictor
-  variable. The third matrix (\code{pval}) has one row for
-  each predictor variable and one column for each
-  importance metric. The values are the permutation
-  p-values for the respective importance metrics calculated
-  as: \eqn{(N(rep >= obs) + 1) / (nrep + 1)}.  }
+An \code{rfPermute} object which contains all of the
+components of a \code{randomForest} object plus:
+\item{null.dist}{A list containing three matrices. The
+first two matrices are null distributions for the
+importance metrics (\%IncMSE and IncNodePurity for
+regression models, and MeanDecreaseAccuracy and
+MeanDecreaseGini for classification models) and have
+\code{nrep} rows and one column for each predictor
+variable. The third matrix (\code{pval}) has one row for
+each predictor variable and one column for each importance
+metric. The values are the permutation p-values for the
+respective importance metrics calculated as: \eqn{(N(rep >=
+obs) + 1) / (nrep + 1)}.  }
 }
 \description{
-  Estimate significance of importance metrics for a Random
-  Forest model by permuting the response variable.
-  Produces null distribution of importance metrics for each
-  predictor variable and p-value of observed.
+Estimate significance of importance metrics for a Random
+Forest model by permuting the response variable.  Produces
+null distribution of importance metrics for each predictor
+variable and p-value of observed.
 }
 \details{
-  All other parameters are as defined in
-  \code{randomForest.formula}. A Random Forest model is
-  first created as normal to calculate the observed values
-  of variable importance. \code{rfPermute} then permutes
-  the response variable \code{nrep} times, with a new
-  Random Forest model built for each permutation step.
-  Permutations are done using the \code{\link{mclapply}}
-  function in the package \code{\link{parallel}}. Set
-  \code{options("mc.cores")} to the number of cores desired
-  beforehand.
+All other parameters are as defined in
+\code{randomForest.formula}. A Random Forest model is first
+created as normal to calculate the observed values of
+variable importance. \code{rfPermute} then permutes the
+response variable \code{nrep} times, with a new Random
+Forest model built for each permutation step. Permutations
+are done using the \code{\link{mclapply}} function in the
+package \code{\link{parallel}}. Set
+\code{options("mc.cores")} to the number of cores desired
+beforehand.
 }
 \examples{
 # A regression model using the ozone example
@@ -61,14 +60,14 @@
   plot(ozone.rfP, imp.type = 1) # Plot the null distributions and observed values.
 }
 \author{
-  Eric Archer <eric.archer@noaa.gov>
+Eric Archer <eric.archer@noaa.gov>
 }
 \seealso{
-  \code{\link{plot.rfPermute}} for plotting null
-  distributions from the \code{rfPermute} object
+\code{\link{plot.rfPermute}} for plotting null
+distributions from the \code{rfPermute} object
 
-  \code{\link{randomForest}}, \code{\link{mclapply}} in
-  package \code{\link{parallel}}
+\code{\link{randomForest}}, \code{\link{mclapply}} in
+package \code{\link{parallel}}
 }
 \keyword{classif}
 \keyword{regression}

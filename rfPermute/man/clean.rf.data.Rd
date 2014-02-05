@@ -2,7 +2,7 @@
 \alias{clean.rf.data}
 \title{Clean RandomForest input data}
 \usage{
-  clean.rf.data(x, y, data, max.levels = 30)
+clean.rf.data(x, y, data, max.levels = 30)
 }
 \arguments{
   \item{x}{columns used as predictor variables as character
@@ -17,12 +17,12 @@
   variable 'y'}
 }
 \value{
-  a data.frame containing cleaned data
+a data.frame containing cleaned data
 }
 \description{
-  Clean RandomForest input data
+Clean RandomForest input data
 }
 \author{
-  Eric Archer <eric.archer@noaa.gov>
+Eric Archer <eric.archer@noaa.gov>
 }
 

@@ -40,7 +40,9 @@ rfPermute.default <- function(x, y, ..., nrep = 100) {
     
     # create null distribution for each variable  
     rf$null.dist <- sapply(imp.names, function(imp.type) {
-      t(sapply(1:length(importance.perm), function(i) importance.perm[[i]][, imp.type]))
+      null.dist <- t(sapply(1:length(importance.perm), function(i) importance.perm[[i]][, imp.type, drop = FALSE]))
+      colnames(null.dist) <- rownames(rf$importance)
+      null.dist
     }, simplify = FALSE)
     
     # calculate p-value of observed importance metrics
