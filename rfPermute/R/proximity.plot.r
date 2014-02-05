@@ -30,11 +30,8 @@ proximity.plot <- function(rf, dim.x = 1, dim.y = 2, legend.loc = NULL, grp.cols
   if(!is.null(legend.loc)) legend(legend.loc, legend = levels(rf$y), pch = 21, pt.bg = grp.cols)
   
   if(!is.null(circle.size) & is.numeric(circle.size)) {
-    correct <- rf$y == rf$predicted
-    pt.col <- bg.col[correct]
     pt.col <- grp.cols[as.numeric(rf$predicted)]
     points(prox.cmd[, 1], prox.cmd[, 2], col = pt.col, pch = 1, cex = circle.size)
-    #points(prox.cmd[correct, 1], prox.cmd[correct, 2], col = pt.col, pch = 1, cex = circle.size)
   }
   
   invisible(prox.cmd)
