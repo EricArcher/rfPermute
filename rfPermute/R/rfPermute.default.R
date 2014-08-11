@@ -1,5 +1,4 @@
 #' @rdname rfPermute
-#' @usage \method{rfPermute}{default}(x, y, \dots, nrep = 100, num.cores = 1)
 
 rfPermute.default <- function(x, y, ..., nrep = 100, num.cores = 1) {  
   orig.call <- match.call()

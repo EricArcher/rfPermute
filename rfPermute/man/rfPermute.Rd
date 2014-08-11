@@ -7,9 +7,10 @@
 \usage{
 rfPermute(x, ...)
 
-\method{rfPermute}{default}(x, y, \dots, nrep = 100, num.cores = 1)
+\method{rfPermute}{default}(x, y, ..., nrep = 100, num.cores = 1)
 
-\method{rfPermute}{formula}(formula, data = NULL, \dots, subset, na.action = na.fail, nrep = 100, num.cores = 1)
+\method{rfPermute}{formula}(formula, data = NULL, ..., subset,
+  na.action = na.fail, nrep = 100, num.cores = 1)
 }
 \arguments{
 \item{x,y,formula,data,subset,na.action,\dots}{See \code{\link{randomForest}} for definitions.}
