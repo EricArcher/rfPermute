@@ -1,27 +1,20 @@
-#' Extract a matrix of the observed importance scores
-#' and p-values from the object produced by a 
-#' call to \code{rfPermute}.
-#'
-#' @title Extract rfPermute importance scores and p-values.
 #' @export rp.importance
-#' @usage rp.importance(x, sort.by = "MeanDecreaseAccuracy", decreasing = T)
+#' 
+#' @title Extract rfPermute Importance Scores and p-values.
+#' @description Extract a matrix of the observed importance scores
+#'   and p-values from the object produced by a call to \code{rfPermute}
+#' 
 #' @param x An object produced by a call to \code{rfPermute}.
 #' @param sort.by character vector giving the importance metric(s) or p-values to sort by.
 #' @param decreasing logical. Should the sort order be increasing or decreasing?
+#' 
 #' @details p-values can be given to the \code{sort.by} argument by adding '.pval' to the 
 #'   column name of the desired column from the \code{importance} element of the \code{rfPermute}
-#'   object
-#' @author Eric Archer <eric.archer@@noaa.gov>
+#'   object.
+#'   
+#' @author Eric Archer \email{eric.archer@@noaa.gov}
 
-rp.importance <- function(x, sort.by = "MeanDecreaseAccuracy", decreasing = T) {
-  # Extract matrix of importance scores and p-values
-  #
-  # 'x': an object of class 'rfPermute' with a 'null.dist' element
-  # 'sort.by': either a character or numeric vector of the importance metrics to sort by
-  # 'decreasing': whether to sort importance scores in decreasing order
-  #
-  #  11/30/2012
-  
+rp.importance <- function(x, sort.by = "MeanDecreaseAccuracy", decreasing = TRUE) {  
   if(!inherits(x, "rfPermute")) stop("'x' is not of class 'rfPermute'")
   if(!is.character(sort.by) & !is.vector(sort.by)) stop("'sort.by' is not a character vector")
   
