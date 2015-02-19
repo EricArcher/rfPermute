@@ -42,7 +42,7 @@
 #' @examples
 #'   # A regression model using the ozone example
 #'   data(airquality)
-#'   ozone.rfP <- rfPermute(Ozone ~ ., data = airquality, ntree = 500, na.action = na.omit, nrep = 100)
+#'   ozone.rfP <- rfPermute(Ozone ~ ., data = airquality, ntree = 500, na.action = na.omit, nrep = 50)
 #'   print(ozone.rfP$importance)  # The original importance metrics.
 #'   print(ozone.rfP$null.dist$pval) # The p-values for each variable.
 #'   plot(ozone.rfP, imp.type = 1) # Plot the null distributions and observed values.
