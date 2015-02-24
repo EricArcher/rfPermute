@@ -4,7 +4,7 @@
 \alias{plot.rfPermute}
 \title{Plot Random Forest Importance Null Distributions.}
 \usage{
-\method{plot}{rfPermute}(x, imp.type, ...)
+\method{plot}{rfPermute}(x, imp.type = 1, ...)
 }
 \arguments{
 \item{x}{An object produced by a call to \code{\link{rfPermute}}.}

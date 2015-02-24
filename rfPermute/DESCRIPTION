@@ -1,9 +1,9 @@
 Package: rfPermute
 Type: Package
-Title: Estimate Permutation p-values for Random Forest Importance
-    Metrics.
-Version: 1.6.2
-Date: 2015-02-19 
+Title: Estimate Permutation p-Values for Random Forest Importance
+    Metrics
+Version: 1.6.3
+Date: 2015-02-22 
 Author: Eric Archer
 Maintainer: Eric Archer <eric.archer@noaa.gov>
 Depends:

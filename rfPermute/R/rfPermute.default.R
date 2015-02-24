@@ -1,5 +1,7 @@
 #' @rdname rfPermute
-
+#' 
+#' @export rfPermute.default
+#' @export
 rfPermute.default <- function(x, y, ..., nrep = 100, num.cores = 1) {  
   orig.call <- match.call()
   orig.call$nrep <- NULL

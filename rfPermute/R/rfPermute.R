@@ -1,5 +1,4 @@
 #' @rdname rfPermute
-#' @export rfPermute rfPermute.default rfPermute.formula
 #' @importFrom randomForest randomForest
 #' @importFrom parallel mclapply
 #' 
@@ -46,5 +45,6 @@
 #'   print(ozone.rfP$importance)  # The original importance metrics.
 #'   print(ozone.rfP$null.dist$pval) # The p-values for each variable.
 #'   plot(ozone.rfP, imp.type = 1) # Plot the null distributions and observed values.
-
+#'
+#' @export
 rfPermute <- function(x, ...) UseMethod("rfPermute")

@@ -4,7 +4,8 @@
 \alias{plot.rp.importance}
 \title{Plot Random Forest Importance Distributions.}
 \usage{
-\method{plot}{rp.importance}(x, alpha = 0.05, sig.only = FALSE, n = NULL, main = NULL, ...)
+\method{plot}{rp.importance}(x, alpha = 0.05, sig.only = FALSE, n = NULL,
+  main = NULL, ...)
 }
 \arguments{
 \item{x}{An object produced by a call to \code{\link{rp.importance}}.}
