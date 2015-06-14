@@ -1,6 +1,5 @@
 #' @rdname rfPermute
 #' @importFrom randomForest randomForest
-#' @importFrom parallel mclapply
 #' 
 #' @title Estimate Permutation p-values for Random Forest Importance Metrics.
 #' @description Estimate significance of importance metrics for
@@ -12,8 +11,6 @@
 #' @param x,y,formula,data,subset,na.action,\dots See \code{\link{randomForest}} for definitions.
 #' @param nrep Number of permutation replicates to run to construct 
 #'   null distribution and calculate p-values (default = 100).
-#' @param num.cores Number of cores desired. Is used by the \code{\link[parallel]{mclapply}} function 
-#' for permutations. 
 #'
 #' @details All other parameters are as defined in \code{randomForest.formula}. A Random Forest model is
 #'   first created as normal to calculate the observed values of variable importance. \code{rfPermute}
