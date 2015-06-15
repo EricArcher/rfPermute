@@ -3,7 +3,7 @@ Type: Package
 Title: Estimate Permutation p-Values for Random Forest Importance
     Metrics
 Version: 1.7
-Date: 2015-06-14
+Date: 2015-06-15
 Author: Eric Archer
 Maintainer: Eric Archer <eric.archer@noaa.gov>
 Depends:

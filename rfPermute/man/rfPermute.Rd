@@ -55,8 +55,8 @@ All other parameters are as defined in \code{randomForest.formula}. A Random For
 Eric Archer \email{eric.archer@noaa.gov}
 }
 \seealso{
-\code{\link{plot.rfPermute}} for plotting null distributions from the \code{rfPermute} object
-
+\code{\link{plot.rfPermute}} for plotting null distributions from the \code{rfPermute} objects. \cr
+\code{\link{rp.combine}} for combining multiple \code{rfPermute} objects.\cr
 \code{\link{randomForest}}
 }
 \keyword{classif}

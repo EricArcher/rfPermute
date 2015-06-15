@@ -31,8 +31,9 @@
 #' 
 #' @keywords tree classif regression
 #' 
-#' @seealso \code{\link{plot.rfPermute}} for plotting null distributions from the \code{rfPermute} object
-#' 
+#' @seealso 
+#' \code{\link{plot.rfPermute}} for plotting null distributions from the \code{rfPermute} objects. \cr
+#' \code{\link{rp.combine}} for combining multiple \code{rfPermute} objects.\cr
 #' \code{\link{randomForest}}
 #'
 #' @examples
