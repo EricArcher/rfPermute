@@ -5,7 +5,6 @@
 * Added this NEWS.md
 * Added README.md
 * Added num.cores argument to rfPermute to take advantage of multi-threading 
-
 ## Changes
 
 * Added internal keyword to calc.imp.pval to keep it from indexing
