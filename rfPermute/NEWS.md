@@ -1,3 +1,12 @@
+# rfPermute 1.9.3
+
+## Additions
+
+## Bug Fixes
+
+* Fixed logic error in clean.rf.data where fixed predictors were not removed
+
+
 # rfPermute 1.9.2
 
 ## Additions

@@ -21,7 +21,7 @@ clean.rf.data <- function(x, y, data, max.levels = 30) {
   delete.pred <- character(0)
   for (pred in x) {
     pred.vec <- sub.df[[pred]]
-    if (length(unique(pred.vec)) == 0) delete.pred <- c(delete.pred, pred)
+    if (length(unique(pred.vec)) <= 1) delete.pred <- c(delete.pred, pred)
     if (is.factor(pred.vec) & (nlevels(pred.vec) > max.levels)) delete.pred <- c(delete.pred, pred)
   }
   delete.pred <- unique(delete.pred)
