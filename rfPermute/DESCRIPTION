@@ -6,8 +6,8 @@ Description: Estimate significance of importance metrics
     variable. Produces null distribution of importance
     metrics for each predictor variable and p-value of
     observed.
-Version: 1.9.2
-Date: 2015-07-29
+Version: 1.9.3
+Date: 2015-10-07
 Author: Eric Archer
 Maintainer: Eric Archer <eric.archer@noaa.gov>
 Depends: R (>= 3.2.0), randomForest, ggplot2
