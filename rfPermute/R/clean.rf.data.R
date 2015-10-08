@@ -24,21 +24,14 @@ clean.rf.data <- function(x, y, data, max.levels = 30) {
   
   delete.pred <- sapply(x, function(pred){
     pred.vec <- sub.df[[pred]]
-<<<<<<< HEAD
     if (length(unique(pred.vec)) <= 1) return(pred)
     if (is.factor(pred.vec) & (nlevels(pred.vec) > max.levels)) return(pred)
     NULL
   })
   delete.pred <- unlist(delete.pred)
   delete.pred <- delete.pred[!is.null(delete.pred)]
-=======
-    if (length(unique(pred.vec)) <= 1) delete.pred <- c(delete.pred, pred)
-    if (is.factor(pred.vec) & (nlevels(pred.vec) > max.levels)) delete.pred <- c(delete.pred, pred)
-  }
-  delete.pred <- unique(delete.pred)
->>>>>>> e49200f6516577b39aeae9b2ff25132bdb4b50a7
+  
   if (length(delete.pred) > 0) x <- setdiff(x, delete.pred)
-
   if (is.factor(sub.df[[y]]) & nlevels(sub.df[[y]][, drop = TRUE]) < 2) return(NULL)
   sub.df[, c(y, x)]
 }
