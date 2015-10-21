@@ -51,5 +51,5 @@ plot.rp.importance <- function(x, alpha = 0.05, sig.only = FALSE,
            scale_fill_manual(values = c("FALSE" = "black", "TRUE" = "red"))
     )
   })
-  suppressWarnings(do.call(gridExtra::grid.arrange, c(imp.list, main = main)))
+  suppressWarnings(do.call(gridExtra::grid.arrange, c(imp.list, top = main)))
 }

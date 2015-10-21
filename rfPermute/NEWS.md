@@ -5,6 +5,7 @@
 ## Bug Fixes
 
 * Fixed logic error in clean.rf.data where fixed predictors were not removed
+* Fixed error in use of main argument in plot.rp.importance
 
 
 # rfPermute 1.9.2
@@ -14,6 +15,7 @@
 * Added this NEWS.md
 * Added README.md
 * Added num.cores argument to rfPermute to take advantage of multi-threading 
+
 ## Changes
 
 * Added internal keyword to calc.imp.pval to keep it from indexing
