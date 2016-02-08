@@ -4,6 +4,7 @@
 
 ## Bug Fixes
 
+* Fixed import declarations to avoid grid name clashes
 * Fixed logic error in clean.rf.data where fixed predictors were not removed
 * Fixed error in use of main argument in plot.rp.importance
 
