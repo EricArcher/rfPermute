@@ -14,6 +14,7 @@ exptd.err.rate <- function(rf) {
   if(!inherits(rf, "randomForest")) {
     stop("'rf' is not a randomForest or rfPermute object.")
   }
+  if(rf$type == "regression") stop("'rf' must be of a classification model")
   y.freq <- table(rf$y)
   exp.err <- 1 - y.freq / sum(y.freq)
   oob.err <- sum(exp.err * y.freq) / sum(y.freq)

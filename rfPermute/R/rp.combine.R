@@ -11,26 +11,27 @@
 #' @examples
 #' 
 #' data(iris)
-#' rp1 <- rfPermute(Species ~ ., iris, ntree=50, norm.votes=FALSE, nrep = 100)
-#' rp2 <- rfPermute(Species ~ ., iris, ntree=50, norm.votes=FALSE, nrep = 100)
-#' rp3 <- rfPermute(Species ~ ., iris, ntree=50, norm.votes=FALSE, nrep = 100)
+#' rp1 <- rfPermute(Species ~ ., iris, ntree = 50, norm.votes = FALSE, nrep = 100)
+#' rp2 <- rfPermute(Species ~ ., iris, ntree = 50, norm.votes = FALSE, nrep = 100)
+#' rp3 <- rfPermute(Species ~ ., iris, ntree = 50, norm.votes = FALSE, nrep = 100)
 #' rp.all <- rp.combine(rp1, rp2, rp3)
 #' plot(rp.all)
 #' 
+#' @importFrom abind abind
 #' @importFrom randomForest combine
 #' @export
 #' 
 rp.combine <- function(...) {
   rp.list <- list(...)
-  are.rp <- sapply(rp.list, function(x) inherits(x, c("rfPermute", "randomForest")))
+  are.rp <- sapply(rp.list, function(x) inherits(x, "rfPermute"))
   if(any(!are.rp)) stop("Argument must be a list of rfPermute objects.")
   
   rf <- do.call(combine, rp.list)
-  imp.types <- colnames(rf$importance)
-  rf$null.dist <- sapply(imp.types, function(imp) {
-    do.call(rbind, lapply(rp.list, function(rp) rp$null.dist[[imp]]))
-  }, simplify = FALSE)
-  rf$null.dist$pval <- calc.imp.pval(rf, imp.types)
+  rf$null.dist <- list(
+    unscaled = do.call(abind, c(lapply(rp.list, function(x) x$null.dist$unscaled), along = 3)),
+    scaled = do.call(abind, c(lapply(rp.list, function(x) x$null.dist$scaled), along = 3))
+  )
+  rf$pval <- .calcImpPval(rf)
   
   class(rf) <- c("rfPermute", "randomForest")
   return(rf)  

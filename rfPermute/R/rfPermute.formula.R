@@ -43,7 +43,11 @@ rfPermute.formula <- function(formula, data = NULL, ..., subset, na.action = na.
   rf$terms <- Terms
   if (!is.null(attr(m, "na.action"))) rf$na.action <- attr(m, "na.action")
   
-  class(rf) <- c("rfPermute", "randomForest.formula", "randomForest")
+  class(rf) <- if(nrep > 0) {
+    c("rfPermute", "randomForest.formula", "randomForest")
+  } else {
+    c("randomForest.formula", "randomForest")
+  }
+  
   return(rf)
 }
-

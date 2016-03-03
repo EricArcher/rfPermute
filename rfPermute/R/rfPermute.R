@@ -54,14 +54,3 @@
 #' @export
 #' 
 rfPermute <- function(x, ...) UseMethod("rfPermute")
-
-# #' @rdname rfPermute
-# #' @export
-# #' 
-# setMethod("print", "rfPermute",
-#   function(x, ...) { 
-#     randomForest:::print.randomForest(x)
-#     cat("\nImportance scores and p-values:\n")
-#     print(unclass(rp.importance(x)))
-#   }
-# )

@@ -33,17 +33,19 @@ proximity.plot <- function(rf, dim.x = 1, dim.y = 2, legend.loc = NULL, grp.cols
        xlab = paste("Dimension", dim.x), ylab = paste("Dimension", dim.y)
   )
   
-  loc.hull <- tapply(1:nrow(prox.cmd), rf$y, function(i) {
-    ch <- chull(prox.cmd[i, 1], prox.cmd[i, 2])
-    c(i[ch], i[ch[1]])
-  })
-  for(ch in 1:length(loc.hull)) lines(prox.cmd[loc.hull[[ch]], 1:2], col = grp.cols[ch])
-  
-  if(!is.null(legend.loc)) legend(legend.loc, legend = levels(rf$y), pch = 21, pt.bg = grp.cols)
-  
-  if(!is.null(circle.size) & is.numeric(circle.size)) {
-    pt.col <- grp.cols[as.numeric(rf$predicted)]
-    points(prox.cmd[, 1], prox.cmd[, 2], col = pt.col, pch = 1, cex = circle.size)
+  if(rf$type != "regression") {
+    loc.hull <- tapply(1:nrow(prox.cmd), rf$y, function(i) {
+      ch <- chull(prox.cmd[i, 1], prox.cmd[i, 2])
+      c(i[ch], i[ch[1]])
+    })
+    for(ch in 1:length(loc.hull)) lines(prox.cmd[loc.hull[[ch]], 1:2], col = grp.cols[ch])
+    
+    if(!is.null(legend.loc)) legend(legend.loc, legend = levels(rf$y), pch = 21, pt.bg = grp.cols)
+    
+    if(!is.null(circle.size) & is.numeric(circle.size)) {
+      pt.col <- grp.cols[as.numeric(rf$predicted)]
+      points(prox.cmd[, 1], prox.cmd[, 2], col = pt.col, pch = 1, cex = circle.size)
+    }
   }
   
   invisible(prox.cmd)

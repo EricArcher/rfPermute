@@ -16,9 +16,9 @@ Combines two or more ensembles of \code{rfPermute} objects into one, combining
 \examples{
 
 data(iris)
-rp1 <- rfPermute(Species ~ ., iris, ntree=50, norm.votes=FALSE, nrep = 100)
-rp2 <- rfPermute(Species ~ ., iris, ntree=50, norm.votes=FALSE, nrep = 100)
-rp3 <- rfPermute(Species ~ ., iris, ntree=50, norm.votes=FALSE, nrep = 100)
+rp1 <- rfPermute(Species ~ ., iris, ntree = 50, norm.votes = FALSE, nrep = 100)
+rp2 <- rfPermute(Species ~ ., iris, ntree = 50, norm.votes = FALSE, nrep = 100)
+rp3 <- rfPermute(Species ~ ., iris, ntree = 50, norm.votes = FALSE, nrep = 100)
 rp.all <- rp.combine(rp1, rp2, rp3)
 plot(rp.all)
 

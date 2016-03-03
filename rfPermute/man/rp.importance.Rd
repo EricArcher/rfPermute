@@ -4,10 +4,12 @@
 \alias{rp.importance}
 \title{Extract rfPermute Importance Scores and p-values.}
 \usage{
-rp.importance(x, sort.by = NULL, decreasing = TRUE)
+rp.importance(x, scale = TRUE, sort.by = NULL, decreasing = TRUE)
 }
 \arguments{
 \item{x}{An object produced by a call to \code{rfPermute}.}
+
+\item{scale}{For permutation based measures, should the measures be divided their "standard errors"?}
 
 \item{sort.by}{character vector giving the importance metric(s) or p-values to sort by.
 If \code{NULL}, defaults to \code{"MeanDecreaseAccuracy"} for classification models and 
