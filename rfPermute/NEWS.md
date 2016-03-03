@@ -1,5 +1,14 @@
 # rfPermute NEWS.md
 
+To install the latest version from GitHub:
+
+```r
+# make sure you have Rtools installed
+if (!require('devtools')) install.packages('devtools')
+# install from GitHub
+devtools::install_github('EricArcher/rfPermute/rfPermute')
+```
+
 ## Changes in 2.0:
 
 * Fixed bug with calculation of p-values not respecting importance measure scaling (division by standard deviations). New format of output of `rfPemute` has separate `$null.dist` and `$pval` elements, each with results for unscaled and scaled importance mesures. See ?rfPermute for more information.
