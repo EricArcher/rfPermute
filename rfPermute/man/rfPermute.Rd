@@ -21,17 +21,6 @@ null distribution and calculate p-values (default = 100).}
 
 \item{num.cores}{Number of CPUs to distribute permutation results over.}
 }
-\value{
-An \code{rfPermute} object which contains all of the components of a 
-  \code{randomForest} object plus:
-  \item{null.dist}{A list containing three matrices. The first two matrices are null distributions
-    for the importance metrics (\%IncMSE and IncNodePurity for regression models, and 
-    MeanDecreaseAccuracy and MeanDecreaseGini for classification models) and have 
-    \code{nrep} rows and one column for each predictor variable. The third matrix (\code{pval})
-    has one row for each predictor variable and one column for each importance metric. The values
-    are the permutation p-values for the respective importance metrics calculated as: \eqn{(N(rep >= obs) + 1) / (nrep + 1)}.
-  }
-}
 \description{
 Estimate significance of importance metrics for
 a Random Forest model by permuting the response
@@ -66,6 +55,7 @@ Eric Archer \email{eric.archer@noaa.gov}
 }
 \seealso{
 \code{\link{plot.rfPermute}} for plotting null distributions from the \code{rfPermute} objects. \cr
+\code{\link{rp.importance}} for extracting importance measures. \cr
 \code{\link{rp.combine}} for combining multiple \code{rfPermute} objects.\cr
 \code{\link{randomForest}}
 }
