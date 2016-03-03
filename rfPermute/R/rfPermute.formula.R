@@ -4,10 +4,13 @@
 #' @export rfPermute.formula
 #' @export
 #' 
-rfPermute.formula <- function(formula, data = NULL, ..., subset, na.action = na.fail, nrep = 100) {
+rfPermute.formula <- function(formula, data = NULL, ..., subset, 
+                              na.action = na.fail, nrep = 100) {
   if (!inherits(formula, "formula")) stop("method is only for formula objects")
   m <- match.call(expand.dots = FALSE)
-  if (any(c("xtest", "ytest") %in% names(m))) stop("xtest/ytest not supported through the formula interface")
+  if (any(c("xtest", "ytest") %in% names(m))) {
+    stop("xtest/ytest not supported through the formula interface")
+  }
   
   # extract formula terms
   names(m)[2] <- "formula"

@@ -1,8 +1,10 @@
 #' @title Combine rfPermute Objects
-#' @description Combines two or more ensembles of \code{rfPermute} objects into one, combining
-#' \code{randomForest} results, null distributions, and re-calculating p-values.
+#' @description Combines two or more ensembles of \code{rfPermute} objects into 
+#'   one, combining \code{randomForest} results, null distributions, 
+#'   and re-calculating p-values.
 #' 
-#' @param \dots two or more objects of class \code{rfPermute}, to be combined into one.
+#' @param \dots two or more objects of class \code{rfPermute}, to be combined 
+#'   into one.
 #' 
 #' @author Eric Archer \email{eric.archer@@noaa.gov}
 #' 
@@ -24,13 +26,12 @@
 rp.combine <- function(...) {
   rp.list <- list(...)
   are.rp <- sapply(rp.list, function(x) inherits(x, "rfPermute"))
-  if(any(!are.rp)) stop("Argument must be a list of rfPermute objects.")
+  if(any(!are.rp)) stop("some objects in '...' are not rfPermute results.")
   
   rf <- do.call(combine, rp.list)
-  rf$null.dist <- list(
-    unscaled = do.call(abind, c(lapply(rp.list, function(x) x$null.dist$unscaled), along = 3)),
-    scaled = do.call(abind, c(lapply(rp.list, function(x) x$null.dist$scaled), along = 3))
-  )
+  rf$null.dist <- sapply(c("unscaled", "scaled"), function(sc) {
+   do.call(abind, c(lapply(rp.list, function(x) x$null.dist[[sc]]), along = 3))
+  }, simplify = FALSE)
   rf$pval <- .calcImpPval(rf)
   
   class(rf) <- c("rfPermute", "randomForest")

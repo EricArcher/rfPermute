@@ -9,11 +9,12 @@ rp.importance(x, scale = TRUE, sort.by = NULL, decreasing = TRUE)
 \arguments{
 \item{x}{An object produced by a call to \code{rfPermute}.}
 
-\item{scale}{For permutation based measures, should the measures be divided their "standard errors"?}
+\item{scale}{For permutation based measures, should the measures be divided 
+their "standard errors"?}
 
-\item{sort.by}{character vector giving the importance metric(s) or p-values to sort by.
-If \code{NULL}, defaults to \code{"MeanDecreaseAccuracy"} for classification models and 
-\code{"\%IncMSE"} for regression models.}
+\item{sort.by}{character vector giving the importance metric(s) or p-values 
+to sort by. If \code{NULL}, defaults to \code{"MeanDecreaseAccuracy"} for 
+classification models and \code{"\%IncMSE"} for regression models.}
 
 \item{decreasing}{logical. Should the sort order be increasing or decreasing?}
 }
@@ -22,11 +23,14 @@ Extract a matrix of the observed importance scores
   and p-values from the object produced by a call to \code{rfPermute}
 }
 \details{
-p-values can be given to the \code{sort.by} argument by adding '.pval' to the 
-  column name of the desired column from the \code{importance} element of the \code{rfPermute}
-  object.
+p-values can be given to the \code{sort.by} argument by adding 
+  '.pval' to the column name of the desired column from the \code{importance} 
+  element of the \code{rfPermute} object.
 }
 \author{
 Eric Archer \email{eric.archer@noaa.gov}
+}
+\seealso{
+\code{\link{rfPermute}}
 }
 

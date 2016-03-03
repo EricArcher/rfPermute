@@ -14,40 +14,50 @@ rfPermute(x, ...)
   na.action = na.fail, nrep = 100)
 }
 \arguments{
-\item{x, y, formula, data, subset, na.action, \dots}{See \code{\link{randomForest}} for definitions.}
+\item{x, y, formula, data, subset, na.action, \dots}{See \code{\link{randomForest}} 
+for definitions.}
 
 \item{nrep}{Number of permutation replicates to run to construct 
 null distribution and calculate p-values (default = 100).}
 
 \item{num.cores}{Number of CPUs to distribute permutation results over.}
 }
+\value{
+An \code{rfPermute} object which contains all of the components of a 
+  \code{randomForest} object plus:
+  \item{null.dist}{A list containing two three-dimensional arrays of null 
+    distributions for \code{unscaled} and \code{scaled} importance measures.} 
+  \item{pval}{A three dimensional array containing permutation p-values for 
+    \code{unscaled} and \code{scaled} importance measures.}
+}
 \description{
-Estimate significance of importance metrics for
-a Random Forest model by permuting the response
-variable.  Produces null distribution of importance
-metrics for each predictor variable and p-value of
-observed.
+Estimate significance of importance metrics for a Random Forest 
+  model by permuting the response variable. Produces null distribution of 
+  importance metrics for each predictor variable and p-value of observed.
 }
 \details{
-All other parameters are as defined in \code{randomForest.formula}. A Random Forest model is
-  first created as normal to calculate the observed values of variable importance. \code{rfPermute}
-  then permutes the response variable \code{nrep} times, with a new Random Forest model built 
-  for each permutation step.
+All other parameters are as defined in \code{randomForest.formula}. 
+  A Random Forest model is first created as normal to calculate the observed 
+  values of variable importance. The response variable is then permuted 
+  \code{nrep} times, with a new Random Forest model built for each 
+  permutation step.
 }
 \examples{
   # A regression model using the ozone example
   data(airquality)
   ozone.rfP <- rfPermute(Ozone ~ ., data = airquality, ntree = 500, na.action = na.omit, nrep = 50)
   
-  # The importance metrics and their p-values
-  ozone.imp <- rp.importance(ozone.rfP)
-  print(ozone.imp)
-  
   # Plot the null distributions and observed values.
-  plot(ozone.rfP, imp.type = 1) 
+  layout(matrix(1:6, nrow = 2))
+  plot(ozone.rfP) 
+  layout(matrix(1))
   
-  # Plot the importance distributions and highlight significant predictors
-  plot(ozone.imp)
+  # Plot the unscaled importance distributions and highlight significant predictors
+  plot(rp.importance(ozone.rfP, scale = FALSE))
+  
+  # ... and the scaled measures
+  plot(rp.importance(ozone.rfP, scale = TRUE))
+
 
 }
 \author{

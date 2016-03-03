@@ -12,10 +12,10 @@ Author: Eric Archer
 Maintainer: Eric Archer <eric.archer@noaa.gov>
 Depends:
     R (>= 3.2.0),
-    ggplot2,
     randomForest
 Imports:
     abind,
+    ggplot2,
     graphics,
     grDevices,
     gridExtra,

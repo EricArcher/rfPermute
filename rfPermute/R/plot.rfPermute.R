@@ -43,11 +43,11 @@ plot.rfPermute <- function(x, imp.type = 1, scale = TRUE, ...) {
       o <- imp[pred, i]
       xlab <- if(is.character(i)) i else colnames(imp)[i]
       pval <- x$pval[pred, i, sc]
-      main <- c(paste("Variable:", pred), paste("P(null >= obs) =", sprintf("%0.3f", pval)))
+      main <- c(paste("Variable:", pred), 
+                paste("P(null >= obs) =", sprintf("%0.3f", pval)))
       plot(density(n), xlim = range(c(n, o)), xlab = xlab, main = main)
       abline(v = o, lwd = 2)
     }
   }
   par(op)
 }
-

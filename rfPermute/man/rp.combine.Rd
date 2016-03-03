@@ -7,11 +7,13 @@
 rp.combine(...)
 }
 \arguments{
-\item{\dots}{two or more objects of class \code{rfPermute}, to be combined into one.}
+\item{\dots}{two or more objects of class \code{rfPermute}, to be combined 
+into one.}
 }
 \description{
-Combines two or more ensembles of \code{rfPermute} objects into one, combining
-\code{randomForest} results, null distributions, and re-calculating p-values.
+Combines two or more ensembles of \code{rfPermute} objects into 
+  one, combining \code{randomForest} results, null distributions, 
+  and re-calculating p-values.
 }
 \examples{
 

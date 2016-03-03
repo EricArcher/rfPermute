@@ -1,9 +1,16 @@
+# Scale importance measures
+# imp: matrix of predictors x importance type
+# impSD: vector of standard deviation of importances for predictors
 .scaleImp <- function(imp, impSD) {
   imp[, -ncol(imp)] <- imp[, -ncol(imp), drop = FALSE] / 
     ifelse(impSD < .Machine$double.eps, 1, impSD)
   return(imp)
 }
 
+# Make a 3-dimensional array of importance values
+# x: initial 2-dimensional array of predictors x importance type
+# z.dim: dimensionality of z axis
+# z.dimnames: dimnames of z axis
 .makeImpArray <- function(x, z.dim, z.dimnames) {
   array(
     x, dim = c(nrow(x), ncol(x), z.dim), 
@@ -11,6 +18,8 @@
   )
 }
 
+# Calculate importance p-values from null distribution and observed importances
+# rp: rfPermute object
 #' @importFrom swfscMisc pVal
 .calcImpPval <- function(rp) {
   calcPval <- function(obs, null) {

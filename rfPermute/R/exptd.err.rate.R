@@ -1,10 +1,10 @@
 #' @title Expected Error Rate
-#' @description Calculate expected OOB error rates based on random assignment 
-#'   and class sizes (prior).
+#' @description Calculate expected OOB error rates for randomForest 
+#'   classification model based on random assignment and class sizes (prior).
 #' 
-#' @param rf a \code{link{randomForest}} or \code{\link{rfPermute}} object.
+#' @param rf an object inheriting from \code{link{randomForest}}.
 #' 
-#' @return a vector of expected error rates.
+#' @return a vector of expected error rates for each class.
 #' 
 #' @author Eric Archer \email{eric.archer@@noaa.gov}
 #' 
