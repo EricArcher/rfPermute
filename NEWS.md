@@ -6,8 +6,12 @@ To install the latest version from GitHub:
 # make sure you have Rtools installed
 if (!require('devtools')) install.packages('devtools')
 # install from GitHub
-devtools::install_github('EricArcher/rfPermute/rfPermute')
+devtools::install_github('EricArcher/rfPermute')
 ```
+
+## Changes in 2.0.1:
+
+* Fixed bug in plot.rfPermute that was reporting the p-value incorrectly at the top of the figure.
 
 ## Changes in 2.0:
 
