@@ -19,6 +19,7 @@ Imports:
     graphics,
     grDevices,
     gridExtra,
+    reshape2,
     stats,
     swfscMisc
 License: GPL (>= 2)
