@@ -15,7 +15,7 @@ impHeatmap <- function(rf, ranks = TRUE) {
   classes <- levels(rf$y)
   pred.lvls <- rownames(imp)[order(imp[, "MeanDecreaseAccuracy"])]
   imp$predictor <- rownames(imp)
-  for(x in classes) imp[[x]] <- rank(-imp[[x]])
+  if(ranks) for(x in classes) imp[[x]] <- rank(-imp[[x]])
   imp <- melt(imp[, c("predictor", classes)], id.vars = "predictor",
               variable.name = "class", value.name = "value")
   imp$class <- factor(imp$class, levels = levels(rf$y))
@@ -24,7 +24,7 @@ impHeatmap <- function(rf, ranks = TRUE) {
   ggplot(imp, aes_string("class", "predictor")) +
     geom_raster(aes_string(fill = "value")) +
     scale_fill_gradient2(low = "green", mid = "yellow", high = "red",
-                         midpoint = median(imp$value)) +
+                         midpoint = mean(range(imp$value))) +
     labs(x = "", y = "") +
     theme(
       axis.text.x = element_text(angle = 45, hjust = 1),
