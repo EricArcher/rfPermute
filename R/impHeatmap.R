@@ -17,6 +17,7 @@
 #' @examples
 #' data(mtcars)
 #' rf <- randomForest(factor(am) ~ ., mtcars, importance = TRUE)
+#' importance(rf)
 #' impHeatmap(rf, xlab = "Transmission", ylab = "Predictor")
 #' 
 #' @importFrom reshape2 melt
@@ -25,11 +26,11 @@
 #' 
 impHeatmap <- function(rf, ranks = TRUE, plot = TRUE, xlab = NULL, ylab = NULL) {
   if(rf$type != "classification") stop("'rf' must be a classification model")
-  if(is.null(rf$importanceSD)) stop("'rf' must be run with 'importance = TRUE'")
+  classes <- levels(rf$y)
+  if(!all(classes %in% colnames(rf$importance))) stop("'rf' must be run with 'importance = TRUE'")
   
   # format importance data.frame
   imp <- data.frame(rf$importance, check.names = FALSE)
-  classes <- levels(rf$y)
   imp$predictor <- rownames(imp)
   if(ranks) for(x in classes) imp[[x]] <- rank(-imp[[x]])
   imp <- melt(imp[, c("predictor", classes)], id.vars = "predictor",
