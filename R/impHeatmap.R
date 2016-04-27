@@ -20,36 +20,40 @@
 #' impHeatmap(rf, xlab = "Transmission", ylab = "Predictor")
 #' 
 #' @importFrom reshape2 melt
-#' @importFrom ggplot2 ggplot geom_raster scale_fill_gradient2 aes_string xlab ylab theme element_blank
+#' @importFrom ggplot2 ggplot geom_raster scale_fill_gradient2 aes_string xlab ylab theme element_blank guide_colorbar
 #' @export
 #' 
 impHeatmap <- function(rf, ranks = TRUE, plot = TRUE, xlab = NULL, ylab = NULL) {
   if(rf$type != "classification") stop("'rf' must be a classification model")
   if(is.null(rf$importanceSD)) stop("'rf' must be run with 'importance = TRUE'")
+  
+  # format importance data.frame
   imp <- data.frame(rf$importance, check.names = FALSE)
   classes <- levels(rf$y)
-  pred.lvls <- rownames(imp)[order(imp[, "MeanDecreaseAccuracy"])]
   imp$predictor <- rownames(imp)
   if(ranks) for(x in classes) imp[[x]] <- rank(-imp[[x]])
   imp <- melt(imp[, c("predictor", classes)], id.vars = "predictor",
               variable.name = "class", value.name = "value")
   imp$class <- factor(imp$class, levels = levels(rf$y))
-  imp$predictor <- factor(imp$predictor, levels = pred.lvls)
+  imp.val <- rf$importance[, "MeanDecreaseAccuracy"]
+  imp$predictor <- factor(imp$predictor, levels = names(sort(imp.val)))
 
   g <- ggplot(imp, aes_string("class", "predictor")) +
-    geom_raster(aes_string(fill = "value")) +
-    scale_fill_gradient2(low = "#a50026", mid = "#ffffbf", high = "#313695",
-                         midpoint = mean(range(imp$value))) 
-  g <- if(is.null(xlab)) {
-    g + theme(axis.title.x = element_blank())
+    geom_raster(aes_string(fill = "value"))
+  g <- g + if(ranks) {
+    scale_fill_gradient2(
+      "Rank", low = "#a50026", mid = "#ffffbf", high = "#313695",
+       midpoint = mean(range(imp$value)), guide = guide_colorbar(reverse = TRUE)
+    )
   } else {
-    g + xlab(xlab)
+    scale_fill_gradient2(
+      "MeanDecreaseAccuracy", low = "#313695", mid = "#ffffbf", high = "#a50026",
+      midpoint = mean(range(imp$value))
+    )
   }
-  g <- if(is.null(ylab)) {
-    g + theme(axis.title.y = element_blank())
-  } else {
-    g + ylab(ylab)
-  }
+  g <- g + if(is.null(xlab)) theme(axis.title.x = element_blank()) else xlab(xlab)
+  g <- g + if(is.null(ylab)) theme(axis.title.y = element_blank()) else ylab(ylab)
+  
   if(plot) print(g)
   invisible(g)
 }
