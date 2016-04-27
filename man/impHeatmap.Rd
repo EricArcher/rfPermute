@@ -4,15 +4,27 @@
 \alias{impHeatmap}
 \title{Importance Heatmap}
 \usage{
-impHeatmap(rf, ranks = TRUE)
+impHeatmap(rf, ranks = TRUE, plot = TRUE, xlab = NULL, ylab = NULL)
 }
 \arguments{
 \item{rf}{an object inheriting from \code{link{randomForest}}.}
 
 \item{ranks}{plot ranks instead of actual importance scores?}
+
+\item{plot}{print the plot?}
+
+\item{xlab, ylab}{labels for the x and y axes.}
+}
+\value{
+the \code{ggplot} object is invisibly returned.
 }
 \description{
-Plot heatmap of importance scores or ranks
+Plot heatmap of importance scores or ranks from a 
+  classification model
+}
+\details{
+\code{rf} must be a classification model run with 
+  \code{importance = TRUE}.
 }
 \author{
 Eric Archer \email{eric.archer@noaa.gov}

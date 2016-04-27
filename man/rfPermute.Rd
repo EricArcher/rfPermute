@@ -58,7 +58,6 @@ All other parameters are as defined in \code{randomForest.formula}.
   # ... and the scaled measures
   plot(rp.importance(ozone.rfP, scale = TRUE))
 
-
 }
 \author{
 Eric Archer \email{eric.archer@noaa.gov}

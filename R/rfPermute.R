@@ -49,7 +49,6 @@
 #'   # ... and the scaled measures
 #'   plot(rp.importance(ozone.rfP, scale = TRUE))
 #'
-#'
 #' @importFrom randomForest randomForest
 #' @export
 #' 
