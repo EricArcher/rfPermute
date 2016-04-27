@@ -66,6 +66,8 @@ Eric Archer \email{eric.archer@noaa.gov}
 \code{\link{plot.rfPermute}} for plotting null distributions from the \code{rfPermute} objects. \cr
 \code{\link{rp.importance}} for extracting importance measures. \cr
 \code{\link{rp.combine}} for combining multiple \code{rfPermute} objects.\cr
+\code{\link{proximity.plot}} for plotting case proximities.\cr
+\code{\link{impHeatmap}} for plotting a heatmap of importance scores.\cr
 \code{\link{randomForest}}
 }
 \keyword{classif}

@@ -29,6 +29,7 @@ Plot heatmap of importance scores or ranks from a
 \examples{
 data(mtcars)
 rf <- randomForest(factor(am) ~ ., mtcars, importance = TRUE)
+importance(rf)
 impHeatmap(rf, xlab = "Transmission", ylab = "Predictor")
 
 }

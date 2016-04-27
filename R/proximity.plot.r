@@ -25,10 +25,10 @@
 #' @author Eric Archer \email{eric.archer@@noaa.gov}
 #' 
 #' @examples
-#' data(iris)
-#' iris.rf <- randomForest(Species ~ ., data = iris, importance = TRUE, proximity = TRUE)
-#' iris.rf
-#' proximity.plot(iris.rf)
+#' data(mtcars)
+#' rf <- randomForest(factor(am) ~ ., mtcars, proximity = TRUE)
+#' rf
+#' proximity.plot(rf)
 #' 
 #' @importFrom stats cmdscale
 #' @importFrom grDevices chull rainbow

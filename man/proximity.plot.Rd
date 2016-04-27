@@ -42,10 +42,10 @@ Produces a scatter plot of proximity scores for \code{dim.x} and
   colored according to original (inner) and predicted (outer) class.
 }
 \examples{
-data(iris)
-iris.rf <- randomForest(Species ~ ., data = iris, importance = TRUE, proximity = TRUE)
-iris.rf
-proximity.plot(iris.rf)
+data(mtcars)
+rf <- randomForest(factor(am) ~ ., mtcars, proximity = TRUE)
+rf
+proximity.plot(rf)
 
 }
 \author{
