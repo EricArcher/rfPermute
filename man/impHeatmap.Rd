@@ -26,6 +26,12 @@ Plot heatmap of importance scores or ranks from a
 \code{rf} must be a classification model run with 
   \code{importance = TRUE}.
 }
+\examples{
+data(mtcars)
+rf <- randomForest(factor(am) ~ ., mtcars, importance = TRUE)
+impHeatmap(rf, xlab = "Transmission", ylab = "Predictor")
+
+}
 \author{
 Eric Archer \email{eric.archer@noaa.gov}
 }

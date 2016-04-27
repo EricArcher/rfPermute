@@ -17,7 +17,7 @@
 #' @examples
 #' data(mtcars)
 #' rf <- randomForest(factor(am) ~ ., mtcars, importance = TRUE)
-#' impHeatmap(rf, xlab = "Transmission", ylab = "Predictor)
+#' impHeatmap(rf, xlab = "Transmission", ylab = "Predictor")
 #' 
 #' @importFrom reshape2 melt
 #' @importFrom ggplot2 ggplot geom_raster scale_fill_gradient2 aes_string xlab ylab theme element_blank
