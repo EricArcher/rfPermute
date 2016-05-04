@@ -4,7 +4,8 @@
 \alias{impHeatmap}
 \title{Importance Heatmap}
 \usage{
-impHeatmap(rf, ranks = TRUE, plot = TRUE, xlab = NULL, ylab = NULL)
+impHeatmap(rf, ranks = TRUE, plot = TRUE, xlab = NULL, ylab = NULL,
+  scale = TRUE, alpha = 0.05)
 }
 \arguments{
 \item{rf}{an object inheriting from \code{link{randomForest}}.}
@@ -14,6 +15,15 @@ impHeatmap(rf, ranks = TRUE, plot = TRUE, xlab = NULL, ylab = NULL)
 \item{plot}{print the plot?}
 
 \item{xlab, ylab}{labels for the x and y axes.}
+
+\item{scale}{For permutation based measures, should the measures be divided 
+their "standard errors"?}
+
+\item{alpha}{a number specifying the critical alpha for identifying 
+predictors with importance scores significantly different from random. 
+This parameter is only relevant if \code{rf} is a \code{\link{rfPermute}}
+object with p-values. Importance measures with p-values less than alpha 
+will be denoted in the heatmap by a black border.}
 }
 \value{
 the \code{ggplot} object is invisibly returned.
@@ -28,9 +38,15 @@ Plot heatmap of importance scores or ranks from a
 }
 \examples{
 data(mtcars)
+
+# A randomForest model
 rf <- randomForest(factor(am) ~ ., mtcars, importance = TRUE)
 importance(rf)
 impHeatmap(rf, xlab = "Transmission", ylab = "Predictor")
+
+# An rfPermute model with significant predictors identified
+rp <- rfPermute(factor(am) ~ ., mtcars, nrep = 100)
+impHeatmap(rp, xlab = "Transmission", ylab = "Predictor")
 
 }
 \author{
