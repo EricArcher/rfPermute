@@ -38,7 +38,7 @@
 #' @examples
 #'   # A regression model using the ozone example
 #'   data(airquality)
-#'   ozone.rfP <- rfPermute(Ozone ~ ., data = airquality, ntree = 500, na.action = na.omit, nrep = 50)
+#'   ozone.rfP <- rfPermute(Ozone ~ ., data = airquality, ntree = 100, na.action = na.omit, nrep = 50)
 #'   
 #'   # Plot the null distributions and observed values.
 #'   layout(matrix(1:6, nrow = 2))
