@@ -15,6 +15,16 @@
 #'   
 #' @author Eric Archer \email{eric.archer@@noaa.gov}
 #' 
+#' @examples
+#'   # A regression model using the ozone example
+#'   data(airquality)
+#'   ozone.rfP <- rfPermute(Ozone ~ ., data = airquality, ntree = 100, na.action = na.omit, nrep = 50)
+#'   
+#'   # Plot the null distributions and observed values.
+#'   layout(matrix(1:6, nrow = 2))
+#'   plot(ozone.rfP) 
+#'   layout(matrix(1))
+#' 
 #' @importFrom graphics abline par plot
 #' @importFrom stats density
 #' @export plot.rfPermute
