@@ -21,13 +21,13 @@
 #'   data(airquality)
 #'   ozone.rfP <- rfPermute(Ozone ~ ., data = airquality, ntree = 100, na.action = na.omit, nrep = 50)
 #'   
-#'   # Plot the unscaled importance distributions and highlight significant predictors
-#'   plot(rp.importance(ozone.rfP, scale = FALSE))
+#'   imp.unscaled <- rp.importance(ozone.rfP, scale = TRUE)
+#'   imp.unscaled
 #'   
-#'   # ... and the scaled measures
-#'   plot(rp.importance(ozone.rfP, scale = TRUE))
+#'   imp.scaled <- rp.importance(ozone.rfP, scale = TRUE)
+#'   imp.scaled
 #' 
-#' @seealso \code{\link{rfPermute}}
+#' @seealso \code{\link{rfPermute}}, \code{\link{plot.rp.importance}}
 #' 
 #' @export
 #' 

@@ -28,6 +28,8 @@
 #'   # ... and the scaled measures
 #'   plot(rp.importance(ozone.rfP, scale = TRUE))
 #' 
+#' @seealso \code{\link{rfPermute}}, \code{\link{rp.importance}}
+#' 
 #' @importFrom ggplot2 ggplot aes geom_bar labs coord_flip theme scale_fill_manual
 #' @importFrom gridExtra grid.arrange
 #' @export

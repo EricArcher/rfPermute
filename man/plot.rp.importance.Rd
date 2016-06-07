@@ -47,4 +47,7 @@ The function will generate a panel of plots, one for each
 \author{
 Eric Archer \email{eric.archer@noaa.gov}
 }
+\seealso{
+\code{\link{rfPermute}}, \code{\link{rp.importance}}
+}
 

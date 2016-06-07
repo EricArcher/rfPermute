@@ -32,17 +32,17 @@ p-values can be given to the \code{sort.by} argument by adding
   data(airquality)
   ozone.rfP <- rfPermute(Ozone ~ ., data = airquality, ntree = 100, na.action = na.omit, nrep = 50)
   
-  # Plot the unscaled importance distributions and highlight significant predictors
-  plot(rp.importance(ozone.rfP, scale = FALSE))
+  imp.unscaled <- rp.importance(ozone.rfP, scale = TRUE)
+  imp.unscaled
   
-  # ... and the scaled measures
-  plot(rp.importance(ozone.rfP, scale = TRUE))
+  imp.scaled <- rp.importance(ozone.rfP, scale = TRUE)
+  imp.scaled
 
 }
 \author{
 Eric Archer \email{eric.archer@noaa.gov}
 }
 \seealso{
-\code{\link{rfPermute}}
+\code{\link{rfPermute}}, \code{\link{plot.rp.importance}}
 }
 
