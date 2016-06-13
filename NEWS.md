@@ -12,6 +12,7 @@ devtools::install_github('EricArcher/rfPermute')
 ## Changes in 2.0.2:
 
 * Added `n` argument to impHeatmap.
+* Added classConfInt and confusionMatrix functions.
 
 ## Changes in 2.0.1:
 
