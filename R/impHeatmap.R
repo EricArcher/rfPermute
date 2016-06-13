@@ -13,7 +13,8 @@
 #'   predictors with importance scores significantly different from random. 
 #'   This parameter is only relevant if \code{rf} is a \code{\link{rfPermute}}
 #'   object with p-values. Importance measures with p-values less than alpha 
-#'   will be denoted in the heatmap by a black border. 
+#'   will be denoted in the heatmap by a black border. If set to \code{NULL}, 
+#'   no border is drawn.
 #' 
 #' @details \code{rf} must be a classification model run with 
 #'   \code{importance = TRUE}.
@@ -74,7 +75,7 @@ impHeatmap <- function(rf, n = NULL, ranks = TRUE, plot = TRUE, xlab = NULL,
   g <- g + if(is.null(xlab)) theme(axis.title.x = element_blank()) else xlab(xlab)
   g <- g + if(is.null(ylab)) theme(axis.title.y = element_blank()) else ylab(ylab)
   
-  if(inherits(rf, "rfPermute") & !is.null(rf$pval))  {
+  if(inherits(rf, "rfPermute") & !is.null(rf$pval) & !is.null(alpha))  {
     sc <- ifelse(scale, "scaled", "unscaled")
     sig <- sapply(1:nrow(imp), function(i) {
       pred <- as.character(imp$predictor[i])

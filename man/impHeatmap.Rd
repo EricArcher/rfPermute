@@ -25,7 +25,8 @@ their "standard errors"?}
 predictors with importance scores significantly different from random. 
 This parameter is only relevant if \code{rf} is a \code{\link{rfPermute}}
 object with p-values. Importance measures with p-values less than alpha 
-will be denoted in the heatmap by a black border.}
+will be denoted in the heatmap by a black border. If set to \code{NULL}, 
+no border is drawn.}
 }
 \value{
 the \code{ggplot} object is invisibly returned.
