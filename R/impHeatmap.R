@@ -2,7 +2,8 @@
 #' @description Plot heatmap of importance scores or ranks from a 
 #'   classification model
 #' 
-#' @param rf an object inheriting from \code{link{randomForest}}.
+#' @param rf an object inheriting from \code{\link{randomForest}}.
+#' @param n Plot \code{n} most important predictors.
 #' @param ranks plot ranks instead of actual importance scores?
 #' @param plot print the plot?
 #' @param xlab,ylab labels for the x and y axes.
@@ -37,8 +38,8 @@
 #' @importFrom ggplot2 ggplot geom_raster geom_rect scale_fill_gradient2 aes_string xlab ylab theme element_blank guide_colorbar
 #' @export
 #' 
-impHeatmap <- function(rf, ranks = TRUE, plot = TRUE, xlab = NULL, ylab = NULL,
-                       scale = TRUE, alpha = 0.05) {
+impHeatmap <- function(rf, n = NULL, ranks = TRUE, plot = TRUE, xlab = NULL, 
+                       ylab = NULL, scale = TRUE, alpha = 0.05) {
   if(rf$type != "classification") stop("'rf' must be a classification model")
   classes <- levels(rf$y)
   if(!all(classes %in% colnames(rf$importance))) stop("'rf' must be run with 'importance = TRUE'")
@@ -52,6 +53,10 @@ impHeatmap <- function(rf, ranks = TRUE, plot = TRUE, xlab = NULL, ylab = NULL,
               variable.name = "class", value.name = "value")
   imp$class <- factor(imp$class, levels = levels(rf$y))
   imp$predictor <- factor(imp$predictor, levels = names(sort(imp.val)))
+  num.preds <- length(levels(imp$predictor))
+  n <- if(is.null(n)) length(levels(imp$predictor)) else min(c(n, num.preds))
+  imp <- imp[imp$predictor %in% levels(imp$predictor)[(num.preds - n + 1):num.preds], ]
+  imp <- droplevels(imp)
 
   g <- ggplot(imp, aes_string("class", "predictor")) +
     geom_raster(aes_string(fill = "value"))

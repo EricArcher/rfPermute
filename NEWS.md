@@ -9,6 +9,10 @@ if (!require('devtools')) install.packages('devtools')
 devtools::install_github('EricArcher/rfPermute')
 ```
 
+## Changes in 2.0.2:
+
+* Added `n` argument to impHeatmap.
+
 ## Changes in 2.0.1:
 
 * Fixed bug in plot.rfPermute that was reporting the p-value incorrectly at the top of the figure.
