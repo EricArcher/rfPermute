@@ -12,6 +12,7 @@
 #' rf <- randomForest(factor(am) ~ ., mtcars, importance = TRUE)
 #' classConfInt(rf)
 #' 
+#' @importFrom stats binom.test
 #' @export
 #' 
 classConfInt <- function(rf, conf.level = 0.95) {
