@@ -1,4 +1,6 @@
-![](http://www.r-pkg.org/badges/version/rfPermute) ![](http://cranlogs.r-pkg.org/badges/grand-total/rfPermute)[![Travis-CI Build Status](https://travis-ci.org/EricArcher/rfPermute.svg?branch=master)](https://travis-ci.org/EricArcher/rfPermute)
+![](http://www.r-pkg.org/badges/version/rfPermute)
+![](http://cranlogs.r-pkg.org/badges/grand-total/rfPermute)
+[![Travis-CI Build Status](https://travis-ci.org/EricArcher/rfPermute.svg?branch=master)](https://travis-ci.org/EricArcher/rfPermute)
 
 # rfPermute
 
