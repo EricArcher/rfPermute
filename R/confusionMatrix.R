@@ -4,9 +4,12 @@
 #'   confidence intervals and expected classification rates (priors) added.
 #' 
 #' @param rf a \code{\link[randomForest]{randomForest}} object.
-#' @param conf.level confidence level for the \code{\link{binom.test}} confidence interval.
+#' @param conf.level confidence level for the \code{\link{binom.test}} confidence interval
+#' @param threshold threshold to test observed classification probability against.
 #' 
 #' @author Eric Archer \email{eric.archer@@noaa.gov} 
+#' 
+#' @seealso \code{\link{classConfInt}}
 #' 
 #' @examples
 #' data(mtcars)
@@ -16,12 +19,12 @@
 #' 
 #' @export
 #' 
-confusionMatrix <- function(rf, conf.level = 0.95) {
+confusionMatrix <- function(rf, conf.level = 0.95, threshold = 0.8) {
   conf <- rf$confusion
   # Strip error rate column
   conf <- conf[, -ncol(conf)]
   # Get confidence intervals
-  ci <- classConfInt(rf)
+  ci <- classConfInt(rf, conf.level = conf.level, threshold = threshold)
   # Get expected error rate (prior)
   prior <- exptd.err.rate(rf)
   prior <- (1 - prior[c(2:length(prior), 1)]) * 100

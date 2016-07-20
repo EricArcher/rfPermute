@@ -4,12 +4,22 @@
 \alias{classConfInt}
 \title{Classification Confidence Intervals}
 \usage{
-classConfInt(rf, conf.level = 0.95)
+classConfInt(rf, conf.level = 0.95, threshold = 0.8)
 }
 \arguments{
 \item{rf}{a \code{\link[randomForest]{randomForest}} object}
 
 \item{conf.level}{confidence level for the \code{\link{binom.test}} confidence interval}
+
+\item{threshold}{threshold to test observed classification probability against.}
+}
+\value{
+A matrix with the following columns for each class and overall:
+\describe{
+  \item{pct.correct}{percent correctly classified}
+  \item{LCI_##, UCI_##}{the lower and upper central confidence intervals given \code{conf.level}}
+  \item{Pr.gt_##}{the probability that the true classification probability is >= \code{threshold}}
+}
 }
 \description{
 Calculate confidence intervals for Random Forest classifications

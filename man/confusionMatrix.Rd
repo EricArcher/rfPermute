@@ -4,12 +4,14 @@
 \alias{confusionMatrix}
 \title{Confusion Matrix}
 \usage{
-confusionMatrix(rf, conf.level = 0.95)
+confusionMatrix(rf, conf.level = 0.95, threshold = 0.8)
 }
 \arguments{
 \item{rf}{a \code{\link[randomForest]{randomForest}} object.}
 
-\item{conf.level}{confidence level for the \code{\link{binom.test}} confidence interval.}
+\item{conf.level}{confidence level for the \code{\link{binom.test}} confidence interval}
+
+\item{threshold}{threshold to test observed classification probability against.}
 }
 \description{
 Generate a confusion matrix for Random Forest analyses with 
@@ -25,5 +27,8 @@ confusionMatrix(rf)
 }
 \author{
 Eric Archer \email{eric.archer@noaa.gov}
+}
+\seealso{
+\code{\link{classConfInt}}
 }
 
