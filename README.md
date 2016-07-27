@@ -36,6 +36,7 @@ devtools::install_github('EricArcher/rfPermute')
 * Added `n` argument to impHeatmap.
 * Added classConfInt and confusionMatrix functions.
 * Added plotVotes function.
+* Added pctCorrect function.
 
 ## Changes in 2.0.1:
 
