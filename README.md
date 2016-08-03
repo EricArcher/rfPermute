@@ -32,7 +32,7 @@ devtools::install_github('EricArcher/rfPermute')
 * send a pull request: <https://github.com/ericarcher/rfPermute/>
 * e-mail: <eric.archer@noaa.gov>
 
-## Changes in 2.0.2:
+## Changes in 2.1:
 
 * Added `n` argument to `impHeatmap`.
 * Added functions: `classConfInt`, `confusionMatrix`, `plotVotes`, `pctCorrect`.
