@@ -1,5 +1,5 @@
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/rfPermute)](https://cran.r-project.org/package=rfPermute)
-[![](http://cranlogs.r-pkg.org/badges/grand-total/rfPermute)](https://cran.r-project.org/web/packages/rfPermute/index.html)
+[![](http://cranlogs.r-pkg.org/badges/grand-total/rfPermute)](https://cran.r-project.org/package=rfPermute/index.html)
 [![Travis-CI Build Status](https://travis-ci.org/EricArcher/rfPermute.svg?branch=master)](https://travis-ci.org/EricArcher/rfPermute)
 
 # rfPermute
@@ -32,7 +32,7 @@ devtools::install_github('EricArcher/rfPermute')
 * send a pull request: <https://github.com/ericarcher/rfPermute/>
 * e-mail: <eric.archer@noaa.gov>
 
-## Changes in 2.1:
+## Changes in 2.1.1:
 
 * Added `n` argument to `impHeatmap`.
 * Added functions: `classConfInt`, `confusionMatrix`, `plotVotes`, `pctCorrect`.
