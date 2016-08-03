@@ -1,5 +1,5 @@
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/rfPermute)](https://cran.r-project.org/package=rfPermute)
-[![](http://cranlogs.r-pkg.org/badges/grand-total/rfPermute)](https://cran.rstudio.com/web/packages/rfPermute/index.html)
+[![](http://cranlogs.r-pkg.org/badges/grand-total/rfPermute)](https://cran.r-project.org/web/packages/rfPermute/index.html)
 [![Travis-CI Build Status](https://travis-ci.org/EricArcher/rfPermute.svg?branch=master)](https://travis-ci.org/EricArcher/rfPermute)
 
 # rfPermute
