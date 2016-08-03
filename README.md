@@ -1,12 +1,13 @@
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/rfPermute)](https://cran.r-project.org/package=rfPermute)
-[![](http://cranlogs.r-pkg.org/badges/grand-total/rfPermute)](http://cran.rstudio.com/web/packages/rfPermute/index.html)
+[![](http://cranlogs.r-pkg.org/badges/grand-total/rfPermute)](https://cran.rstudio.com/web/packages/rfPermute/index.html)
 [![Travis-CI Build Status](https://travis-ci.org/EricArcher/rfPermute.svg?branch=master)](https://travis-ci.org/EricArcher/rfPermute)
 
 # rfPermute
 
 ## Description
 
-*rfPermute* estimates the significance of importance metrics for a Random Forest model by permuting the response variable. It will produces null distributions of importance metrics for each predictor variable and p-value of observed.
+*rfPermute* estimates the significance of importance metrics for a Random Forest model by permuting the response variable. It will produce null distributions of importance metrics for each predictor variable and p-value of observed. The package also includes several summary and 
+visualization functions for `randomForest` and `rfPermute` results.
 
 ## Installation
 
@@ -33,10 +34,8 @@ devtools::install_github('EricArcher/rfPermute')
 
 ## Changes in 2.0.2:
 
-* Added `n` argument to impHeatmap.
-* Added classConfInt and confusionMatrix functions.
-* Added plotVotes function.
-* Added pctCorrect function.
+* Added `n` argument to `impHeatmap`.
+* Added functions: `classConfInt`, `confusionMatrix`, `plotVotes`, `pctCorrect`.
 
 ## Changes in 2.0.1:
 
