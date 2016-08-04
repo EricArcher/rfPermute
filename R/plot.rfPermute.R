@@ -1,4 +1,4 @@
-#' @title Plot Random Forest Importance Null Distributions.
+#' @title Plot Random Forest Importance Null Distributions
 #' @description Plot the Random Forest null distributions importance metrics, 
 #' observed values, and p-values for
 #' each predictor variable from the object produced by a 

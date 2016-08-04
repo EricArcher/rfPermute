@@ -1,4 +1,4 @@
-#' @title Plot Random Forest Proximity Scores.
+#' @title Plot Random Forest Proximity Scores
 #' @description Create a plot of Random Forest proximity scores using 
 #'   multi-dimensional scaling.
 #' 

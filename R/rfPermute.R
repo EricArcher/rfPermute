@@ -1,5 +1,5 @@
 #' @name rfPermute
-#' @title Estimate Permutation p-values for Random Forest Importance Metrics.
+#' @title Estimate Permutation p-values for Random Forest Importance Metrics
 #' @description Estimate significance of importance metrics for a Random Forest 
 #'   model by permuting the response variable. Produces null distribution of 
 #'   importance metrics for each predictor variable and p-value of observed.
