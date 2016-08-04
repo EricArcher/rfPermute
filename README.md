@@ -57,8 +57,8 @@ devtools::install_github('EricArcher/rfPermute')
 
 ### version 2.0.1:
 
-* Fixed bug in plot.rfPermute that was reporting the p-value incorrectly at the top of the figure.
-* Fixed multi-threading in rfPermute so it works on Windows too.
+* Fixed bug in `plot.rfPermute` that was reporting the p-value incorrectly at the top of the figure.
+* Fixed multi-threading in `rfPermute` so it works on Windows too.
 * Added `impHeatmap` function.
 * Switched `proximity.plot` to use `ggplot2` graphics.
 
