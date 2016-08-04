@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot.rfPermute.R
 \name{plot.rfPermute}
 \alias{plot.rfPermute}
-\title{Plot Random Forest Importance Null Distributions.}
+\title{Plot Random Forest Importance Null Distributions}
 \usage{
 \method{plot}{rfPermute}(x, imp.type = 1, scale = TRUE, ...)
 }

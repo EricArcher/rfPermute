@@ -2,7 +2,7 @@
 % Please edit documentation in R/proximity.plot.R
 \name{proximity.plot}
 \alias{proximity.plot}
-\title{Plot Random Forest Proximity Scores.}
+\title{Plot Random Forest Proximity Scores}
 \usage{
 proximity.plot(rf, dim.x = 1, dim.y = 2, legend.loc = c("top", "bottom",
   "left", "right"), point.size = 2, circle.size = 8, circle.border = 1,

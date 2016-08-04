@@ -34,19 +34,19 @@ devtools::install_github('EricArcher/rfPermute')
 
 ## Current Functions
 
-`classConfInt`        Classification Confidence Intervals
-`clean.rf.data`       Clean Random Forest Input Data
-`confusionMatrix`     Confusion Matrix
-`exptd.err.rate`      Expected Error Rate
-`impHeatmap`          Importance Heatmap
-`pctCorrect`          Percent Correctly Classified
-`plot.rfPermute`      Plot Random Forest Importance Null Distributions
-`plot.rp.importance`  Plot Random Forest Importance Distributions
-`plotVotes`           Vote Distribution
-`proximity.plot`      Plot Random Forest Proximity Scores
-`rfPermute`           Estimate Permutation p-values for Random Forest Importance Metrics
-`rp.combine`          Combine rfPermute Objects
-`rp.importance`       Extract rfPermute Importance Scores and p-values
+`classConfInt`        Classification Confidence Intervals  
+`clean.rf.data`       Clean Random Forest Input Data  
+`confusionMatrix`     Confusion Matrix  
+`exptd.err.rate`      Expected Error Rate  
+`impHeatmap`          Importance Heatmap  
+`pctCorrect`          Percent Correctly Classified  
+`plot.rfPermute`      Plot Random Forest Importance Null Distributions  
+`plot.rp.importance`  Plot Random Forest Importance Distributions  
+`plotVotes`           Vote Distribution  
+`proximity.plot`      Plot Random Forest Proximity Scores  
+`rfPermute`           Estimate Permutation p-values for Random Forest Importance Metrics  
+`rp.combine`          Combine rfPermute Objects  
+`rp.importance`       Extract rfPermute Importance Scores and p-values  
                         
 ## Changes in 2.1.1:
 

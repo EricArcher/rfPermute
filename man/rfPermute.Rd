@@ -4,7 +4,7 @@
 \alias{rfPermute}
 \alias{rfPermute.default}
 \alias{rfPermute.formula}
-\title{Estimate Permutation p-values for Random Forest Importance Metrics.}
+\title{Estimate Permutation p-values for Random Forest Importance Metrics}
 \usage{
 rfPermute(x, ...)
 
