@@ -6,7 +6,7 @@
 
 ## Description
 
-*rfPermute* estimates the significance of importance metrics for a Random Forest model by permuting the response variable. It will produce null distributions of importance metrics for each predictor variable and p-value of observed. The package also includes several summary and 
+`rfPermute` estimates the significance of importance metrics for a Random Forest model by permuting the response variable. It will produce null distributions of importance metrics for each predictor variable and p-value of observed. The package also includes several summary and 
 visualization functions for `randomForest` and `rfPermute` results.
 
 ## Installation
