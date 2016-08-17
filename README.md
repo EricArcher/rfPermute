@@ -4,7 +4,7 @@
 [![](http://cranlogs.r-pkg.org/badges/last-week/rfPermute)](https://cran.r-project.org/package=rfPermute)
 [![](http://cranlogs.r-pkg.org/badges/rfPermute)](https://cran.r-project.org/package=rfPermute)
 [![](http://cranlogs.r-pkg.org/badges/grand-total/rfPermute)](https://cran.r-project.org/package=rfPermute)  
-[![](https://zenodo.org/badge/23926/EricArcher/rfPermute.svg)]  
+[](https://zenodo.org/badge/23926/EricArcher/rfPermute.svg)
 # rfPermute
 
 ## Description
