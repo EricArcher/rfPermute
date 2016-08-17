@@ -1,10 +1,9 @@
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/rfPermute)](https://cran.r-project.org/package=rfPermute)
+![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/rfPermute)
 [![Travis-CI Build Status](https://travis-ci.org/EricArcher/rfPermute.svg?branch=master)](https://travis-ci.org/EricArcher/rfPermute)  
-[![](http://cranlogs.r-pkg.org/badges/last-day/rfPermute)](https://cran.r-project.org/package=rfPermute)
 ![](http://cranlogs.r-pkg.org/badges/last-day/rfPermute)
-[![](http://cranlogs.r-pkg.org/badges/last-week/rfPermute)](https://cran.r-project.org/package=rfPermute)
-[![](http://cranlogs.r-pkg.org/badges/rfPermute)](https://cran.r-project.org/package=rfPermute)
-[![](http://cranlogs.r-pkg.org/badges/grand-total/rfPermute)](https://cran.r-project.org/package=rfPermute)  
+![](http://cranlogs.r-pkg.org/badges/last-week/rfPermute)
+![](http://cranlogs.r-pkg.org/badges/rfPermute)]
+![](http://cranlogs.r-pkg.org/badges/grand-total/rfPermute)  
 [![DOI](https://zenodo.org/badge/23926/EricArcher/rfPermute.svg)](https://zenodo.org/badge/23926/EricArcher/rfPermute)
 # rfPermute
 
