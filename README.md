@@ -51,39 +51,41 @@ devtools::install_github('EricArcher/rfPermute')
 `rp.combine` Combine rfPermute Objects  
 `rp.importance` Extract rfPermute Importance Scores and p-values  
 
-## Changes
+## version 2.1.2
 
-### version 2.1.1:
+* Added `type` argument to `plotVotes` to choose between area and bar charts.
+
+## version 2.1.1
 
 * Added `n` argument to `impHeatmap`.
 * Added functions: `classConfInt`, `confusionMatrix`, `plotVotes`, `pctCorrect`.
 
-### version 2.0.1:
+## version 2.0.1
 
 * Fixed bug in `plot.rfPermute` that was reporting the p-value incorrectly at the top of the figure.
 * Fixed multi-threading in `rfPermute` so it works on Windows too.
 * Added `impHeatmap` function.
 * Switched `proximity.plot` to use `ggplot2` graphics.
 
-### version 2.0:
+## version 2.0
 
 * Fixed bug with calculation of p-values not respecting importance measure scaling (division by standard deviations). New format of output of `rfPemute` has separate `$null.dist` and `$pval` elements, each with results for unscaled and scaled importance mesures. See `?rfPermute` for more information.
 * `rp.importance` and `plot.rfPermute` now take a `scale` argument to specify whether or not importance values should be scaled by standard deviations.
 * If `nrep = 0` for `rfPermute`, a `randomForest` object is returned.
 
-### version 1.9.3:
+## version 1.9.3
 
 * Fixed import declarations to avoid `grid` name clashes.
 * Fixed logic error in `clean.rf.data` where fixed predictors were not removed.
 * Fixed error in use of `main` argument in `plot.rp.importance`.
 
-### version 1.9.2:
+## version 1.9.2
 
 * Added this NEWS.md
 * Added README.md
 * Added `num.cores` argument to `rfPermute` to take advantage of multi-threading 
 
-### version 1.9.1:
+## version 1.9.1
 
 * Added internal keyword to `calc.imp.pval` to keep it from indexing
 * Updated imports to match new CRAN policies
