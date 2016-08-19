@@ -3,4 +3,5 @@
 language: R
 cache: packages
 sudo: required
+r_github_packages: ericarcher/swfscMisc
 warnings_are_errors: false
