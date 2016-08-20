@@ -23,6 +23,6 @@ Imports:
     parallel,
     reshape2,
     stats,
-    swfscMisc
+    swfscMisc (>= 1.1.1)
 License: GPL (>= 2)
 RoxygenNote: 5.0.1.9000
