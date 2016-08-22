@@ -1,5 +1,6 @@
 ![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/rfPermute)
-[![Travis-CI Build Status](https://travis-ci.org/EricArcher/rfPermute.svg?branch=master)](https://travis-ci.org/EricArcher/rfPermute)  
+[![Travis-CI Build Status](https://travis-ci.org/EricArcher/rfPermute.svg?branch=master)](https://travis-ci.org/EricArcher/rfPermute)
+[![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/github/EricArcher/rfPermute?branch=master&svg=true)](https://ci.appveyor.com/api/projects/status/github/EricArcher/rfPermute?branch=master&svg=true)  
 ![](http://cranlogs.r-pkg.org/badges/last-day/rfPermute?color=red)
 ![](http://cranlogs.r-pkg.org/badges/last-week/rfPermute?color=red)
 ![](http://cranlogs.r-pkg.org/badges/rfPermute?color=red)
