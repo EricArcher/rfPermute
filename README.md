@@ -1,11 +1,12 @@
-![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/rfPermute?color=red)
-![](http://cranlogs.r-pkg.org/badges/last-day/rfPermute?color=red)
-![](http://cranlogs.r-pkg.org/badges/last-week/rfPermute?color=red)
-![](http://cranlogs.r-pkg.org/badges/rfPermute?color=red)
-![](http://cranlogs.r-pkg.org/badges/grand-total/rfPermute?color=red)  
-[![DOI](https://zenodo.org/badge/23926/EricArcher/rfPermute.svg)](https://zenodo.org/badge/latestdoi/23926/EricArcher/rfPermute)  
+[![CRAN version](http://www.r-pkg.org/badges/version/rfPermute?color=red)](https://cran.r-project.org/packages=rfPermute)
+[![CRAN last day downloads](http://cranlogs.r-pkg.org/badges/last-day/rfPermute?color=red)](https://cran.r-project.org/packages=rfPermute)
+[![CRAN last week downloads](http://cranlogs.r-pkg.org/badges/last-week/rfPermute?color=red)](https://cran.r-project.org/packages=rfPermute)
+[![CRAN last month downloads](http://cranlogs.r-pkg.org/badges/rfPermute?color=red)](https://cran.r-project.org/packages=rfPermute)
+[![CRAN total downloads](http://cranlogs.r-pkg.org/badges/grand-total/rfPermute?color=red)](https://cran.r-project.org/packages=rfPermute)  
+[![Zenodo DOI](https://zenodo.org/badge/23926/EricArcher/rfPermute.svg)](https://zenodo.org/badge/latestdoi/23926/EricArcher/rfPermute)  
 [![Travis-CI Build Status](https://travis-ci.org/EricArcher/rfPermute.svg?branch=master)](https://travis-ci.org/EricArcher/rfPermute)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/EricArcher/rfPermute?branch=master&svg=true)](https://ci.appveyor.com/project/EricArcher/rfPermute)
+
 # rfPermute
 
 ## Description
