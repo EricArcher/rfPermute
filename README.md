@@ -45,7 +45,7 @@ devtools::install_github('EricArcher/rfPermute')
 `exptd.err.rate` Expected Error Rate  
 `impHeatmap` Importance Heatmap  
 `pctCorrect` Percent Correctly Classified  
-`plot.rfPermute` Plot Random Forest Importance Null Distributions  
+`plotNull` Plot Random Forest Importance Null Distributions  
 `plot.rp.importance` Plot Random Forest Importance Distributions  
 `plotVotes` Vote Distribution  
 `proximity.plot` Plot Random Forest Proximity Scores  
@@ -56,6 +56,7 @@ devtools::install_github('EricArcher/rfPermute')
 ## version 2.1.2 (current on GitHub)
 
 * Added `type` argument to `plotVotes` to choose between area and bar charts.
+* Changed plot.rfPermute to plotNull to avoid clashes and maintain functionality of plot.randomForest.
 
 ## version 2.1.1
 
