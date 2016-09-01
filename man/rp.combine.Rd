@@ -23,6 +23,10 @@ rp2 <- rfPermute(Species ~ ., iris, ntree = 50, norm.votes = FALSE, nrep = 100)
 rp3 <- rfPermute(Species ~ ., iris, ntree = 50, norm.votes = FALSE, nrep = 100)
 rp.all <- rp.combine(rp1, rp2, rp3)
 
+layout(matrix(1:6, nrow = 2))
+plotNull(rp.all) 
+layout(matrix(1))
+
 }
 \author{
 Eric Archer \email{eric.archer@noaa.gov}
