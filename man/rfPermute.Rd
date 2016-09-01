@@ -49,7 +49,7 @@ All other parameters are as defined in \code{randomForest.formula}.
   
   # Plot the null distributions and observed values.
   layout(matrix(1:6, nrow = 2))
-  plot(ozone.rfP) 
+  plotNull(ozone.rfP) 
   layout(matrix(1))
   
   # Plot the unscaled importance distributions and highlight significant predictors
@@ -63,7 +63,7 @@ All other parameters are as defined in \code{randomForest.formula}.
 Eric Archer \email{eric.archer@noaa.gov}
 }
 \seealso{
-\code{\link{plot.rfPermute}} for plotting null distributions from the \code{rfPermute} objects. \cr
+\code{\link{plotNull}} for plotting null distributions from the \code{rfPermute} objects. \cr
 \code{\link{rp.importance}} for extracting importance measures. \cr
 \code{\link{rp.combine}} for combining multiple \code{rfPermute} objects.\cr
 \code{\link{proximity.plot}} for plotting case proximities.\cr

@@ -17,7 +17,6 @@
 #' rp2 <- rfPermute(Species ~ ., iris, ntree = 50, norm.votes = FALSE, nrep = 100)
 #' rp3 <- rfPermute(Species ~ ., iris, ntree = 50, norm.votes = FALSE, nrep = 100)
 #' rp.all <- rp.combine(rp1, rp2, rp3)
-#' plot(rp.all)
 #' 
 #' @importFrom abind abind
 #' @importFrom randomForest combine
