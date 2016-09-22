@@ -27,6 +27,7 @@ To install the latest version from GitHub:
 ```r
 # make sure you have Rtools installed
 if (!require('devtools')) install.packages('devtools')
+
 # install from GitHub
 devtools::install_github('EricArcher/rfPermute')
 ```
@@ -40,23 +41,26 @@ devtools::install_github('EricArcher/rfPermute')
 ## Current Functions
 
 `classConfInt` Classification Confidence Intervals  
-`clean.rf.data` Clean Random Forest Input Data  
+`cleanRFdata` Clean Random Forest Input Data  
 `confusionMatrix` Confusion Matrix  
-`exptd.err.rate` Expected Error Rate  
+`exptdErrRate` Expected Error Rate  
 `impHeatmap` Importance Heatmap  
 `pctCorrect` Percent Correctly Classified  
 `plotNull` Plot Random Forest Importance Null Distributions  
-`plot.rp.importance` Plot Random Forest Importance Distributions  
 `plotVotes` Vote Distribution  
-`proximity.plot` Plot Random Forest Proximity Scores  
+`plot.rp.importance` Plot Random Forest Importance Distributions  
+`proximityPlot` Plot Random Forest Proximity Scores  
 `rfPermute` Estimate Permutation p-values for Random Forest Importance Metrics  
 `rp.combine` Combine rfPermute Objects  
 `rp.importance` Extract rfPermute Importance Scores and p-values  
 
-## version 2.1.2 (current on GitHub)
+## current on GitHub (version 2.1.5)
 
 * Added `type` argument to `plotVotes` to choose between area and bar charts.
 * Changed plot.rfPermute to plotNull to avoid clashes and maintain functionality of plot.randomForest.
+* Changed name of `proximity.plot` to `proximityPlot`,  `exptd.err.rate` to `exptdErrRate`, and `clean.rf.data` to `cleanRFdata` to make camelCase naming scheme more consistent in package.
+* Changed `plotNull` from base graphics to ggplot2.
+* Added `symb.metab` data set.
 
 ## version 2.1.1
 

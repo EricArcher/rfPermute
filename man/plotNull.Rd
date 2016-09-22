@@ -4,17 +4,22 @@
 \alias{plotNull}
 \title{Plot Random Forest Importance Null Distributions}
 \usage{
-plotNull(x, imp.type = 1, scale = TRUE, ...)
+plotNull(x, preds = NULL, imp.type = NULL, scale = TRUE,
+  plot.type = c("density", "hist"))
 }
 \arguments{
 \item{x}{An object produced by a call to \code{\link{rfPermute}}.}
+
+\item{preds}{a character vector of predictors to plot. If \code{NULL}, then 
+all predictors are plotted.}
 
 \item{imp.type}{Either a numeric or character vector giving the 
 importance metric(s) to plot.}
 
 \item{scale}{Plot importance measures scaled (divided by) standard errors?}
 
-\item{...}{Optional graphical arguments to be sent to \code{\link[graphics]{par}}.}
+\item{plot.type}{type of plot to produce: \code{"density"} for smoothed density 
+plot, or \code{"hist"} for histogram.}
 }
 \description{
 Plot the Random Forest null distributions importance metrics, 
@@ -23,9 +28,9 @@ each predictor variable from the object produced by a
 call to \code{\link{rfPermute}}.
 }
 \details{
-The function will generate an individual plot for
-  each variable and importance metric on the default graphics
-  device.
+The function will generate an plot for each predictor, with facetted 
+  importance metrics. The vertical red line shows the observed importance 
+  score and the p-value is given in the facet label.
 }
 \examples{
   # A regression model using the ozone example
@@ -33,9 +38,7 @@ The function will generate an individual plot for
   ozone.rfP <- rfPermute(Ozone ~ ., data = airquality, ntree = 100, na.action = na.omit, nrep = 50)
   
   # Plot the null distributions and observed values.
-  layout(matrix(1:6, nrow = 2))
   plotNull(ozone.rfP) 
-  layout(matrix(1))
 
 }
 \author{
