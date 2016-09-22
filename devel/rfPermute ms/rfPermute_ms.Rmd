@@ -125,7 +125,7 @@ Figure 5 shows that *Symbiodinium* types A194 and D206 have many of their member
 
 ## Proximity plots
 
-For visualizing the relative distribution of samples in the Random Forest, multi-dimensional scaling (MDS) is applied to the proxmity matrix computed by `randomForest`. The *randomForest* package provides the `MDSplot` function which uses *base* graphics to visualize these points. In *rfPermute* there is the `proximityPlot` function which uses *ggplot* graphics [@Wickham2009] and provides a few additional useful features. The result of `proximityPlot` depicts the MDS projection of cases, with classes encircled by a shaded convex hull. Additionally, each case is represented by a color-coded dot and circle. The color of the interior dot corresponds to the original case, while the color of the exterior circle corresponds to the predicted case. Thus, correctly classified cases will have the same color, while misclassified cases will have different colors.
+For visualizing the relative distribution of samples in the Random Forest, multi-dimensional scaling (MDS) is applied to the proxmity matrix computed by `randomForest`. The *randomForest* package provides the `MDSplot` function which uses *base* graphics to visualize these points. In *rfPermute* there is the `proximityPlot` function which uses *ggplot2* graphics [@Wickham2009] and provides a few additional useful features. The result of `proximityPlot` depicts the MDS projection of cases, with classes encircled by a shaded convex hull. Additionally, each case is represented by a color-coded dot and circle. The color of the interior dot corresponds to the original case, while the color of the exterior circle corresponds to the predicted case. Thus, correctly classified cases will have the same color, while misclassified cases will have different colors.
 
 ```{r proximityPlot, fig.cap = "Proximity plot of *Symbiodinium* samples."}
 proximityPlot(metab.rf)
@@ -133,7 +133,7 @@ proximityPlot(metab.rf)
 
 In Figure 6, the two misclassified B224 samples are near the periphery of the D206 convex hull, some distance away from the majority of the other B224 samples, but also separated from the majority of the D206 samples. Given the variability in B224, we might then view these as aberrant B224 samples rather than mislabelled D206 samples.
 
-All graphical output in *rfPermute* is produced using the *ggplot* package. Functions that produce figures will also invisibly return the *ggplot* object generated so that they can be further modified if desired. The `proximityPlot` function also returns the MDS matrix resulting from a call to `cmdscale`. 
+All graphical output in *rfPermute* is produced using the *ggplot* package. Functions that produce figures will also invisibly return the *ggplot2* object generated so that they can be further modified if desired. The `proximityPlot` function also returns the MDS matrix resulting from a call to `cmdscale`. 
 
 ## Performance
 

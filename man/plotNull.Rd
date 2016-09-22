@@ -21,6 +21,9 @@ importance metric(s) to plot.}
 \item{plot.type}{type of plot to produce: \code{"density"} for smoothed density 
 plot, or \code{"hist"} for histogram.}
 }
+\value{
+A named list of the \code{ggplot} figures produced is invisbly returned.
+}
 \description{
 Plot the Random Forest null distributions importance metrics, 
 observed values, and p-values for

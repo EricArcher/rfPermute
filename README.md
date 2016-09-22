@@ -54,12 +54,12 @@ devtools::install_github('EricArcher/rfPermute')
 `rp.combine` Combine rfPermute Objects  
 `rp.importance` Extract rfPermute Importance Scores and p-values  
 
-## current on GitHub (version 2.1.5)
+## Development version (current on GitHub)
 
 * Added `type` argument to `plotVotes` to choose between area and bar charts.
-* Changed plot.rfPermute to plotNull to avoid clashes and maintain functionality of plot.randomForest.
+* Changed `plot.rfPermute` to `plotNull` to avoid clashes and maintain functionality of `randomForest::plot.randomForest`.
 * Changed name of `proximity.plot` to `proximityPlot`,  `exptd.err.rate` to `exptdErrRate`, and `clean.rf.data` to `cleanRFdata` to make camelCase naming scheme more consistent in package.
-* Changed `plotNull` from base graphics to ggplot2.
+* Changed `plotNull` from base graphics to *ggplot2*.
 * Added `symb.metab` data set.
 
 ## version 2.1.1

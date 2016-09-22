@@ -561,7 +561,7 @@ Forest, multi-dimensional scaling (MDS) is applied to the proxmity
 matrix computed by \texttt{randomForest}. The \emph{randomForest}
 package provides the \texttt{MDSplot} function which uses \emph{base}
 graphics to visualize these points. In \emph{rfPermute} there is the
-\texttt{proximityPlot} function which uses \emph{ggplot} graphics
+\texttt{proximityPlot} function which uses \emph{ggplot2} graphics
 (Wickham 2009) and provides a few additional useful features. The result
 of \texttt{proximityPlot} depicts the MDS projection of cases, with
 classes encircled by a shaded convex hull. Additionally, each case is
@@ -591,7 +591,7 @@ aberrant B224 samples rather than mislabelled D206 samples.
 
 All graphical output in \emph{rfPermute} is produced using the
 \emph{ggplot} package. Functions that produce figures will also
-invisibly return the \emph{ggplot} object generated so that they can be
+invisibly return the \emph{ggplot2} object generated so that they can be
 further modified if desired. The \texttt{proximityPlot} function also
 returns the MDS matrix resulting from a call to \texttt{cmdscale}.
 
