@@ -1,0 +1,70 @@
+\begin{thebibliography}{9}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Berk(2006)]{RN125}
+R.~Berk.
+\newblock An introduction to ensemble methods for data analysis.
+\newblock \emph{Sociological Methods and Research}, 34\penalty0 (3):\penalty0
+  263--295, 2006.
+
+\bibitem[Breiman(2001)]{RN266}
+L.~Breiman.
+\newblock Random forests.
+\newblock \emph{Machine Learning}, 45\penalty0 (1):\penalty0 5--32, 2001.
+
+\bibitem[Breiman(2002)]{RN403}
+L.~Breiman.
+\newblock Manual on setting up, using, and understanding random forests v3.1.
+\newblock 2002.
+\newblock URL
+  \url{http://oz.berkeley.edu/users/breiman/Using_random_forests_V3.1.pdf}.
+
+\bibitem[Cutler et~al.(2007)Cutler, Edwards, Beard, Cutler, Hess, Gibson, and
+  Lawler]{RN126}
+D.~R. Cutler, T.~J. Edwards, K.~H. Beard, A.~Cutler, K.~Hess, J.~Gibson, and
+  J.~Lawler.
+\newblock Random forests for classification in ecology.
+\newblock \emph{Ecology}, 88\penalty0 (11):\penalty0 2783--2792, 2007.
+
+\bibitem[Klueter et~al.(2015)Klueter, Crandall, Archer, Teece, and
+  Coffroth]{RN404}
+A.~Klueter, J.~Crandall, F.~I. Archer, M.~Teece, and M.~Coffroth.
+\newblock Taxonomic and environmental variation of metabolite profiles in
+  marine dinoflagellates of the genus symbiodinium.
+\newblock \emph{Metabolites}, 5:\penalty0 74--99, 2015.
+
+\bibitem[Liaw and Wiener(2002)]{RN127}
+A.~Liaw and M.~Wiener.
+\newblock Classification and regression by randomforest.
+\newblock \emph{R News}, 2/3:\penalty0 18--22, 2002.
+
+\bibitem[Touw et~al.(2012)Touw, Bayjanov, Overmars, Backus, Boekhorst, Wels,
+  and van Hijum]{RN128}
+W.~Touw, J.~Bayjanov, L.~Overmars, L.~Backus, J.~Boekhorst, M.~Wels, and S.~A.
+  F.~T. van Hijum.
+\newblock Data mining in the life sciences with random forest: a walk in the
+  park or lost in the jungle?
+\newblock \emph{Briefings in Bioinformatics}, 14\penalty0 (3):\penalty0
+  316--326, 2012.
+\newblock \doi{10.1093/bib/bbs034}.
+
+\bibitem[Wickham(2009)]{Wickham2009}
+H.~Wickham.
+\newblock \emph{ggplot2: Elegant Graphics for Data Analysis}.
+\newblock Springer-Verlag New York, 2009.
+\newblock ISBN 978-0-387-98140-6.
+\newblock URL \url{http://ggplot2.org}.
+
+\bibitem[Winham et~al.(2012)Winham, Colby, Freimuth, Wang, de~Andrade, Huebner,
+  and Biernacka]{RN268}
+S.~Winham, C.~Colby, R.~Freimuth, X.~Wang, M.~de~Andrade, M.~Huebner, and
+  J.~Biernacka.
+\newblock Snp interaction detection with random forests in high-dimensional
+  genetic data.
+\newblock \emph{BMC Bioinformatics}, 13:\penalty0 164, 2012.
+
+\end{thebibliography}
