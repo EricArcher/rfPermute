@@ -228,9 +228,11 @@ using the proximity matrix later, so we must specify
 \CommentTok{# Load the metabolomics data set}
 \KeywordTok{data}\NormalTok{(symb.metab)}
 
-\CommentTok{# Create the randomForest model with 1000 permutations.}
-\NormalTok{metab.rf <-}\StringTok{ }\KeywordTok{rfPermute}\NormalTok{(type ~}\StringTok{ }\NormalTok{., }\DataTypeTok{data =} \NormalTok{symb.metab, }\DataTypeTok{sampsize =} \KeywordTok{rep}\NormalTok{(}\DecValTok{8}\NormalTok{, }\DecValTok{4}\NormalTok{), }\DataTypeTok{replace =} \OtherTok{FALSE}\NormalTok{, }
-    \DataTypeTok{proximity =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{nrep =} \DecValTok{1000}\NormalTok{)}
+\CommentTok{# Create the randomForest model with 1000}
+\CommentTok{# permutations.}
+\NormalTok{metab.rf <-}\StringTok{ }\KeywordTok{rfPermute}\NormalTok{(type ~}\StringTok{ }\NormalTok{., }\DataTypeTok{data =} \NormalTok{symb.metab, }
+    \DataTypeTok{sampsize =} \KeywordTok{rep}\NormalTok{(}\DecValTok{8}\NormalTok{, }\DecValTok{4}\NormalTok{), }\DataTypeTok{replace =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{proximity =} \OtherTok{TRUE}\NormalTok{, }
+    \DataTypeTok{nrep =} \DecValTok{1000}\NormalTok{)}
 \NormalTok{metab.rf}
 \end{Highlighting}
 \end{Shaded}
@@ -243,12 +245,12 @@ Call:
                      Number of trees: 500
 No. of variables tried at each split: 12
 
-        OOB estimate of  error rate: 4.69%
+        OOB estimate of  error rate: 3.12%
 Confusion matrix:
      A194 B184 B224 D206 class.error
-A194   15    1    0    0      0.0625
+A194   15    0    0    1      0.0625
 B184    0   16    0    0      0.0000
-B224    0    0   14    2      0.1250
+B224    0    0   15    1      0.0625
 D206    0    0    0   16      0.0000
 \end{verbatim}
 
@@ -263,7 +265,8 @@ same components as a \texttt{randomForest} object, plus
 \end{Shaded}
 
 \begin{verbatim}
-[1] "rfPermute"            "randomForest.formula" "randomForest"        
+[1] "rfPermute"            "randomForest.formula"
+[3] "randomForest"        
 \end{verbatim}
 
 \begin{Shaded}
@@ -273,13 +276,17 @@ same components as a \texttt{randomForest} object, plus
 \end{Shaded}
 
 \begin{verbatim}
- [1] "call"            "type"            "predicted"      
- [4] "err.rate"        "confusion"       "votes"          
- [7] "oob.times"       "classes"         "importance"     
-[10] "importanceSD"    "localImportance" "proximity"      
-[13] "ntree"           "mtry"            "forest"         
-[16] "y"               "test"            "inbag"          
-[19] "null.dist"       "pval"            "terms"          
+ [1] "call"            "type"           
+ [3] "predicted"       "err.rate"       
+ [5] "confusion"       "votes"          
+ [7] "oob.times"       "classes"        
+ [9] "importance"      "importanceSD"   
+[11] "localImportance" "proximity"      
+[13] "ntree"           "mtry"           
+[15] "forest"          "y"              
+[17] "test"            "inbag"          
+[19] "null.dist"       "pval"           
+[21] "terms"          
 \end{verbatim}
 
 \begin{Shaded}
@@ -290,12 +297,12 @@ same components as a \texttt{randomForest} object, plus
 
 \begin{verbatim}
 List of 2
- $ unscaled: num [1:155, 1:6, 1:1000] 0.00175 0.00025 0.00025 0.0005 -0.0005 -0.00175 -0.001 -0.0005 0.0005 -0.0005 ...
+ $ unscaled: num [1:155, 1:6, 1:1000] 0.0015 0.0005 -0.0015 0.00075 0.0005 -0.001 -0.00025 -0.00025 -0.0005 -0.002 ...
   ..- attr(*, "dimnames")=List of 3
   .. ..$ : chr [1:155] "Amino.Acid.2" "Amino.Acid.3" "Alanine" "Amino.Acid.4" ...
   .. ..$ : chr [1:6] "A194" "B184" "B224" "D206" ...
   .. ..$ : NULL
- $ scaled  : num [1:155, 1:6, 1:1000] 1.531 0.578 0.218 1.001 -0.447 ...
+ $ scaled  : num [1:155, 1:6, 1:1000] 1.904 0.707 -2.131 0.6 0.447 ...
   ..- attr(*, "dimnames")=List of 3
   .. ..$ : chr [1:155] "Amino.Acid.2" "Amino.Acid.3" "Alanine" "Amino.Acid.4" ...
   .. ..$ : chr [1:6] "A194" "B184" "B224" "D206" ...
@@ -309,7 +316,7 @@ List of 2
 \end{Shaded}
 
 \begin{verbatim}
- num [1:155, 1:6, 1:2] 0.827 0.232 0.734 0.321 0.569 ...
+ num [1:155, 1:6, 1:2] 0.3367 0.3966 0.4236 0.0889 0.4565 ...
  - attr(*, "dimnames")=List of 3
   ..$ : chr [1:155] "Amino.Acid.2" "Amino.Acid.3" "Alanine" "Amino.Acid.4" ...
   ..$ : chr [1:6] "A194" "B184" "B224" "D206" ...
@@ -332,27 +339,48 @@ respective p-values.
 \end{Shaded}
 
 \begin{verbatim}
-                      A194   A194.pval     B184   B184.pval     B224
-C30..5.Sterol     7.607126 0.000999001 9.512588 0.000999001 5.825483
-C28..5.Sterol    10.405141 0.000999001 6.155306 0.000999001 6.325869
-C29.Stanol.2      8.135186 0.000999001 5.115841 0.000999001 6.084142
-Sugar.17          5.602500 0.000999001 5.631534 0.000999001 7.717763
-Closed.Hexose.5   7.772355 0.000999001 7.303435 0.000999001 2.333828
-C28..5.22.Sterol  3.057139 0.005994006 7.166943 0.000999001 4.075839
-                   B224.pval      D206   D206.pval MeanDecreaseAccuracy
-C30..5.Sterol    0.000999001 10.083884 0.000999001            10.299961
-C28..5.Sterol    0.000999001  5.162145 0.000999001            10.190206
-C29.Stanol.2     0.000999001  8.979959 0.000999001             9.650500
-Sugar.17         0.000999001  6.586413 0.000999001             8.438290
-Closed.Hexose.5  0.032967033  2.298043 0.035964036             8.333227
-C28..5.22.Sterol 0.002997003  7.536672 0.000999001             8.117613
-                 MeanDecreaseAccuracy.pval MeanDecreaseGini
-C30..5.Sterol                  0.000999001        1.3762887
-C28..5.Sterol                  0.000999001        1.3390682
-C29.Stanol.2                   0.000999001        1.2566522
-Sugar.17                       0.000999001        1.0370137
-Closed.Hexose.5                0.000999001        0.8017916
-C28..5.22.Sterol               0.000999001        0.8865358
+                      A194   A194.pval     B184
+C30..5.Sterol     8.509105 0.000999001 9.654092
+C28..5.Sterol    10.479585 0.000999001 7.310758
+C29.Stanol.2      6.641183 0.000999001 6.692812
+Sugar.17          5.561427 0.000999001 5.001033
+Closed.Hexose.5   8.138557 0.000999001 6.961631
+C28..5.22.Sterol  4.478776 0.001998002 5.730685
+                   B184.pval     B224   B224.pval
+C30..5.Sterol    0.000999001 6.915300 0.000999001
+C28..5.Sterol    0.000999001 6.224220 0.000999001
+C29.Stanol.2     0.000999001 5.111778 0.000999001
+Sugar.17         0.000999001 7.952449 0.000999001
+Closed.Hexose.5  0.000999001 3.903217 0.004995005
+C28..5.22.Sterol 0.000999001 4.669289 0.000999001
+                      D206   D206.pval
+C30..5.Sterol    10.241161 0.000999001
+C28..5.Sterol     6.088147 0.000999001
+C29.Stanol.2      9.461333 0.000999001
+Sugar.17          6.903033 0.000999001
+Closed.Hexose.5   3.289976 0.005994006
+C28..5.22.Sterol  6.873986 0.000999001
+                 MeanDecreaseAccuracy
+C30..5.Sterol               11.049444
+C28..5.Sterol               10.447258
+C29.Stanol.2                 9.730202
+Sugar.17                     8.655595
+Closed.Hexose.5              8.629144
+C28..5.22.Sterol             7.689850
+                 MeanDecreaseAccuracy.pval
+C30..5.Sterol                  0.000999001
+C28..5.Sterol                  0.000999001
+C29.Stanol.2                   0.000999001
+Sugar.17                       0.000999001
+Closed.Hexose.5                0.000999001
+C28..5.22.Sterol               0.000999001
+                 MeanDecreaseGini
+C30..5.Sterol           1.5155494
+C28..5.Sterol           1.3630128
+C29.Stanol.2            1.1727002
+Sugar.17                1.1421368
+Closed.Hexose.5         0.8792825
+C28..5.22.Sterol        0.7644224
                  MeanDecreaseGini.pval
 C30..5.Sterol              0.000999001
 C28..5.Sterol              0.000999001
@@ -483,11 +511,11 @@ the true classification rate given the observed sample sizes.
 
 \begin{verbatim}
         pct.correct  LCI_0.95  UCI_0.95 Pr.gt_0.8
-A194       0.937500 0.6976793 0.9984189 0.9718525
-B184       1.000000 0.7940928 1.0000000 1.0000000
-B224       0.875000 0.6165238 0.9844864 0.8592625
-D206       1.000000 0.7940928 1.0000000 1.0000000
-Overall    0.953125 0.8690643 0.9902269 0.9999102
+A194        0.93750 0.6976793 0.9984189 0.9718525
+B184        1.00000 0.7940928 1.0000000 1.0000000
+B224        0.93750 0.6976793 0.9984189 0.9718525
+D206        1.00000 0.7940928 1.0000000 1.0000000
+Overall     0.96875 0.8916295 0.9961928 0.9999893
 \end{verbatim}
 
 The first column in the output is the oberved percent correct (1 - OOB
@@ -509,12 +537,18 @@ function, \texttt{confusionMatrix}.
 \end{Shaded}
 
 \begin{verbatim}
-        A194 B184 B224 D206 pct.correct LCI_0.95  UCI_0.95 Pr.gt_0.8 Prior
-A194      15    1    0    0     93.7500 69.76793  99.84189  97.18525    25
-B184       0   16    0    0    100.0000 79.40928 100.00000 100.00000    25
-B224       0    0   14    2     87.5000 61.65238  98.44864  85.92625    25
-D206       0    0    0   16    100.0000 79.40928 100.00000 100.00000    25
-Overall   NA   NA   NA   NA     95.3125 86.90643  99.02269  99.99102    25
+        A194 B184 B224 D206 pct.correct LCI_0.95
+A194      15    0    0    1      93.750 69.76793
+B184       0   16    0    0     100.000 79.40928
+B224       0    0   15    1      93.750 69.76793
+D206       0    0    0   16     100.000 79.40928
+Overall   NA   NA   NA   NA      96.875 89.16295
+         UCI_0.95 Pr.gt_0.8 Prior
+A194     99.84189  97.18525    25
+B184    100.00000 100.00000    25
+B224     99.84189  97.18525    25
+D206    100.00000 100.00000    25
+Overall  99.61928  99.99893    25
 \end{verbatim}
 
 Note that in this matrix, the columns deriving from the

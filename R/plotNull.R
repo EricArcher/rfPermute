@@ -77,7 +77,7 @@ plotNull <- function(x, preds = NULL, imp.type = NULL, scale = TRUE,
     )
     
     pval <- x$pval[p, imp.type, sc]
-    labels <- paste0(names(pval), " (p = ", sprintf("%0.3f", pval), ")")
+    labels <- paste0(names(pval), "\n(p = ", sprintf("%0.3f", pval), ")")
     levels(df$imp.type) <- levels(obs$imp.type) <- labels
     
     pl <- ggplot(df, aes_string("importance"))
