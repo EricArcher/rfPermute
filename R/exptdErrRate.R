@@ -8,6 +8,12 @@
 #' 
 #' @author Eric Archer \email{eric.archer@@noaa.gov}
 #' 
+#' @examples 
+#' data(mtcars)
+#' 
+#' rf <- randomForest(factor(am) ~ ., mtcars)
+#' exptdErrRate(rf)
+#' 
 #' @export
 #' 
 exptdErrRate <- function(rf) {

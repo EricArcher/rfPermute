@@ -22,12 +22,12 @@
 #' @author Eric Archer \email{eric.archer@@noaa.gov}
 #' 
 #' @examples
-#'   # A regression model using the ozone example
-#'   data(airquality)
-#'   ozone.rfP <- rfPermute(Ozone ~ ., data = airquality, ntree = 100, na.action = na.omit, nrep = 50)
+#' # A regression model using the ozone example
+#' data(airquality)
+#' ozone.rfP <- rfPermute(Ozone ~ ., data = airquality, ntree = 100, na.action = na.omit, nrep = 50)
 #'   
-#'   # Plot the null distributions and observed values.
-#'   plotNull(ozone.rfP) 
+#' # Plot the null distributions and observed values.
+#' plotNull(ozone.rfP) 
 #' 
 #' @importFrom reshape2 melt
 #' @importFrom ggplot2 ggplot aes_string geom_histogram geom_density xlab

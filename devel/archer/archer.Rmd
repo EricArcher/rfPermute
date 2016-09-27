@@ -32,7 +32,7 @@ Under this procedure, a predictor that is not adding any significant information
 
 The function, `rfPermute`, provides a wrapper for the `randomForest` function that accepts all of its arguments, plus two additional ones: `nrep`, which is an integer specifying the number of permutation replicates to run, and `num.cores`, which is an integer specifying the number of CPU cores to distribute the permutations over on a multi-core system. If `nrep` is set to 0, then the return value is a list with the same elements as the equivalent call to `randomForest`. With one or more permutation replicates specified, the returned list contains two elements: `null.dist`, which is a list containing arrays of the null distributions for unscaled and scaled importance measures, and `pval`, which is an array containing the permutation p-values for unscaled and scaled importance measures.  
 
-As an example, we use `rfPermute` to create a classifier of four clades of the endosymbiont dinoflagellate *Symbiodinium* from a data set of metabolite profiles as published in \citet{RN404}. We build a Random Forest model with 2000 trees. Significance of the predictor importances is measured with 1000 permutations. Because each *Symbiodinium* type is represented by 16 cases in this data set, we create a model where 8 cases from each type are used in each tree, and sampling is done without replacement. This scheme ensures that in each tree, half of the samples from each class are used for trainng, while the other half are retained as out-of-bag (OOB) for testing. `rfPermute` automatically sets `importance = TRUE` to force `randomForest` to calculate and return the full matrix of importance scores, so we don't need to set that. However, we will be using the proximity matrix later, so we must specify `proximity = TRUE`.
+As an example, we use `rfPermute` to create a classifier of four clades of the endosymbiont dinoflagellate *Symbiodinium* from a data set of metabolite profiles as published in \citet{RN404}. We build a Random Forest model with 2000 trees. Significance of the predictor importances is measured with 1000 permutations. Because each *Symbiodinium* type is represented by 16 cases in this data set, we create a model where 8 cases from each type are used in each tree, and sampling is done without replacement. This scheme ensures that in each tree, half of the samples from each class are used for training, while the other half are retained as out-of-bag (OOB) for testing. `rfPermute` automatically sets `importance = TRUE` to force `randomForest` to calculate and return the full matrix of importance scores, so we don't need to set that. However, we will be using the proximity matrix later, so we must specify `proximity = TRUE`.
 
 ```{r load_pkg, include = FALSE}
 library(rfPermute)
@@ -50,7 +50,7 @@ metab.rf <- rfPermute(type ~ ., data = symb.metab, ntree = 2000, sampsize = rep(
 metab.rf
 ```
 
-The result is a `rfPermute` object that inherits from and has the same components as a `randomForest` object, plus `null.dist` and `pval`, as seen below.
+The result is an `rfPermute` object that inherits from and has the same components as a `randomForest` object, plus `null.dist` and `pval`, as seen below.
 
 ```{r view_model}
 class(metab.rf)
@@ -68,7 +68,7 @@ imp <- rp.importance(metab.rf)
 head(imp)
 ```
 
-The null distribution along with the observed importance of a predictor can be visualized as either a density plot or histogram with the `plotNull` function. This function acepts vectors of any number of predictors and importance types, so that multiple figures can produced in one call. If no predictors or importance types are specified, all null distributions will be produced by default. In Figure 1, we show the null distributions for the metabolite Disaccharide.8, which is a significant predictor overall in the model with p = `r imp["Disaccharide.8", "MeanDecreaseAccuracy.pval"]`.
+The null distribution along with the observed importance of a predictor can be visualized as either a density plot or histogram with the `plotNull` function. This function accepts vectors of any number of predictors and importance types, so that multiple figures can produced in one call. If no predictors or importance types are specified, all null distributions will be produced by default. In Figure 1, we show the null distributions for the metabolite Disaccharide.8, which is a significant predictor overall in the model with p = `r imp["Disaccharide.8", "MeanDecreaseAccuracy.pval"]`.
 
 ```{r plotNull, echo=FALSE, fig.cap="Null distributions of importance scores for Disaccharide.8."}
 plotNull(metab.rf, preds = "Disaccharide.8")
@@ -80,7 +80,7 @@ It can be useful to visualize the distribution of importance scores across all p
 plot(imp, type = "MeanDecreaseAccuracy")
 ```
 
-Given that we can't see much detail about specific predictor metabolites in Figure 2 due to overlap of all of the metabolite names, we can also use the `plot` function to just show a subset, say only the top ten most important predictors, but this time for all importance types (Fig. 3). This figure suggests that many of the same metabolites are significantly important for all classes. One can also restrict the output to only significant predictors by specifyig the argument, `sig.only = TRUE`.
+Given that we can't see much detail about specific predictor metabolites in Figure 2 due to overlap of all of the metabolite names, we can also use the `plot` function to just show a subset, say only the top ten most important predictors, but this time for all importance types (Fig. 3). This figure suggests that many of the same metabolites are significantly important for all classes. One can also restrict the output to only significant predictors by specifying the argument, `sig.only = TRUE`.
 
 ```{r plot_imp2, echo=FALSE, fig.cap="Bar chart of top ten most important predictors."}
 plot(imp, n = 10)
@@ -94,7 +94,7 @@ impHeatmap(metab.rf, n = 30)
 
 ## Model summary functions
 
-\(\CRANpkg{rfPermute}\) also provides a set of convenient summary functions for \(\CRANpkg{randomForest}\) models, regardless of if the model was run in \(\CRANpkg{randomForest}\) or \(\CRANpkg{rfPermute}\). One such function is used to evaluate how well a classification model is performing, by calculating the OOB error rates that would expected if samples were just randomly allocated to bins in the absence of information from predictor variables. These rates turn out to simply be the fraction of the total sample size represented by each class. In a simple two-class model, with equal sample sizes in each class, this is then 50% for both classes. However, if the sample sizes are skewed, say 80 in class A, and 10 in class B, then one would expect on average to correctly classify 80 / 90 of the class A samples and 10 / 90 of the class B samples. Thus the expected error rates would be 0.11 for class A and 0.89 for class B. These values, referred to as "priors" are calculated by the `exptdErrRate` function. Since this data set has equal sample sizes, all priors are the same: 
+\(\CRANpkg{rfPermute}\) also provides a set of convenient summary functions for \(\CRANpkg{randomForest}\) models, regardless of whether the model was run in \(\CRANpkg{randomForest}\) or \(\CRANpkg{rfPermute}\). One such function is used to evaluate how well a classification model is performing, by calculating the OOB error rates that would expected if samples were just randomly allocated to bins in the absence of information from predictor variables. These rates turn out to simply be the fraction of the total sample size represented by each class. In a simple two-class model, with equal sample sizes in each class, this is then 50% for both classes. However, if the sample sizes are skewed, say 80 in class A, and 10 in class B, then one would expect on average to correctly classify 80 / 90 of the class A samples and 10 / 90 of the class B samples. Thus the expected error rates would be 0.11 for class A and 0.89 for class B. These values, referred to as "priors" are calculated by the `exptdErrRate` function. Since this data set has equal sample sizes, all priors are the same: 
 
 ```{r exptdErrRate}
 exptdErrRate(metab.rf)
@@ -106,7 +106,7 @@ The `classConfInt` function provides confidence intervals for the class-specific
 classConfInt(metab.rf)
 ```
 
-The first column in the output is the oberved percent correct (1 - OOB error rate). The next two columns are the bounds of the central 95-percentile of the classification score given the observed sample sizes. The final column provides the fraction of the binomial distribution that is greater than a given threshold. The default is 0.8, but it can be specified to any other value in `0:1` using the `threshold` argument.
+The first column in the output is the observed percent correct (1 - OOB error rate). The next two columns are the bounds of the central 95-percentile of the classification score given the observed sample sizes. The final column provides the fraction of the binomial distribution that is greater than a given threshold. The default is 0.8, but it can be specified to any other value in `0:1` using the `threshold` argument.
 
 A complete summary of the \(\CRANpkg{randomForest}\) classification model can be produced by combining the results of `classConfInt` and `exptdErrRate` along with the full confusion matrix as in the function, `confusionMatrix`.
 

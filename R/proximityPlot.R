@@ -27,9 +27,9 @@
 #' @author Eric Archer \email{eric.archer@@noaa.gov}
 #' 
 #' @examples
-#' data(mtcars)
-#' rf <- randomForest(factor(am) ~ ., mtcars, proximity = TRUE)
-#' rf
+#' data(symb.metab)
+#'
+#' rf <- randomForest(type ~ ., symb.metab, proximity = TRUE)
 #' proximityPlot(rf)
 #' 
 #' @importFrom stats cmdscale

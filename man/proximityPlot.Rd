@@ -45,9 +45,9 @@ Produces a scatter plot of proximity scores for \code{dim.x} and
   colored according to original (inner) and predicted (outer) class.
 }
 \examples{
-data(mtcars)
-rf <- randomForest(factor(am) ~ ., mtcars, proximity = TRUE)
-rf
+data(symb.metab)
+
+rf <- randomForest(type ~ ., symb.metab, proximity = TRUE)
 proximityPlot(rf)
 
 }

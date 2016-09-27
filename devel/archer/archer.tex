@@ -90,7 +90,7 @@ importances is measured with 1000 permutations. Because each
 \emph{Symbiodinium} type is represented by 16 cases in this data set, we
 create a model where 8 cases from each type are used in each tree, and
 sampling is done without replacement. This scheme ensures that in each
-tree, half of the samples from each class are used for trainng, while
+tree, half of the samples from each class are used for training, while
 the other half are retained as out-of-bag (OOB) for testing.
 \texttt{rfPermute} automatically sets \texttt{importance\ =\ TRUE} to
 force \texttt{randomForest} to calculate and return the full matrix of
@@ -116,8 +116,7 @@ metab.rf
 \begin{Soutput}
 
 Call:
- randomForest(formula = type ~ ., data = symb.metab, ntree = 2000,      sampsize = rep(8, 4), 
- replace = FALSE, proximity = TRUE) 
+ randomForest(formula = type ~ ., data = symb.metab, ntree = 2000,      sampsize = rep(8, 4), replace = FALSE, proximity = TRUE) 
                Type of random forest: classification
                      Number of trees: 2000
 No. of variables tried at each split: 12
@@ -132,8 +131,8 @@ D206    0    0    0   16      0.0000
 \end{Soutput}
 \end{Schunk}
 
-The result is a \texttt{rfPermute} object that inherits from and has the
-same components as a \texttt{randomForest} object, plus
+The result is an \texttt{rfPermute} object that inherits from and has
+the same components as a \texttt{randomForest} object, plus
 \texttt{null.dist} and \texttt{pval}, as seen below.
 
 \begin{Schunk}
@@ -208,7 +207,7 @@ Closed.Hexose.5             0.837              0.000999
 
 The null distribution along with the observed importance of a predictor
 can be visualized as either a density plot or histogram with the
-\texttt{plotNull} function. This function acepts vectors of any number
+\texttt{plotNull} function. This function accepts vectors of any number
 of predictors and importance types, so that multiple figures can
 produced in one call. If no predictors or importance types are
 specified, all null distributions will be produced by default. In Figure
@@ -244,7 +243,7 @@ use the \texttt{plot} function to just show a subset, say only the top
 ten most important predictors, but this time for all importance types
 (Fig. 3). This figure suggests that many of the same metabolites are
 significantly important for all classes. One can also restrict the
-output to only significant predictors by specifyig the argument,
+output to only significant predictors by specifying the argument,
 \texttt{sig.only\ =\ TRUE}.
 
 \begin{Schunk}
@@ -269,21 +268,21 @@ might have strong diagnostic properties for those subsets of classes.
 \subsection{Model summary functions}\label{model-summary-functions}
 
 \(\CRANpkg{rfPermute}\) also provides a set of convenient summary
-functions for \(\CRANpkg{randomForest}\) models, regardless of if the
-model was run in \(\CRANpkg{randomForest}\) or \(\CRANpkg{rfPermute}\).
-One such function is used to evaluate how well a classification model is
-performing, by calculating the OOB error rates that would expected if
-samples were just randomly allocated to bins in the absence of
-information from predictor variables. These rates turn out to simply be
-the fraction of the total sample size represented by each class. In a
-simple two-class model, with equal sample sizes in each class, this is
-then 50\% for both classes. However, if the sample sizes are skewed, say
-80 in class A, and 10 in class B, then one would expect on average to
-correctly classify 80 / 90 of the class A samples and 10 / 90 of the
-class B samples. Thus the expected error rates would be 0.11 for class A
-and 0.89 for class B. These values, referred to as ``priors'' are
-calculated by the \texttt{exptdErrRate} function. Since this data set
-has equal sample sizes, all priors are the same:
+functions for \(\CRANpkg{randomForest}\) models, regardless of whether
+the model was run in \(\CRANpkg{randomForest}\) or
+\(\CRANpkg{rfPermute}\). One such function is used to evaluate how well
+a classification model is performing, by calculating the OOB error rates
+that would expected if samples were just randomly allocated to bins in
+the absence of information from predictor variables. These rates turn
+out to simply be the fraction of the total sample size represented by
+each class. In a simple two-class model, with equal sample sizes in each
+class, this is then 50\% for both classes. However, if the sample sizes
+are skewed, say 80 in class A, and 10 in class B, then one would expect
+on average to correctly classify 80 / 90 of the class A samples and 10 /
+90 of the class B samples. Thus the expected error rates would be 0.11
+for class A and 0.89 for class B. These values, referred to as
+``priors'' are calculated by the \texttt{exptdErrRate} function. Since
+this data set has equal sample sizes, all priors are the same:
 
 \begin{Schunk}
 \begin{Sinput}
@@ -314,7 +313,7 @@ Overall       0.969    0.892    0.996     1.000
 \end{Soutput}
 \end{Schunk}
 
-The first column in the output is the oberved percent correct (1 - OOB
+The first column in the output is the observed percent correct (1 - OOB
 error rate). The next two columns are the bounds of the central
 95-percentile of the classification score given the observed sample
 sizes. The final column provides the fraction of the binomial

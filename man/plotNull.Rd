@@ -36,12 +36,12 @@ The function will generate an plot for each predictor, with facetted
   score and the p-value is given in the facet label.
 }
 \examples{
-  # A regression model using the ozone example
-  data(airquality)
-  ozone.rfP <- rfPermute(Ozone ~ ., data = airquality, ntree = 100, na.action = na.omit, nrep = 50)
+# A regression model using the ozone example
+data(airquality)
+ozone.rfP <- rfPermute(Ozone ~ ., data = airquality, ntree = 100, na.action = na.omit, nrep = 50)
   
-  # Plot the null distributions and observed values.
-  plotNull(ozone.rfP) 
+# Plot the null distributions and observed values.
+plotNull(ozone.rfP) 
 
 }
 \author{

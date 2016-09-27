@@ -16,6 +16,13 @@ a vector of expected error rates (priors) for each class.
 Calculate expected OOB error rates (priors) for randomForest 
   classification model based on random assignment and class sizes.
 }
+\examples{
+data(mtcars)
+
+rf <- randomForest(factor(am) ~ ., mtcars)
+exptdErrRate(rf)
+
+}
 \author{
 Eric Archer \email{eric.archer@noaa.gov}
 }
