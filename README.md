@@ -55,6 +55,8 @@ devtools::install_github('EricArcher/rfPermute')
 
 ## Development version (current on GitHub)
 
+## version 2.1.5
+
 * Added `type` argument to `plotVotes` to choose between area and bar charts.
 * Changed `plot.rfPermute` to `plotNull` to avoid clashes and maintain functionality of `randomForest::plot.randomForest`.
 * Changed name of `proximity.plot` to `proximityPlot`,  `exptd.err.rate` to `exptdErrRate`, and `clean.rf.data` to `cleanRFdata` to make camelCase naming scheme more consistent in package.
