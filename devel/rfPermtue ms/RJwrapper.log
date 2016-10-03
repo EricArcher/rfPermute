@@ -1,9 +1,12 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  27 SEP 2016 09:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  3 OCT 2016 09:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**\nonstopmode \input ./RJwrapper.tex
-(./RJwrapper.tex (/usr/local/texlive/2015/texmf-dist/tex/latex/base/report.cls
+**RJwrapper.tex
+(./RJwrapper.tex
+LaTeX2e <2015/01/01>
+Babel <3.9l> and hyphenation patterns for 79 languages loaded.
+(/usr/local/texlive/2015/texmf-dist/tex/latex/base/report.cls
 Document Class: report 2014/09/29 v1.4h Standard LaTeX document class
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/size10.clo
 File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
@@ -1315,14 +1318,14 @@ Package microtype Info: Character `textemdash ' is missing
  [1{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 ]
-Overfull \hbox (0.6365pt too wide) in paragraph at lines 134--137
+Overfull \hbox (0.6365pt too wide) in paragraph at lines 135--138
 []\T1/ppl/m/n/9 (-20) The re-sult is an \T1/zi4/m/n/9 rfPermute \T1/ppl/m/n/9 (
 -20) ob-ject that in-her-its from and has the same com-po-nents as a \T1/zi4/m/
 n/9 randomForest
  []
 
 
-Overfull \hbox (3.19958pt too wide) in paragraph at lines 171--177
+Overfull \hbox (3.19958pt too wide) in paragraph at lines 172--178
 \T1/ppl/m/n/9 (-20) The per-mu-ta-tion p-values for pre-dic-tors in the \T1/zi4
 /m/n/9 rfPermute \T1/ppl/m/n/9 (-20) ob-ject can be ac-cessed with the \T1/zi4/
 m/n/9 rp.importance
@@ -1334,10 +1337,10 @@ File: archer_files/figure-latex/plotNull-1.pdf Graphic file (type pdf)
 
 <use archer_files/figure-latex/plotNull-1.pdf>
 Package pdftex.def Info: archer_files/figure-latex/plotNull-1.pdf used on input
- line 219.
+ line 220.
 (pdftex.def)             Requested size: 460.72012pt x 315.17673pt.
 
-Overfull \hbox (62.38155pt too wide) in paragraph at lines 219--219
+Overfull \hbox (62.38155pt too wide) in paragraph at lines 220--220
 [][] 
  []
 
@@ -1347,10 +1350,10 @@ File: archer_files/figure-latex/plot_imp1-1.pdf Graphic file (type pdf)
 
 <use archer_files/figure-latex/plot_imp1-1.pdf>
 Package pdftex.def Info: archer_files/figure-latex/plot_imp1-1.pdf used on inpu
-t line 236.
+t line 237.
 (pdftex.def)             Requested size: 458.71263pt x 320.19545pt.
 
-Overfull \hbox (60.37405pt too wide) in paragraph at lines 236--236
+Overfull \hbox (60.37405pt too wide) in paragraph at lines 237--237
 [][] 
  []
 
@@ -1360,10 +1363,10 @@ File: archer_files/figure-latex/plot_imp2-1.pdf Graphic file (type pdf)
 
 <use archer_files/figure-latex/plot_imp2-1.pdf>
 Package pdftex.def Info: archer_files/figure-latex/plot_imp2-1.pdf used on inpu
-t line 251.
+t line 252.
 (pdftex.def)             Requested size: 462.72762pt x 320.19545pt.
 
-Overfull \hbox (64.38904pt too wide) in paragraph at lines 251--251
+Overfull \hbox (64.38904pt too wide) in paragraph at lines 252--252
 [][] 
  []
 
@@ -1372,10 +1375,10 @@ File: archer_files/figure-latex/impHeatmap-1.pdf Graphic file (type pdf)
 
 <use archer_files/figure-latex/impHeatmap-1.pdf>
 Package pdftex.def Info: archer_files/figure-latex/impHeatmap-1.pdf used on inp
-ut line 264.
+ut line 265.
 (pdftex.def)             Requested size: 445.66391pt x 315.17673pt.
 
-Overfull \hbox (47.32533pt too wide) in paragraph at lines 264--264
+Overfull \hbox (47.32533pt too wide) in paragraph at lines 265--265
 [][] 
  []
 
@@ -1386,10 +1389,10 @@ File: archer_files/figure-latex/plotVotes-1.pdf Graphic file (type pdf)
 
 <use archer_files/figure-latex/plotVotes-1.pdf>
 Package pdftex.def Info: archer_files/figure-latex/plotVotes-1.pdf used on inpu
-t line 363.
+t line 364.
 (pdftex.def)             Requested size: 457.7089pt x 299.11676pt.
 
-Overfull \hbox (59.37032pt too wide) in paragraph at lines 363--363
+Overfull \hbox (59.37032pt too wide) in paragraph at lines 364--364
 [][] 
  []
 
@@ -1399,10 +1402,10 @@ t>
 File: archer_files/figure-latex/proximityPlot-1.pdf Graphic file (type pdf)
  <use archer_files/figure-latex/proximityPlot-1.pdf>
 Package pdftex.def Info: archer_files/figure-latex/proximityPlot-1.pdf used on 
-input line 393.
+input line 394.
 (pdftex.def)             Requested size: 459.71637pt x 298.11302pt.
 
-Overfull \hbox (61.37779pt too wide) in paragraph at lines 393--393
+Overfull \hbox (61.37779pt too wide) in paragraph at lines 394--394
 [][] 
  []
 
@@ -1428,12 +1431,12 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 27.
  ) 
 Here is how much of TeX's memory you used:
  21612 strings out of 493089
- 387459 string characters out of 6134842
+ 387457 string characters out of 6134842
  485406 words of memory out of 5000000
  24466 multiletter control sequences out of 15000+600000
  44963 words of font info for 181 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,11n,56p,447b,658s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,11n,56p,425b,658s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/inconsolata/i4-t1-0.enc}{
 /usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texl
 ive/2015/texmf-dist/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb></usr/l
@@ -1441,7 +1444,7 @@ ocal/texlive/2015/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb></usr/local
 /texlive/2015/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/texliv
 e/2015/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2015/
 texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on RJwrapper.pdf (9 pages, 179519 bytes).
+Output written on RJwrapper.pdf (9 pages, 179526 bytes).
 PDF statistics:
  243 PDF objects out of 1000 (max. 8388607)
  204 compressed objects within 3 object streams
