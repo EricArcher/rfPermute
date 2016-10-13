@@ -48,9 +48,7 @@ All other parameters are as defined in \code{randomForest.formula}.
   ozone.rfP <- rfPermute(Ozone ~ ., data = airquality, ntree = 100, na.action = na.omit, nrep = 50)
   
   # Plot the null distributions and observed values.
-  layout(matrix(1:6, nrow = 2))
   plotNull(ozone.rfP) 
-  layout(matrix(1))
   
   # Plot the unscaled importance distributions and highlight significant predictors
   plot(rp.importance(ozone.rfP, scale = FALSE))
