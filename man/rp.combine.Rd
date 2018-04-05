@@ -28,10 +28,9 @@ plotNull(rp.all)
 layout(matrix(1))
 
 }
-\author{
-Eric Archer \email{eric.archer@noaa.gov}
-}
 \seealso{
 \code{\link[randomForest]{combine}}
 }
-
+\author{
+Eric Archer \email{eric.archer@noaa.gov}
+}

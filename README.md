@@ -55,6 +55,9 @@ devtools::install_github('EricArcher/rfPermute')
 
 ## Development version (current on GitHub)
 
+* Added `plotConfMat`, `plotOOBtimes`, and `plotRFtrace` visualizations.
+* Changed `confusionMatrix` so it will work when `randomForest model doesn't have a `$confusion` element, like when model is result of `combine`-ing multiple models.
+
 ## version 2.1.5
 
 * Added `type` argument to `plotVotes` to choose between area and bar charts.

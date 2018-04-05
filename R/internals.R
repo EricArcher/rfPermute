@@ -36,3 +36,6 @@
   dimnames(arr) <- list(rownames(imp), colnames(imp), c("unscaled", "scaled"))
   return(arr)
 }
+
+# Simple confusion matrix
+.confMat <- function(rf) cbind(table(rf$y, rf$predicted))

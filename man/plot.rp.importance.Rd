@@ -44,10 +44,9 @@ The function will generate a panel of plots, one for each
   plot(rp.importance(ozone.rfP, scale = TRUE))
 
 }
-\author{
-Eric Archer \email{eric.archer@noaa.gov}
-}
 \seealso{
 \code{\link{rfPermute}}, \code{\link{rp.importance}}
 }
-
+\author{
+Eric Archer \email{eric.archer@noaa.gov}
+}

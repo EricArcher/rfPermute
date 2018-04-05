@@ -39,10 +39,9 @@ p-values can be given to the \code{sort.by} argument by adding
   imp.scaled
 
 }
-\author{
-Eric Archer \email{eric.archer@noaa.gov}
-}
 \seealso{
 \code{\link{rfPermute}}, \code{\link{plot.rp.importance}}
 }
-
+\author{
+Eric Archer \email{eric.archer@noaa.gov}
+}

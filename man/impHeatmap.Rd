@@ -55,4 +55,3 @@ impHeatmap(rp, xlab = "Transmission", ylab = "Predictor")
 \author{
 Eric Archer \email{eric.archer@noaa.gov}
 }
-

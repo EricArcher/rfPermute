@@ -47,4 +47,3 @@ plotNull(ozone.rfP)
 \author{
 Eric Archer \email{eric.archer@noaa.gov}
 }
-
