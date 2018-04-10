@@ -45,7 +45,13 @@ devtools::install_github('EricArcher/rfPermute')
 `exptdErrRate` Expected Error Rate  
 `impHeatmap` Importance Heatmap  
 `pctCorrect` Percent Correctly Classified  
+`plotConfMat` Heatmap representation of Confusion Matrix
+`plotImpVarDist` Distribution of Important Variables
+`plotInbag` Distribution of sample inbag rates
 `plotNull` Plot Random Forest Importance Null Distributions  
+`plotOOBtimes` Distribution of sample OOB rates
+`plotPredictedProbs` Distribution of prediction assignment probabilities
+`plotRFtrace` Trace of cumulative error rates in forest
 `plotVotes` Vote Distribution  
 `plot.rp.importance` Plot Random Forest Importance Distributions  
 `proximityPlot` Plot Random Forest Proximity Scores  
@@ -55,7 +61,7 @@ devtools::install_github('EricArcher/rfPermute')
 
 ## Development version (current on GitHub)
 
-* Added `plotConfMat`, `plotOOBtimes`, `plotRFtrace`, and `plotInbag` visualizations.
+* Added `plotConfMat`, `plotOOBtimes`, `plotRFtrace`, and `plotInbag`, and `plotImpVarDist` visualizations.
 * Changed `confusionMatrix` so it will work when `randomForest model doesn't have a `$confusion` element, like when model is result of `combine`-ing multiple models.
 
 ## version 2.1.5

@@ -29,7 +29,7 @@ plotRFtrace <- function(rf, plot = TRUE) {
     dplyr::mutate(class = factor(.data$class, levels = colnames(df))) %>% 
     ggplot2::ggplot(ggplot2::aes_string("trees", "error", color = "class")) +
     ggplot2::geom_line() +
-    ggplot2::scale_color_discrete("")
+    ggplot2::theme(legend.title = ggplot2::element_blank())
   
   if(plot) print(p)
   invisible(p)

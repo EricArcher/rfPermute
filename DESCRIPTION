@@ -31,6 +31,7 @@ Imports:
     swfscMisc (>= 1.1.1),
     tibble,
     tidyr,
+    utils,
     viridis
 License: GPL (>= 2)
 RoxygenNote: 6.0.1
