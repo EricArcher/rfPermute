@@ -20,9 +20,14 @@
 #' @export
 #'
 plotRFtrace <- function(rf, plot = TRUE) {
-  df <- rf$err.rate %>% 
-    as.data.frame()
+  if(!hasName(rf, "err.rate")) {
+    stop(
+      "'rf' does not have an 'err.rate' matrix. ",
+      "Is it the result of a 'randomForest::combine(...)' operation?"
+    )
+  }
   
+  df <- as.data.frame(rf$err.rate)
   p <- df %>% 
     dplyr::mutate(trees = 1:nrow(.)) %>% 
     tidyr::gather("class", "error", -.data$trees) %>% 

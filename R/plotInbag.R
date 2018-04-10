@@ -6,7 +6,9 @@
 #' @param bins number of bins in histogram.
 #' @param plot display the plot?
 #'   
-#' @return the \code{ggplot2} object is invisibly returned.
+#' @return the \code{ggplot2} object is invisibly returned. The red vertical 
+#'   lines mark the expected values for the classes in the model based on their 
+#'   frequency and sample sizes.
 #' 
 #' @author Eric Archer \email{eric.archer@@noaa.gov}
 #' 
