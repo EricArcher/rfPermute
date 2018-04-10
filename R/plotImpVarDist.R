@@ -30,7 +30,7 @@
 #'
 plotImpVarDist <- function(rf, df, class.col, max.vars = 16, plot = TRUE) {
   if(ncol(df) <= 2) return(NULL)
-  imp.val <- if(utils::hasName(rf$importance, "MeanDecreaseAccuracy")) {
+  imp.val <- if("MeanDecreaseAccuracy" %in% colnames(rf$importance)) {
     "MeanDecreaseAccuracy" 
   } else {
     "MeanDecreaseGini"
