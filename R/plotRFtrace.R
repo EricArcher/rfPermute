@@ -20,7 +20,7 @@
 #' @export
 #'
 plotRFtrace <- function(rf, plot = TRUE) {
-  if(!hasName(rf, "err.rate")) {
+  if(!utils::hasName(rf, "err.rate")) {
     stop(
       "'rf' does not have an 'err.rate' matrix. ",
       "Is it the result of a 'randomForest::combine(...)' operation?"

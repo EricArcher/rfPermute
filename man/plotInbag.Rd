@@ -16,7 +16,9 @@ plotInbag(rf, sampsize = NULL, bins = 20, plot = TRUE)
 \item{plot}{display the plot?}
 }
 \value{
-the \code{ggplot2} object is invisibly returned.
+the \code{ggplot2} object is invisibly returned. The red vertical 
+  lines mark the expected values for the classes in the model based on their 
+  frequency and sample sizes.
 }
 \description{
 Plot distribution of sample inbag rates

@@ -24,6 +24,11 @@ the \code{ggplot2} object is invisibly returned.
 Plot distribution of predictor variables on classes sorted 
   by order of importance in model.
 }
+\note{
+If the model in \code{rf} was run with \code{importance = TRUE}, then
+  'MeanDecreaseAccuracy' is used as the importance measure. Otherwise,
+  'MeanDecreaseGini' is used.
+}
 \examples{
 data(mtcars)
 df <- mtcars
