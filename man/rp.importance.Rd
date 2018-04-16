@@ -28,15 +28,16 @@ p-values can be given to the \code{sort.by} argument by adding
   element of the \code{rfPermute} object.
 }
 \examples{
-  # A regression model using the ozone example
-  data(airquality)
-  ozone.rfP <- rfPermute(Ozone ~ ., data = airquality, ntree = 100, na.action = na.omit, nrep = 50)
+# A regression model using the ozone example
+ozone.rfP <- rfPermute(
+  Ozone ~ ., data = airquality, ntree = 100, 
+  na.action = na.omit, nrep = 50, num.cores = 1
+)
+imp.unscaled <- rp.importance(ozone.rfP, scale = TRUE)
+imp.unscaled
   
-  imp.unscaled <- rp.importance(ozone.rfP, scale = TRUE)
-  imp.unscaled
-  
-  imp.scaled <- rp.importance(ozone.rfP, scale = TRUE)
-  imp.scaled
+imp.scaled <- rp.importance(ozone.rfP, scale = TRUE)
+imp.scaled
 
 }
 \seealso{

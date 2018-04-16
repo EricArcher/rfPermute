@@ -17,7 +17,6 @@
 #' 
 #' @importFrom magrittr %>% 
 #' @importFrom rlang .data
-#' @importFrom stats reorder
 #' @export
 #'
 plotConfMat <- function(rf, title = NULL, plot = TRUE) {
@@ -40,11 +39,11 @@ plotConfMat <- function(rf, title = NULL, plot = TRUE) {
     tidyr::gather("predicted", "prop", -.data$observed) %>% 
     dplyr::mutate(
       observed = factor(.data$observed),
-      observed = reorder(.data$observed, dplyr::desc(.data$observed)),
+      observed = stats::reorder(.data$observed, dplyr::desc(.data$observed)),
       predicted = factor(.data$predicted)
     ) %>% 
     ggplot2::ggplot(ggplot2::aes_string("predicted", "observed")) +
-    ggplot2::geom_raster(aes_string(fill = "prop")) +
+    ggplot2::geom_raster(ggplot2::aes_string(fill = "prop")) +
     viridis::scale_fill_viridis(option = "magma", direction = -1, limits = c(0, 1)) +
     ggplot2::scale_x_discrete(position = "top") +
     ggplot2::labs(x = "Predicted", y = "True", title = title) +

@@ -24,7 +24,7 @@
 .calcImpPval <- function(rp) {
   calcPval <- function(obs, null) {
     t(sapply(1:nrow(null), function(i) {
-      sapply(1:ncol(null), function(j) pVal(obs[i, j], null[i, j, ]))
+      sapply(1:ncol(null), function(j) swfscMisc::pVal(obs[i, j], null[i, j, ]))
     }))
   }
   imp <- rp$importance
@@ -39,3 +39,14 @@
 
 # Simple confusion matrix
 .confMat <- function(rf) cbind(table(rf$y, rf$predicted))
+
+.permFunc <- function(y, x, perm.rf.call) {
+  perm.rf.call$y <- y
+  perm.rf <- eval(perm.rf.call)
+  imp <- perm.rf$importance
+  impSD <- perm.rf$importanceSD
+  rm(perm.rf)
+  imp.arr <- .makeImpArray(imp, 2, c("unscaled", "scaled"))
+  imp.arr[, , 2] <- .scaleImp(imp, impSD)
+  return(imp.arr)
+}

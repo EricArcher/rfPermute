@@ -9,7 +9,7 @@
 \usage{
 rfPermute(x, ...)
 
-\method{rfPermute}{default}(x, y, ..., nrep = 100, num.cores = 1)
+\method{rfPermute}{default}(x, y, ..., nrep = 100, num.cores = NULL)
 
 \method{rfPermute}{formula}(formula, data = NULL, ..., subset,
   na.action = na.fail, nrep = 100)
@@ -21,7 +21,9 @@ for definitions.}
 \item{nrep}{Number of permutation replicates to run to construct 
 null distribution and calculate p-values (default = 100).}
 
-\item{num.cores}{Number of CPUs to distribute permutation results over.}
+\item{num.cores}{Number of CPUs to distribute permutation results over. 
+Defaults to \code{NULL} which uses one fewer than the number of cores 
+reported by \code{\link[parallel]{detectCores}}.}
 }
 \value{
 An \code{rfPermute} object which contains all of the components of a 
@@ -44,18 +46,21 @@ All other parameters are as defined in \code{randomForest.formula}.
   permutation step.
 }
 \examples{
-  # A regression model using the ozone example
-  data(airquality)
-  ozone.rfP <- rfPermute(Ozone ~ ., data = airquality, ntree = 100, na.action = na.omit, nrep = 50)
+# A regression model using the ozone example
+data(airquality)
+ozone.rfP <- rfPermute(
+  Ozone ~ ., data = airquality, ntree = 100, 
+  na.action = na.omit, nrep = 50, num.cores = 1
+)
   
-  # Plot the null distributions and observed values.
-  plotNull(ozone.rfP) 
+# Plot the null distributions and observed values.
+plotNull(ozone.rfP) 
   
-  # Plot the unscaled importance distributions and highlight significant predictors
-  plot(rp.importance(ozone.rfP, scale = FALSE))
+# Plot the unscaled importance distributions and highlight significant predictors
+plot(rp.importance(ozone.rfP, scale = FALSE))
   
-  # ... and the scaled measures
-  plot(rp.importance(ozone.rfP, scale = TRUE))
+# ... and the scaled measures
+plot(rp.importance(ozone.rfP, scale = TRUE))
 
 }
 \seealso{
