@@ -27,6 +27,7 @@ Imports:
     plyr,
     reshape2,
     rlang,
+    scales,
     stats,
     swfscMisc (>= 1.1.1),
     tibble,

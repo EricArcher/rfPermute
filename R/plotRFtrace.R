@@ -27,13 +27,19 @@ plotRFtrace <- function(rf, plot = TRUE) {
     )
   }
   
+  class.cols <- c("black", scales::hue_pal()(nlevels(rf$y)))
+  class.lines <- c(1, rep(2, nlevels(rf$y)))
+  names(class.cols) <- names(class.lines) <- c("OOB", levels(rf$y))
+  
   df <- as.data.frame(rf$err.rate)
   p <- df %>% 
     dplyr::mutate(trees = 1:nrow(.)) %>% 
     tidyr::gather("class", "error", -.data$trees) %>% 
     dplyr::mutate(class = factor(.data$class, levels = colnames(df))) %>% 
     ggplot2::ggplot(ggplot2::aes_string("trees", "error", color = "class")) +
-    ggplot2::geom_line() +
+    ggplot2::geom_line(ggplot2::aes_string(linetype = "class")) +
+    ggplot2::scale_color_manual(values = class.cols) +
+    ggplot2::scale_linetype_manual(values = class.lines) +
     ggplot2::theme(legend.title = ggplot2::element_blank())
   
   if(plot) print(p)

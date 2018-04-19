@@ -29,6 +29,10 @@
 #' @export
 #'
 plotImpVarDist <- function(rf, df, class.col, max.vars = 16, plot = TRUE) {
+  if(!class.col %in% colnames(df)) {
+    stop("'class.col' = \"", class.col, "\" cannot be found in 'df'")
+  }
+  
   if(ncol(df) <= 2) return(NULL)
   imp.val <- if("MeanDecreaseAccuracy" %in% colnames(rf$importance)) {
     "MeanDecreaseAccuracy" 
@@ -50,7 +54,7 @@ plotImpVarDist <- function(rf, df, class.col, max.vars = 16, plot = TRUE) {
     ggplot2::geom_jitter(size = 0.2, alpha = 0.2) +
     ggplot2::geom_violin(alpha = 0.5) +
     ggplot2::facet_wrap(~ var, scales = "free_y") +
-    ggplot2::labs(x = "Class", y = imp.val) +
+    ggplot2::labs(x = "Class", y = "Value") +
     ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1))  
   
   if(plot) print(p)
