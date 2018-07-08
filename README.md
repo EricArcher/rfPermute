@@ -59,7 +59,7 @@ devtools::install_github('EricArcher/rfPermute')
 `rp.combine` Combine rfPermute Objects  
 `rp.importance` Extract rfPermute Importance Scores and p-values  
 
-## Development version (current on GitHub)
+## version 2.1.6
 
 * Added `plotConfMat`, `plotOOBtimes`, `plotRFtrace`, and `plotInbag`, and `plotImpVarDist` visualizations.  
 * Changed `confusionMatrix` so it will work when `randomForest model doesn't have a `$confusion` element, like when model is result of `combine`-ing multiple models.   
