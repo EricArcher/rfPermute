@@ -47,7 +47,7 @@ rfPermute.default <- function(x, y, ..., nrep = 100, num.cores = NULL) {
       tryCatch({
         cl <- parallel::makeCluster(num.cores)
         parallel::clusterEvalQ(cl, require(randomForest))
-        parallel::clusterExport(cl, "x", "rf.call", environment())
+        parallel::clusterExport(cl, c("x", "rf.call"), environment())
         parallel::parLapply(cl, ran.y, .permFunc, x = x, perm.rf.call = rf.call)
       }, finally = parallel::stopCluster(cl))
     }
