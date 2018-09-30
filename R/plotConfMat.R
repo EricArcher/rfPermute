@@ -15,8 +15,6 @@
 #' rf <- randomForest(factor(am) ~ ., mtcars)
 #' plotConfMat(rf)
 #' 
-#' @importFrom magrittr %>% 
-#' @importFrom rlang .data
 #' @export
 #'
 plotConfMat <- function(rf, title = NULL, plot = TRUE) {
