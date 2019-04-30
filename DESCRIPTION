@@ -7,7 +7,7 @@ Description: Estimate significance of importance metrics
     metrics for each predictor variable and p-value of
     observed. Provides summary and visualization functions for 'randomForest' 
     results.
-Version: 2.1.7
+Version: 2.1.8
 Authors@R: c(
   EA = person("Eric", "Archer", email = "eric.archer@noaa.gov", role = c("aut", "cre")))
 URL: https://github.com/EricArcher/rfPermute

@@ -59,6 +59,8 @@ devtools::install_github('EricArcher/rfPermute')
 `rp.combine` Combine rfPermute Objects  
 `rp.importance` Extract rfPermute Importance Scores and p-values  
 
+## version 2.1.8 (devel)
+
 ## version 2.1.7 (on CRAN)
 
 * Fixed bug in parallel processing code.  
