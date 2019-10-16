@@ -1,4 +1,4 @@
-#' @title Vote Distribution
+#' @title Plot Vote Distribution
 #' @description Plot distribution of votes for each sample in each class.
 #' 
 #' @param rf an object inheriting from \code{\link{randomForest}}.

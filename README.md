@@ -39,6 +39,7 @@ devtools::install_github('EricArcher/rfPermute')
 
 ## Current Functions
 
+`casePredictions` Return predictions and votes for training cases
 `classConfInt` Classification Confidence Intervals  
 `cleanRFdata` Clean Random Forest Input Data  
 `confusionMatrix` Confusion Matrix  
@@ -60,6 +61,9 @@ devtools::install_github('EricArcher/rfPermute')
 `rp.importance` Extract rfPermute Importance Scores and p-values  
 
 ## version 2.1.8 (devel)
+
+* Fixed bug in `pctCorrect`
+* Added `casePredictions`
 
 ## version 2.1.7 (on CRAN)
 
