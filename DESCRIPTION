@@ -28,6 +28,7 @@ Imports:
     rlang,
     scales,
     stats,
+    swfscMisc,
     tibble,
     tidyr,
     utils
