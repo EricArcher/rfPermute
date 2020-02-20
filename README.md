@@ -64,6 +64,7 @@ devtools::install_github('EricArcher/rfPermute')
 
 * Fixed bug in `pctCorrect`
 * Added `casePredictions`
+* Updated parallel code
 
 ## version 2.1.7 (on CRAN)
 
