@@ -28,11 +28,9 @@ Imports:
     rlang,
     scales,
     stats,
-    swfscMisc,
+    swfscMisc (>= 1.3),
     tibble,
     tidyr,
     utils
-Remotes:
-  ericarcher/swfscMisc
 License: GPL (>= 2)
 RoxygenNote: 7.0.2
