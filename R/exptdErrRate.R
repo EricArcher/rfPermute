@@ -23,6 +23,5 @@ exptdErrRate <- function(rf) {
   if(rf$type == "regression") stop("'rf' must be of a classification model")
   y.freq <- table(rf$y)
   exp.err <- 1 - y.freq / sum(y.freq)
-  oob.err <- sum(exp.err * y.freq) / sum(y.freq)
-  c(OOB = oob.err, exp.err)
+  c(exp.err, OOB = sum(exp.err * y.freq) / sum(y.freq))
 }

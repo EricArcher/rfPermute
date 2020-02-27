@@ -19,13 +19,13 @@
 #' 
 #' @export
 #' 
-confusionMatrix <- function(rf, conf.level = 0.95, threshold = 0.8) {
+confusionMatrix <- function(rf, conf.level = 0.95, threshold = NULL) {
   conf <- .confMat(rf)
   # Get confidence intervals
   ci <- classConfInt(rf, conf.level = conf.level, threshold = threshold)
   # Get expected error rate (prior)
   prior <- exptdErrRate(rf)
-  prior <- (1 - prior[c(2:length(prior), 1)]) * 100
+  prior <- (1 - prior) * 100
   # Add rows and columns
   conf <- rbind(conf, Overall = rep(NA, ncol(conf)))
   cbind(conf, ci * 100, Prior = prior)

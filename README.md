@@ -60,6 +60,11 @@ devtools::install_github('EricArcher/rfPermute')
 `rp.combine` Combine rfPermute Objects  
 `rp.importance` Extract rfPermute Importance Scores and p-values  
 
+## version 2.1.9 (devel)
+
+* moved value of OOB expected error rate to end of output vector in `exptdErrRate`
+* changed default of `threshold` argument in `classConfInt` and `confusionMatrix` to `NULL`.
+
 ## version 2.1.81 (on CRAN)
 
 * Fixed bug in `pctCorrect`

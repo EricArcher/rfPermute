@@ -4,7 +4,7 @@
 \alias{confusionMatrix}
 \title{Confusion Matrix}
 \usage{
-confusionMatrix(rf, conf.level = 0.95, threshold = 0.8)
+confusionMatrix(rf, conf.level = 0.95, threshold = NULL)
 }
 \arguments{
 \item{rf}{a \code{\link[randomForest]{randomForest}} object.}
