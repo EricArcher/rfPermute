@@ -28,5 +28,5 @@ confusionMatrix <- function(rf, conf.level = 0.95, threshold = NULL) {
   prior <- (1 - prior) * 100
   # Add rows and columns
   conf <- rbind(conf, Overall = rep(NA, ncol(conf)))
-  cbind(conf, ci * 100, Prior = prior)
+  cbind(conf, round(ci * 100, 1), Prior = round(prior, 1))
 }
