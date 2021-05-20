@@ -63,8 +63,9 @@ devtools::install_github('EricArcher/rfPermute')
 ## version 2.1.9 (devel)
 
 * moved value of OOB expected error rate to end of output vector in `exptdErrRate`
-* changed default of `threshold` argument in `classConfInt` and `confusionMatrix` to `NULL`.
+* changed default of `threshold` argument in `classConfInt` and `confusionMatrix` to `NULL`
 * added new grouping and labelling options to proximityPlot()
+* added binomial test for priors in `exptdErrRate` and `confusionMatrix`
 
 ## version 2.1.81 (on CRAN)
 
