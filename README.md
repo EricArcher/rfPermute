@@ -4,7 +4,7 @@
 [![CRAN last month downloads](http://cranlogs.r-pkg.org/badges/rfPermute?color=red)](https://cran.r-project.org/package=rfPermute)
 [![CRAN total downloads](http://cranlogs.r-pkg.org/badges/grand-total/rfPermute?color=red)](https://cran.r-project.org/package=rfPermute)  
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3685335.svg)](https://doi.org/10.5281/zenodo.3685335)   
-[![Travis-CI Build Status](https://travis-ci.org/EricArcher/rfPermute.svg?branch=master)](https://travis-ci.org/EricArcher/rfPermute)
+[![R-CMD-check](https://github.com/EricArcher/rfPermute/workflows/R-CMD-check/badge.svg)](https://github.com/EricArcher/rfPermute/actions)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/EricArcher/rfPermute?branch=master&svg=true)](https://ci.appveyor.com/project/EricArcher/rfPermute)
 
 # rfPermute
@@ -60,7 +60,7 @@ devtools::install_github('EricArcher/rfPermute')
 `rp.combine` Combine rfPermute Objects  
 `rp.importance` Extract rfPermute Importance Scores and p-values  
 
-## version 2.1.9 (devel)
+## version 2.2 (devel)
 
 * moved value of OOB expected error rate to end of output vector in `exptdErrRate`
 * changed default of `threshold` argument in `classConfInt` and `confusionMatrix` to `NULL`
