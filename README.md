@@ -45,7 +45,7 @@ devtools::install_github('EricArcher/rfPermute')
 `confusionMatrix` Confusion Matrix  
 `classConfInt` Classification Confidence Intervals  
 `exptdErrRate` Expected Error Rate  
-`casePredictions` Return predictions and votes for training cases
+`casePredictions` Return predictions and votes for training cases  
 `pctCorrect` Percent Correctly Classified  
 
 ### Random Forest model visualization
