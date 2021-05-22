@@ -10,19 +10,20 @@
 # rfPermute
 
 ## Description
-
 `rfPermute` estimates the significance of importance metrics for a Random Forest model by permuting the response variable. It will produce null distributions of importance metrics for each predictor variable and p-value of observed. The package also includes several summary and visualization functions for `randomForest` and `rfPermute` results.
 
+## Contact
+* submit suggestions and bug-reports: <https://github.com/ericarcher/rfPermute/issues>
+* send a pull request: <https://github.com/ericarcher/rfPermute/>
+* e-mail: <eric.archer@noaa.gov>
+
 ## Installation
-
 To install the stable version from CRAN:
-
 ```r
 install.packages('rfPermute')
 ```
 
 To install the latest version from GitHub:
-
 ```r
 # make sure you have devtools installed
 if (!require('devtools')) install.packages('devtools')
@@ -31,15 +32,9 @@ if (!require('devtools')) install.packages('devtools')
 devtools::install_github('EricArcher/rfPermute')
 ```
 
-## Contact
-
-* submit suggestions and bug-reports: <https://github.com/ericarcher/rfPermute/issues>
-* send a pull request: <https://github.com/ericarcher/rfPermute/>
-* e-mail: <eric.archer@noaa.gov>
-
 ## Current Functions
 
-### Importance p-value estimation, summary, and visualization
+### Variable importance p-value estimation, summary, and visualization
 `rfPermute` Estimate Permutation p-values for Random Forest Importance Metrics  
 `importance` Extract rfPermute Importance Scores and p-values  
 `plotImportance` Plot Random Forest Importance Distributions
