@@ -78,3 +78,4 @@ plot.rp.importance <- function(x, alpha = 0.05, sig.only = FALSE,
   imp.list$bottom <- "Importance"
   suppressWarnings(do.call(gridExtra::grid.arrange, imp.list))
 }
+
