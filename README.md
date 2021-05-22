@@ -35,32 +35,32 @@ devtools::install_github('EricArcher/rfPermute')
 ## Current Functions
 
 ### Variable importance p-value estimation, summary, and visualization
-`rfPermute` Estimate Permutation p-values for Random Forest Importance Metrics  
-`importance` Extract rfPermute Importance Scores and p-values  
-`plotImportance` Plot Random Forest Importance Distributions
-`impHeatmap` Importance Heatmap    
-`plotImpVarDist` Distribution of Important Variables  
+* `rfPermute` Estimate Permutation p-values for Random Forest Importance Metrics  
+* `importance` Extract rfPermute Importance Scores and p-values  
+* `plotImportance` Plot Random Forest Importance Distributions
+* `plotNull` Plot Random Forest Importance Null Distributions  
+* `impHeatmap` Importance Heatmap    
+* `plotImpVarDist` Distribution of Important Variables  
 
 ### Random Forest model summary
-`confusionMatrix` Confusion Matrix  
-`classConfInt` Classification Confidence Intervals  
-`exptdErrRate` Expected Error Rate  
-`casePredictions` Return predictions and votes for training cases  
-`pctCorrect` Percent Correctly Classified  
+* `confusionMatrix` Confusion Matrix  
+* `classConfInt` Classification Confidence Intervals  
+* `exptdErrRate` Expected Error Rate  
+* `casePredictions` Return predictions and votes for training cases  
+* `pctCorrect` Percent Correctly Classified  
 
-### Random Forest model visualization
-`plotRFtrace` Trace of cumulative error rates in forest 
-`plotConfMat` Heatmap representation of Confusion Matrix
-`plotInbag` Distribution of sample inbag rates  
-`plotNull` Plot Random Forest Importance Null Distributions  
-`plotOOBtimes` Distribution of sample OOB rates  
-`plotPredictedProbs` Distribution of prediction assignment probabilities  
-`plotVotes` Vote Distribution    
-`proximityPlot` Plot Random Forest Proximity Scores 
+### Random Forest model visualization and diagnostics
+* `plotRFtrace` Trace of cumulative error rates in forest  
+* `plotConfMat` Heatmap representation of Confusion Matrix  
+* `plotInbag` Distribution of sample inbag rates  
+* `plotOOBtimes` Distribution of sample OOB rates  
+* `plotPredictedProbs` Distribution of prediction assignment probabilities  
+* `plotVotes` Vote Distribution    
+* `proximityPlot` Plot Random Forest Proximity Scores   
  
 ### Miscellaneous functions
-`combine` Combine rfPermute Objects  
-`cleanRFdata` Clean Random Forest Input Data  
+* `combine` Combine rfPermute Objects  
+* `cleanRFdata` Clean Random Forest Input Data  
 
 ## Changelog
 
