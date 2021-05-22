@@ -3,18 +3,20 @@
 #'   classification model
 #' 
 #' @param rf an object inheriting from \code{\link{randomForest}}.
-#' @param n Plot \code{n} most important predictors.
+#' @param n plot \code{n} most important predictors.
 #' @param ranks plot ranks instead of actual importance scores?
 #' @param plot print the plot?
 #' @param xlab,ylab labels for the x and y axes.
-#' @param scale For permutation based measures, should the measures be divided 
+#' @param scale for permutation based measures, should the measures be divided 
 #'   their "standard errors"?
 #' @param alpha a number specifying the critical alpha for identifying 
 #'   predictors with importance scores significantly different from random. 
 #'   This parameter is only relevant if \code{rf} is a \code{\link{rfPermute}}
-#'   object with p-values. Importance measures with p-values less than alpha 
-#'   will be denoted in the heatmap by a black border. If set to \code{NULL}, 
-#'   no border is drawn.
+#'   object with p-values. Importance measures with p-values less than or 
+#'   equal to \code{alpha} will be denoted in the heatmap by a white diamond. 
+#'   If set to \code{NULL}, significance is not denoted.
+#' @param size a value specifying the size of the significance diamond if 
+#'   the p-value <= \code{alpha}.
 #' 
 #' @details \code{rf} must be a classification model run with 
 #'   \code{importance = TRUE}.
@@ -24,6 +26,7 @@
 #' @author Eric Archer \email{eric.archer@@noaa.gov}
 #' 
 #' @examples
+#' library(randomForest)
 #' data(mtcars)
 #' 
 #' # A randomForest model
@@ -38,7 +41,8 @@
 #' @export
 #' 
 impHeatmap <- function(rf, n = NULL, ranks = TRUE, plot = TRUE, xlab = NULL, 
-                       ylab = NULL, scale = TRUE, alpha = 0.05) {
+                       ylab = NULL, scale = TRUE, alpha = 0.05, 
+                       size = 3) {
   if(rf$type != "classification") stop("'rf' must be a classification model")
   classes <- levels(rf$y)
   if(!all(classes %in% colnames(rf$importance))) {
@@ -47,7 +51,7 @@ impHeatmap <- function(rf, n = NULL, ranks = TRUE, plot = TRUE, xlab = NULL,
   
   # format importance data.frame
   imp <- data.frame(
-    randomForest::importance(rf, scale = scale), 
+    importance(rf, scale = scale), 
     check.names = FALSE
   )
   imp.val <- imp$MeanDecreaseAccuracy
@@ -91,7 +95,7 @@ impHeatmap <- function(rf, n = NULL, ranks = TRUE, plot = TRUE, xlab = NULL,
     ggplot2::ylab(ylab)
   }
   
-  if(inherits(rf, "rfPermute") & !is.null(rf$pval) & !is.null(alpha))  {
+  if(!is.null(rf$pval) & !is.null(alpha)) {
     sc <- ifelse(scale, "scaled", "unscaled")
     sig <- sapply(1:nrow(imp), function(i) {
       pred <- as.character(imp$predictor[i])
@@ -99,16 +103,9 @@ impHeatmap <- function(rf, n = NULL, ranks = TRUE, plot = TRUE, xlab = NULL,
       rf$pval[pred, cl, sc] <= alpha
     })
     sig.df <- imp[sig, ]
-    sig.df$xmin <- as.integer(sig.df$class) - 0.5
-    sig.df$xmax <- as.integer(sig.df$class) + 0.5
-    sig.df$ymin <- as.integer(sig.df$predictor) - 0.5
-    sig.df$ymax <- as.integer(sig.df$predictor) + 0.5
-    g <- g + ggplot2::geom_rect(
-      ggplot2::aes_string(
-        xmin = "xmin", xmax = "xmax", 
-        ymin = "ymin", ymax = "ymax"
-      ),
-      data = sig.df, fill = NA, size = 1, color = "black"
+    g <- g + ggplot2::geom_point(
+      data = imp[sig, ], size = size, shape = 23, 
+      fill = "white", color = "black"
     )
   }
   

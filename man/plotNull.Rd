@@ -19,8 +19,7 @@ plotNull(
 \item{preds}{a character vector of predictors to plot. If \code{NULL}, then 
 all predictors are plotted.}
 
-\item{imp.type}{Either a numeric or character vector giving the 
-importance metric(s) to plot.}
+\item{imp.type}{A character vector giving the importance metric(s) to plot.}
 
 \item{scale}{Plot importance measures scaled (divided by) standard errors?}
 

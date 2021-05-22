@@ -2,6 +2,8 @@
 % Please edit documentation in R/exptdErrRate.R
 \name{exptdErrRate}
 \alias{exptdErrRate}
+\alias{prior,}
+\alias{priors}
 \title{Expected Error Rate}
 \usage{
 exptdErrRate(rf)
@@ -18,6 +20,7 @@ Calculate expected OOB error rates (priors) for randomForest
   classification model based on random assignment and class sizes.
 }
 \examples{
+library(randomForest)
 data(mtcars)
 
 rf <- randomForest(factor(am) ~ ., mtcars)

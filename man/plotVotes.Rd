@@ -27,6 +27,7 @@ the \code{ggplot2} object is invisibly returned.
 Plot distribution of votes for each sample in each class.
 }
 \examples{
+library(randomForest)
 data(mtcars)
 
 rf <- randomForest(factor(am) ~ ., mtcars)

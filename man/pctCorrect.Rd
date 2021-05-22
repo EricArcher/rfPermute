@@ -21,6 +21,7 @@ Calculate the percent of individuals correctly classified in
   a specified percent of trees in the forest.
 }
 \examples{
+library(randomForest)
 data(mtcars)
 
 rf <- randomForest(factor(am) ~ ., mtcars, importance = TRUE)

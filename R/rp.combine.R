@@ -28,8 +28,6 @@
 #' plotNull(rp.all) 
 #' layout(matrix(1))
 #' 
-#' @importFrom abind abind
-#' @importFrom randomForest combine
 #' @export
 #' 
 rp.combine <- function(...) {
@@ -37,9 +35,9 @@ rp.combine <- function(...) {
   are.rp <- sapply(rp.list, function(x) inherits(x, "rfPermute"))
   if(any(!are.rp)) stop("some objects in '...' are not rfPermute results.")
   
-  rf <- do.call(combine, rp.list)
+  rf <- do.call(randomForest::combine, rp.list)
   rf$null.dist <- sapply(c("unscaled", "scaled"), function(sc) {
-   do.call(abind, c(lapply(rp.list, function(x) x$null.dist[[sc]]), along = 3))
+   do.call(abind::abind, c(lapply(rp.list, function(x) x$null.dist[[sc]]), along = 3))
   }, simplify = FALSE)
   rf$pval <- .calcImpPval(rf)
   

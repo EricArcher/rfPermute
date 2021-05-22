@@ -18,6 +18,7 @@ the \code{ggplot2} object is invisibly returned.
 Plot trace of cumulative OOB error rate by number of trees
 }
 \examples{
+library(randomForest)
 data(mtcars)
 
 rf <- randomForest(factor(am) ~ ., mtcars)

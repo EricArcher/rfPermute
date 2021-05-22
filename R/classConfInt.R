@@ -1,7 +1,7 @@
 #' @title Classification Confidence Intervals
 #' @description Calculate confidence intervals for Random Forest classifications
 #' 
-#' @param rf a \code{\link[randomForest]{randomForest}} object
+#' @param rf an object inheriting from \code{\link{randomForest}}.
 #' @param conf.level confidence level for the \code{\link{binom.test}} confidence interval
 #' @param threshold threshold to test observed classification probability against.
 #' 
@@ -15,12 +15,12 @@
 #' @author Eric Archer \email{eric.archer@@noaa.gov} 
 #' 
 #' @examples
+#' library(randomForest)
 #' data(symb.metab)
 #'
 #' rf <- randomForest(type ~ ., symb.metab)
 #' classConfInt(rf)
 #' 
-#' @importFrom stats binom.test pbinom
 #' @export
 #' 
 classConfInt <- function(rf, conf.level = 0.95, threshold = NULL) {
@@ -28,10 +28,10 @@ classConfInt <- function(rf, conf.level = 0.95, threshold = NULL) {
   result <- t(sapply(1:nrow(conf), function(i) {
     correct <- conf[i, i]
     n <- sum(conf[i, ])
-    ci <- binom.test(correct, n, correct / n, conf.level = conf.level)$conf.int
+    ci <- stats::binom.test(correct, n, correct / n, conf.level = conf.level)$conf.int
     names(ci) <- paste(c("LCI", "UCI"), conf.level, sep = "_")
     prob.gt <- if(!is.null(threshold)) {
-      pbinom(correct, n, threshold)
+      stats::pbinom(correct, n, threshold)
     } else NULL
     if(!is.null(prob.gt)) names(prob.gt) <- paste("Pr.gt_", threshold, sep = "")
     c(pct.correct = correct / n, ci, prob.gt)
@@ -39,9 +39,9 @@ classConfInt <- function(rf, conf.level = 0.95, threshold = NULL) {
   rownames(result) <- rownames(conf)
   n <- sum(conf)
   correct <- sum(diag(conf))
-  ci <- binom.test(correct, n, correct / n, conf.level = conf.level)$conf.int
+  ci <- stats::binom.test(correct, n, correct / n, conf.level = conf.level)$conf.int
   prob.gt <- if(!is.null(threshold)) {
-    pbinom(correct, n, threshold)
+    stats::pbinom(correct, n, threshold)
   } else NULL
   rbind(result, Overall = c(correct / n, ci, prob.gt))
 }

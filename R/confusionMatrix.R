@@ -3,7 +3,7 @@
 #'   error rates translated into percent correctly classified, and columns for 
 #'   confidence intervals and expected classification rates (priors) added.
 #' 
-#' @param rf a \code{\link[randomForest]{randomForest}} object.
+#' @param rf an object inheriting from \code{\link{randomForest}}.
 #' @param conf.level confidence level for the \code{\link{binom.test}} confidence interval
 #' @param threshold threshold to test observed classification probability against.
 #' @param digits integer indicating the number of decimal places to round values 
@@ -11,9 +11,11 @@
 #' 
 #' @author Eric Archer \email{eric.archer@@noaa.gov} 
 #' 
-#' @seealso \code{\link{classConfInt}}, \code{\link{exptdErrRate}}
+#' @seealso \code{\link{classConfInt}}, \code{\link{exptdErrRate}}, 
+#' \code{\link{plotConfMat}}
 #' 
 #' @examples
+#' library(randomForest)
 #' data(mtcars)
 #'
 #' rf <- randomForest(factor(am) ~ ., mtcars, importance = TRUE)

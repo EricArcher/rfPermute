@@ -7,8 +7,7 @@
 #' @param x An object produced by a call to \code{\link{rfPermute}}.
 #' @param preds a character vector of predictors to plot. If \code{NULL}, then 
 #'   all predictors are plotted.
-#' @param imp.type Either a numeric or character vector giving the 
-#'   importance metric(s) to plot.
+#' @param imp.type A character vector giving the importance metric(s) to plot.
 #' @param scale Plot importance measures scaled (divided by) standard errors?
 #' @param plot.type type of plot to produce: \code{"density"} for smoothed density 
 #'   plot, or \code{"hist"} for histogram.
@@ -38,21 +37,18 @@
 plotNull <- function(x, preds = NULL, imp.type = NULL, scale = TRUE, 
                      plot.type = c("density", "hist"), plot = TRUE) {
   if(!inherits(x, "rfPermute")) stop("'x' is not of class 'rfPermute'")
-  imp <- randomForest::importance(x, type = NULL, class = NULL, scale = scale)
+  imp <- importance(x, scale = scale)
+  avail.types <- colnames(x$importance)
   
-  if(is.null(imp.type)) imp.type <- colnames(imp)
+  if(is.null(imp.type)) imp.type <- avail.types
   imp.type <- unique(imp.type)
   if(is.character(imp.type)) {
-   not.found <- imp.type[!(imp.type %in% colnames(imp))]
+   not.found <- imp.type[!(imp.type %in% avail.types)]
    if(length(not.found) > 0) {
      imp <- paste(not.found, collapse = ", ")
      stop(paste("imp.type: ", imp, " is not in 'x'", sep = ""))
    }
-  } else if(is.numeric(imp.type)) {
-    imp <- imp[, c(ncol(imp) -1, ncol(imp))]
-    if(!all(imp.type <= ncol(imp))) stop("some 'imp.type' out of range")
-    imp.type <- colnames(imp)[imp.type]
-  } else stop("'imp.type' is not a character or numeric vector")
+  } else stop("'imp.type' is not a character vector")
   
   sc <- if(scale) "scaled" else "unscaled"
   

@@ -7,7 +7,7 @@
 classConfInt(rf, conf.level = 0.95, threshold = NULL)
 }
 \arguments{
-\item{rf}{a \code{\link[randomForest]{randomForest}} object}
+\item{rf}{an object inheriting from \code{\link{randomForest}}.}
 
 \item{conf.level}{confidence level for the \code{\link{binom.test}} confidence interval}
 
@@ -25,6 +25,7 @@ A matrix with the following columns for each class and overall:
 Calculate confidence intervals for Random Forest classifications
 }
 \examples{
+library(randomForest)
 data(symb.metab)
 
 rf <- randomForest(type ~ ., symb.metab)

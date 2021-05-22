@@ -1,5 +1,5 @@
 #' @title Expected Error Rate
-#' @alias prior, priors
+#' @aliases prior, priors
 #' @description Calculate expected OOB error rates (priors) for randomForest 
 #'   classification model based on random assignment and class sizes.
 #' 
@@ -11,6 +11,7 @@
 #' @author Eric Archer \email{eric.archer@@noaa.gov}
 #' 
 #' @examples 
+#' library(randomForest)
 #' data(mtcars)
 #' 
 #' rf <- randomForest(factor(am) ~ ., mtcars)
@@ -34,7 +35,7 @@ exptdErrRate <- function(rf) {
   # Get p-values
   correct.n <- c(diag(cm), sum(diag(cm)))
   total.n <- c(class.n, total.n)
-  prior.p <- 1 - pbinom(correct.n, total.n, 1 - prior)
+  prior.p <- 1 - stats::pbinom(correct.n, total.n, 1 - prior)
   
   cbind(prior = prior, class_p.value = prior.p)
 }

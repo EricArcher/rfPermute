@@ -20,6 +20,7 @@ the \code{ggplot2} object is invisibly returned.
 Plot histogram of times samples were OOB.
 }
 \examples{
+library(randomForest)
 data(mtcars)
 
 rf <- randomForest(factor(am) ~ ., mtcars)

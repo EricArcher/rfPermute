@@ -7,7 +7,7 @@
 confusionMatrix(rf, conf.level = 0.95, threshold = NULL, digits = 1)
 }
 \arguments{
-\item{rf}{a \code{\link[randomForest]{randomForest}} object.}
+\item{rf}{an object inheriting from \code{\link{randomForest}}.}
 
 \item{conf.level}{confidence level for the \code{\link{binom.test}} confidence interval}
 
@@ -22,6 +22,7 @@ Generate a confusion matrix for Random Forest analyses with
   confidence intervals and expected classification rates (priors) added.
 }
 \examples{
+library(randomForest)
 data(mtcars)
 
 rf <- randomForest(factor(am) ~ ., mtcars, importance = TRUE)
@@ -29,7 +30,8 @@ confusionMatrix(rf)
 
 }
 \seealso{
-\code{\link{classConfInt}}, \code{\link{exptdErrRate}}
+\code{\link{classConfInt}}, \code{\link{exptdErrRate}}, 
+\code{\link{plotConfMat}}
 }
 \author{
 Eric Archer \email{eric.archer@noaa.gov}

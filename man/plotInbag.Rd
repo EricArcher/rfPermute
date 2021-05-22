@@ -24,6 +24,7 @@ the \code{ggplot2} object is invisibly returned. The red vertical
 Plot distribution of sample inbag rates
 }
 \examples{
+library(randomForest)
 data(mtcars)
 
 rf <- randomForest(factor(am) ~ ., mtcars)

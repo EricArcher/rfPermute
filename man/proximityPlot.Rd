@@ -76,6 +76,7 @@ Produces a scatter plot of proximity scores for \code{dim.x} and
   and predicted (outer) class.
 }
 \examples{
+library(randomForest)
 data(symb.metab)
 
 rf <- randomForest(type ~ ., symb.metab, proximity = TRUE)

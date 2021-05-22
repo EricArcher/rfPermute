@@ -30,7 +30,9 @@ If the model in \code{rf} was run with \code{importance = TRUE}, then
   'MeanDecreaseGini' is used.
 }
 \examples{
+library(randomForest)
 data(mtcars)
+
 df <- mtcars
 df$am <- factor(df$am)
 

@@ -7,14 +7,13 @@ Description: Estimate significance of importance metrics
     metrics for each predictor variable and p-value of
     observed. Provides summary and visualization functions for 'randomForest' 
     results.
-Version: 2.2
+Version: 2.2.1
 Authors@R: c(
   EA = person("Eric", "Archer", email = "eric.archer@noaa.gov", role = c("aut", "cre")))
 URL: https://github.com/EricArcher/rfPermute
 BugReports: https://github.com/EricArcher/rfPermute/issues
 Depends:
-    R (>= 4.0.0),
-    randomForest
+    R (>= 4.0.0)
 Imports:
     abind,
     dplyr,
@@ -23,6 +22,7 @@ Imports:
     gridExtra,
     magrittr,
     parallel,
+    randomForest,
     rlang,
     scales,
     stats,
@@ -30,5 +30,7 @@ Imports:
     tibble,
     tidyr,
     utils
+LazyData: TRUE
 License: GPL (>= 2)
+Encoding: UTF-8
 RoxygenNote: 7.1.1

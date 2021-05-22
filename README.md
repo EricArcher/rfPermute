@@ -54,20 +54,27 @@ devtools::install_github('EricArcher/rfPermute')
 `plotPredictedProbs` Distribution of prediction assignment probabilities  
 `plotRFtrace` Trace of cumulative error rates in forest  
 `plotVotes` Vote Distribution  
-`plot.rp.importance` Plot Random Forest Importance Distributions  
+`plotImportance` Plot Random Forest Importance Distributions  
 `proximityPlot` Plot Random Forest Proximity Scores  
 `rfPermute` Estimate Permutation p-values for Random Forest Importance Metrics  
-`rp.combine` Combine rfPermute Objects  
-`rp.importance` Extract rfPermute Importance Scores and p-values  
+`combine` Combine rfPermute Objects  
+`importance` Extract rfPermute Importance Scores and p-values  
 
-## version 2.2 (devel)
+## version 2.2.1 (devel)
+
+* removed `rp.importance()` and `plot.rp.importance()` and replaced with 
+`importance()` and `plotImportance()`.
+* replaced black boxing significance indication in `impHeatmap()` with white
+diamonds.
+
+## version 2.2 (on CRAN)
 
 * moved value of OOB expected error rate to end of output vector in `exptdErrRate`
 * changed default of `threshold` argument in `classConfInt` and `confusionMatrix` to `NULL`
 * added new grouping and labelling options to proximityPlot()
 * added binomial test for priors in `exptdErrRate` and `confusionMatrix`
 
-## version 2.1.81 (on CRAN)
+## version 2.1.81
 
 * Fixed bug in `pctCorrect`
 * Added `casePredictions`

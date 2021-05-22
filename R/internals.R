@@ -20,7 +20,6 @@
 
 # Calculate importance p-values from null distribution and observed importances
 # rp: rfPermute object
-#' @importFrom swfscMisc pVal
 .calcImpPval <- function(rp) {
   calcPval <- function(obs, null) {
     t(sapply(1:nrow(null), function(i) {

@@ -17,7 +17,9 @@
 #' @author Eric Archer \email{eric.archer@@noaa.gov}
 #' 
 #' @examples
+#' library(randomForest)
 #' data(mtcars)
+#' 
 #' df <- mtcars
 #' df$am <- factor(df$am)
 #' 

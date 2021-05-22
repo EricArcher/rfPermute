@@ -18,6 +18,7 @@ Get data frame of case predictions for training data along with
   vote distributions.
 }
 \examples{
+library(randomForest)
 data(mtcars)
 
 rf <- randomForest(factor(am) ~ ., mtcars)

@@ -10,6 +10,7 @@
 #' @author Eric Archer \email{eric.archer@@noaa.gov}
 #' 
 #' @examples
+#' library(randomForest)
 #' data(mtcars)
 #' 
 #' rf <- randomForest(factor(am) ~ ., mtcars)

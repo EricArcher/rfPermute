@@ -36,6 +36,7 @@
 #' @author Eric Archer \email{eric.archer@@noaa.gov}
 #' 
 #' @examples
+#' library(randomForest)
 #' data(symb.metab)
 #'
 #' rf <- randomForest(type ~ ., symb.metab, proximity = TRUE)

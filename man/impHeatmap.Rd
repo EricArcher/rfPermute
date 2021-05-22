@@ -12,13 +12,14 @@ impHeatmap(
   xlab = NULL,
   ylab = NULL,
   scale = TRUE,
-  alpha = 0.05
+  alpha = 0.05,
+  size = 3
 )
 }
 \arguments{
 \item{rf}{an object inheriting from \code{\link{randomForest}}.}
 
-\item{n}{Plot \code{n} most important predictors.}
+\item{n}{plot \code{n} most important predictors.}
 
 \item{ranks}{plot ranks instead of actual importance scores?}
 
@@ -26,15 +27,18 @@ impHeatmap(
 
 \item{xlab, ylab}{labels for the x and y axes.}
 
-\item{scale}{For permutation based measures, should the measures be divided 
+\item{scale}{for permutation based measures, should the measures be divided 
 their "standard errors"?}
 
 \item{alpha}{a number specifying the critical alpha for identifying 
 predictors with importance scores significantly different from random. 
 This parameter is only relevant if \code{rf} is a \code{\link{rfPermute}}
-object with p-values. Importance measures with p-values less than alpha 
-will be denoted in the heatmap by a black border. If set to \code{NULL}, 
-no border is drawn.}
+object with p-values. Importance measures with p-values less than or 
+equal to \code{alpha} will be denoted in the heatmap by a white diamond. 
+If set to \code{NULL}, significance is not denoted.}
+
+\item{size}{a value specifying the size of the significance diamond if 
+the p-value <= \code{alpha}.}
 }
 \value{
 the \code{ggplot} object is invisibly returned.
@@ -48,6 +52,7 @@ Plot heatmap of importance scores or ranks from a
   \code{importance = TRUE}.
 }
 \examples{
+library(randomForest)
 data(mtcars)
 
 # A randomForest model

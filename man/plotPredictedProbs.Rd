@@ -22,6 +22,7 @@ Plot histogram of assignment probabilities to predicted class.
   and incorrectly classified samples in terms of how well they ar classified.
 }
 \examples{
+library(randomForest)
 data(mtcars)
 
 rf <- randomForest(factor(am) ~ ., mtcars)
