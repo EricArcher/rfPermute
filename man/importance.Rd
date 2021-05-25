@@ -2,15 +2,10 @@
 % Please edit documentation in R/importance.R
 \name{importance}
 \alias{importance}
-\alias{importance.default}
 \alias{importance.rfPermute}
 \alias{plotImportance}
 \title{Extract rfPermute Importance Scores and p-values.}
 \usage{
-importance(x, ...)
-
-\method{importance}{default}(x, ...)
-
 \method{importance}{rfPermute}(x, scale = TRUE, sort.by = NULL, decreasing = TRUE, ...)
 
 plotImportance(
@@ -26,8 +21,6 @@ plotImportance(
 \arguments{
 \item{x}{An object produced by a call to \code{rfPermute}.}
 
-\item{...}{optional arguments which will be ignored.}
-
 \item{scale}{For permutation based measures, should the measures be divided 
 their "standard errors"?}
 
@@ -36,6 +29,8 @@ to sort by. If \code{NULL}, defaults to \code{"MeanDecreaseAccuracy"} for
 classification models and \code{"\%IncMSE"} for regression models.}
 
 \item{decreasing}{logical. Should the sort order be increasing or decreasing?}
+
+\item{...}{arguments to be passed to and from other methods.}
 
 \item{alpha}{Critical alpha to identify "significant" predictors.}
 
@@ -59,24 +54,19 @@ p-values can be given to the \code{sort.by} argument by adding
   element of the \code{rfPermute} object.
 }
 \examples{
-data(airquality)
+data(mtcars)
 
-# A regression model using the ozone example
-ozone.rfP <- rfPermute(
-  Ozone ~ ., data = airquality, ntree = 100, 
-  na.action = na.omit, nrep = 50, num.cores = 1
-)
-imp.unscaled <- importance(ozone.rfP, scale = TRUE)
-imp.unscaled
+# A classification model classifying cars to manual or automatic transmission 
+am.rp <- rfPermute(factor(am) ~ ., mtcars, ntree = 100, nrep = 50)
   
-imp.scaled <- importance(ozone.rfP, scale = TRUE)
+imp.scaled <- importance(am.rp, scale = TRUE)
 imp.scaled
 
 # plot scaled importance scores
-plotImportance(ozone.rfP, scale = TRUE)
+plotImportance(am.rp, scale = TRUE)
 
 # plot unscaled and only significant scores
-plotImportance(ozone.rfP, scale = FALSE, sig.only = TRUE)
+plotImportance(am.rp, scale = FALSE, sig.only = TRUE)
 
 }
 \author{

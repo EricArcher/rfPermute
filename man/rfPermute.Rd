@@ -4,24 +4,33 @@
 \alias{rfPermute}
 \alias{rfPermute.default}
 \alias{rfPermute.formula}
+\alias{as.randomForest}
+\alias{print.rfPermute}
 \title{Estimate Permutation p-values for Random Forest Importance Metrics}
 \usage{
 rfPermute(x, ...)
 
-\method{rfPermute}{default}(x, y, ..., nrep = 100, num.cores = 1)
+\method{rfPermute}{default}(x, y = NULL, ..., nrep = 100, num.cores = 1)
 
 \method{rfPermute}{formula}(
   formula,
   data = NULL,
   ...,
   subset,
-  na.action = stats::na.fail,
-  nrep = 100
+  na.action = na.fail,
+  nrep = 100,
+  num.cores = 1
 )
+
+as.randomForest(x)
+
+\method{print}{rfPermute}(x, ...)
 }
 \arguments{
 \item{x, y, formula, data, subset, na.action, \dots}{See \code{\link{randomForest}} 
-for definitions.}
+for definitions. In \code{as.randomForest} this is either a 
+\code{randomForest} or \code{rfPermute} object to be converted to a
+\code{randomForest} object.}
 
 \item{nrep}{Number of permutation replicates to run to construct 
 null distribution and calculate p-values (default = 100).}
@@ -31,12 +40,7 @@ Defaults to \code{NULL} which uses one fewer than the number of cores
 reported by \code{\link[parallel]{detectCores}}.}
 }
 \value{
-An \code{rfPermute} object which contains all of the components of a 
-  \code{randomForest} object plus:
-  \item{null.dist}{A list containing two three-dimensional arrays of null 
-    distributions for \code{unscaled} and \code{scaled} importance measures.} 
-  \item{pval}{A three dimensional array containing permutation p-values for 
-    \code{unscaled} and \code{scaled} importance measures.}
+An \code{rfPermute} object.
 }
 \description{
 Estimate significance of importance metrics for a Random Forest 
@@ -51,34 +55,31 @@ All other parameters are as defined in \code{randomForest.formula}.
   permutation step.
 }
 \examples{
-# A regression model using the ozone example
+# A regression model predicting ozone levels
 data(airquality)
-ozone.rfP <- rfPermute(
-  Ozone ~ ., data = airquality, ntree = 100, 
-  na.action = na.omit, nrep = 50, num.cores = 1
-)
+ozone.rp <- rfPermute(Ozone ~ ., data = airquality, na.action = na.omit, ntree = 100, nrep = 50)
+ozone.rp
   
-# Plot the null distributions and observed values.
-plotNull(ozone.rfP) 
-  
-# Plot the unscaled importance distributions and highlight significant predictors
-plotImportance(ozone.rfP, scale = FALSE)
-  
-# ... and the scaled measures
-plotImportance(ozone.rfP, scale = TRUE)
+# Plot the scaled importance distributions 
+# Significant (p <= 0.05) predictors are in red
+plotImportance(ozone.rp, scale = TRUE)
 
-}
-\seealso{
-\code{\link{plotNull}} for plotting null distributions from the \code{rfPermute} objects. \cr
-\code{\link{importance}} for extracting importance measures. \cr
-\code{\link{rp.combine}} for combining multiple \code{rfPermute} objects.\cr
-\code{\link{proximityPlot}} for plotting case proximities.\cr
-\code{\link{impHeatmap}} for plotting a heatmap of importance scores.\cr
-\code{\link{randomForest}}
+# Plot the importance null distributions and observed values for two of the predictors
+plotNull(ozone.rp, preds = c("Solar.R", "Month"))
+
+
+# A classification model classifying cars to manual or automatic transmission 
+data(mtcars)
+
+am.rp <- rfPermute(factor(am) ~ ., mtcars, ntree = 100, nrep = 50)
+summary(am.rp)
+
+
+plotImportance(am.rp, scale = TRUE, sig.only = TRUE)
+
+
+
 }
 \author{
 Eric Archer \email{eric.archer@noaa.gov}
 }
-\keyword{classif}
-\keyword{regression}
-\keyword{tree}

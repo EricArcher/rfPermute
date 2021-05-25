@@ -4,10 +4,10 @@
 \alias{plotPredictedProbs}
 \title{Plot Predicted Probabilities}
 \usage{
-plotPredictedProbs(rf, bins = 30, plot = TRUE)
+plotPredictedProbs(x, bins = 30, plot = TRUE)
 }
 \arguments{
-\item{rf}{an object inheriting from \code{\link{randomForest}}.}
+\item{x}{a \code{rfPermute} or \code{randomForest} model object.}
 
 \item{bins}{number of bins in histogram. Defaults to number of samples / 5.}
 

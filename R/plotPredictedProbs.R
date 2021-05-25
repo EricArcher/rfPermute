@@ -3,7 +3,7 @@
 #'   This is used for determining if the model differentiates between correctly 
 #'   and incorrectly classified samples in terms of how well they ar classified.
 #' 
-#' @param rf an object inheriting from \code{\link{randomForest}}.
+#' @param x a \code{rfPermute} or \code{randomForest} model object.
 #' @param bins number of bins in histogram. Defaults to number of samples / 5.
 #' @param plot display the plot?
 #'   
@@ -20,7 +20,10 @@
 #' 
 #' @export
 #'
-plotPredictedProbs <- function(rf, bins = 30, plot = TRUE) {
+plotPredictedProbs <- function(x, bins = 30, plot = TRUE) {
+  rf <- as.randomForest(x)
+  if(rf$type == "regression") stop("'rf' must be of a classification model")
+  
   p <- rf$votes %>% 
     as.data.frame %>% 
     cbind(

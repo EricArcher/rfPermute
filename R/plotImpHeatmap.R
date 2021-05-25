@@ -2,7 +2,7 @@
 #' @description Plot heatmap of importance scores or ranks from a 
 #'   classification model
 #' 
-#' @param rf an object inheriting from \code{\link{randomForest}}.
+#' @param x a \code{rfPermute} or \code{randomForest} model object.
 #' @param n plot \code{n} most important predictors.
 #' @param ranks plot ranks instead of actual importance scores?
 #' @param plot print the plot?
@@ -26,24 +26,24 @@
 #' @author Eric Archer \email{eric.archer@@noaa.gov}
 #' 
 #' @examples
-#' library(randomForest)
 #' data(mtcars)
 #' 
 #' # A randomForest model
-#' rf <- randomForest(factor(am) ~ ., mtcars, importance = TRUE)
+#' rf <- randomForest::randomForest(factor(am) ~ ., mtcars, importance = TRUE)
 #' importance(rf)
-#' impHeatmap(rf, xlab = "Transmission", ylab = "Predictor")
+#' plotImpHeatmap(rf, xlab = "Transmission", ylab = "Predictor")
 #' 
 #' # An rfPermute model with significant predictors identified
 #' rp <- rfPermute(factor(am) ~ ., mtcars, nrep = 100, num.cores = 1)
-#' impHeatmap(rp, xlab = "Transmission", ylab = "Predictor")
+#' importance(rp)
+#' plotImpHeatmap(rp, xlab = "Transmission", ylab = "Predictor")
 #' 
 #' @export
 #' 
-impHeatmap <- function(rf, n = NULL, ranks = TRUE, plot = TRUE, xlab = NULL, 
-                       ylab = NULL, scale = TRUE, alpha = 0.05, 
-                       size = 3) {
-  if(rf$type != "classification") stop("'rf' must be a classification model")
+plotImpHeatmap <- function(x, n = NULL, ranks = TRUE, plot = TRUE, xlab = NULL, 
+                           ylab = NULL, scale = TRUE, alpha = 0.05, size = 3) {
+  rf <- as.randomForest(x)
+  if(rf$type == "regression") stop("'rf' must be of a classification model")
   classes <- levels(rf$y)
   if(!all(classes %in% colnames(rf$importance))) {
     stop("'rf' must be run with 'importance = TRUE'")
@@ -51,12 +51,12 @@ impHeatmap <- function(rf, n = NULL, ranks = TRUE, plot = TRUE, xlab = NULL,
   
   # format importance data.frame
   imp <- data.frame(
-    importance(rf, scale = scale), 
+    randomForest::importance(rf, scale = scale), 
     check.names = FALSE
   )
   imp.val <- imp$MeanDecreaseAccuracy
   imp$predictor <- names(imp.val) <- rownames(imp)
-  if(ranks) for(x in classes) imp[[x]] <- rank(-imp[[x]])
+  if(ranks) for(cl in classes) imp[[cl]] <- rank(-imp[[cl]])
   imp <- imp[, c("predictor", classes)] %>% 
     tidyr::gather("class", "value", -.data$predictor) %>% 
     dplyr::mutate(
@@ -95,18 +95,20 @@ impHeatmap <- function(rf, n = NULL, ranks = TRUE, plot = TRUE, xlab = NULL,
     ggplot2::ylab(ylab)
   }
   
-  if(!is.null(rf$pval) & !is.null(alpha)) {
+  if(methods::is(x, "rfPermute_model") & !is.null(alpha)) {
     sc <- ifelse(scale, "scaled", "unscaled")
     sig <- sapply(1:nrow(imp), function(i) {
       pred <- as.character(imp$predictor[i])
       cl <- as.character(imp$class[i])
-      rf$pval[pred, cl, sc] <= alpha
+      x@pval[pred, cl, sc] <= alpha
     })
-    sig.df <- imp[sig, ]
-    g <- g + ggplot2::geom_point(
-      data = imp[sig, ], size = size, shape = 23, 
-      fill = "white", color = "black"
-    )
+    if(any(sig)) {
+      sig.df <- imp[sig, ]
+      g <- g + ggplot2::geom_point(
+        data = imp[sig, ], size = size, shape = 23, 
+        fill = "white", color = "black"
+      )
+    }
   }
   
   if(plot) print(g)

@@ -33,9 +33,8 @@ A named list of the \code{ggplot} figures produced is invisbly returned.
 }
 \description{
 Plot the Random Forest null distributions importance metrics, 
-observed values, and p-values for
-each predictor variable from the object produced by a 
-call to \code{\link{rfPermute}}.
+observed values, and p-values for each predictor variable from the 
+object produced by a call to \code{\link{rfPermute}}.
 }
 \details{
 The function will generate an plot for each predictor, with facetted 
@@ -45,13 +44,13 @@ The function will generate an plot for each predictor, with facetted
 \examples{
 # A regression model using the ozone example
 data(airquality)
-ozone.rfP <- rfPermute(
+ozone.rp <- rfPermute(
   Ozone ~ ., data = airquality, ntree = 100, 
   na.action = na.omit, nrep = 50, num.cores = 1
 )
   
 # Plot the null distributions and observed values.
-plotNull(ozone.rfP) 
+plotNull(ozone.rp) 
 
 }
 \author{

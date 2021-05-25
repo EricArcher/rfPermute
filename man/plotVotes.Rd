@@ -4,10 +4,10 @@
 \alias{plotVotes}
 \title{Plot Vote Distribution}
 \usage{
-plotVotes(rf, type = NULL, freq.sep.line = TRUE, plot = TRUE)
+plotVotes(x, type = NULL, freq.sep.line = TRUE, plot = TRUE)
 }
 \arguments{
-\item{rf}{an object inheriting from \code{\link{randomForest}}.}
+\item{x}{a \code{rfPermute} or \code{randomForest} model object.}
 
 \item{type}{either \code{area} for stacked continuous area plot or 
 \code{bar} for discrete stacked bar chart. The latter is prefered for small 

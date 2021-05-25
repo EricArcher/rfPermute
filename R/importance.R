@@ -1,3 +1,4 @@
+#' @name importance
 #' @title Extract rfPermute Importance Scores and p-values.
 #' @description Extract a matrix of the observed importance scores
 #'   and p-values from the object produced by a call to \code{rfPermute}
@@ -16,7 +17,7 @@
 #'   (e.g., "MeanDecreaseAccuracy").
 #' @param n Plot \code{n} most important predictors.
 #' @param main Main title for plot.
-#' @param ... optional arguments which will be ignored.
+#' @param ... arguments to be passed to and from other methods.
 #' 
 #' @details p-values can be given to the \code{sort.by} argument by adding 
 #'   '.pval' to the column name of the desired column from the \code{importance} 
@@ -25,54 +26,36 @@
 #' @author Eric Archer \email{eric.archer@@noaa.gov}
 #' 
 #' @examples
-#' data(airquality)
+#' data(mtcars)
 #' 
-#' # A regression model using the ozone example
-#' ozone.rfP <- rfPermute(
-#'   Ozone ~ ., data = airquality, ntree = 100, 
-#'   na.action = na.omit, nrep = 50, num.cores = 1
-#' )
-#' imp.unscaled <- importance(ozone.rfP, scale = TRUE)
-#' imp.unscaled
+#' # A classification model classifying cars to manual or automatic transmission 
+#' am.rp <- rfPermute(factor(am) ~ ., mtcars, ntree = 100, nrep = 50)
 #'   
-#' imp.scaled <- importance(ozone.rfP, scale = TRUE)
+#' imp.scaled <- importance(am.rp, scale = TRUE)
 #' imp.scaled
 #' 
 #' # plot scaled importance scores
-#' plotImportance(ozone.rfP, scale = TRUE)
+#' plotImportance(am.rp, scale = TRUE)
 #' 
 #' # plot unscaled and only significant scores
-#' plotImportance(ozone.rfP, scale = FALSE, sig.only = TRUE)
+#' plotImportance(am.rp, scale = FALSE, sig.only = TRUE)
 #' 
+#' @importFrom randomForest importance
+#' @method importance rfPermute
+#' @export importance
 #' @export
 #' 
-importance <- function(x, ...)  UseMethod("importance")
-
-#' @rdname importance
-#' @export
-importance.default <- function(x, ...) {
-  if(inherits(x, "randomForest")) {
-    randomForest::importance(x, ...)
-  } else {
-    stop("No method implemented for this class of object")
-  }
-}
-
-#' @rdname importance
-#' @export
-importance.rfPermute <- function(x, scale = TRUE, sort.by = NULL, 
-                                 decreasing = TRUE, ...) {  
-  #if(!inherits(x, "rfPermute")) stop("'x' is not of class 'rfPermute'")
+importance.rfPermute <- function(x, scale = TRUE, sort.by = NULL, decreasing = TRUE, ...) {  
   if((!is.character(sort.by) & !is.vector(sort.by)) & !is.null(sort.by)) {
     stop("'sort.by' is not a character vector")
   }
   
   imp <- if(scale) {
-    .scaleImp(x$importance, x$importanceSD)
+    .scaleImp(x$rf$importance, x$rf$importanceSD)
   } else {
-    x$importance
+    x$rf$importance
   }
-
+  
   pval <- x$pval[, , if(scale) "scaled" else "unscaled"]
   colnames(pval) <- paste(colnames(pval), ".pval", sep = "")
   pred <- rownames(imp)
@@ -82,7 +65,7 @@ importance.rfPermute <- function(x, scale = TRUE, sort.by = NULL,
   
   if(is.null(sort.by)) {
     sort.by <- ifelse(
-      x$type == "regression", "%IncMSE", "MeanDecreaseAccuracy"
+      x$rf$type == "regression", "%IncMSE", "MeanDecreaseAccuracy"
     )
   }
   not.found <- sort.by[!(sort.by %in% colnames(vals))]
@@ -98,14 +81,16 @@ importance.rfPermute <- function(x, scale = TRUE, sort.by = NULL,
 
 
 #' @rdname importance
-#' 
 #' @export
 #' 
 plotImportance <- function(x, scale = TRUE, alpha = 0.05, sig.only = FALSE, 
                            type = NULL, n = NULL, main = NULL) { 
-  x <- importance(x, scale = scale)
+  if(!.hasImportance(x)) {
+    stop("'x' is not a randomForest object with variable importance scores or a rfPermute object.")
+  }
+  imp.mat <- importance(x, scale = scale)
   cols <- if(is.null(type)) {
-    lapply(seq(1, ncol(x), 2), function(i) c(i, i + 1))
+    lapply(seq(1, ncol(imp.mat), 2), function(i) c(i, i + 1))
   } else {
     type <- unique(gsub(".pval", "", type))
     not.found <- setdiff(type, colnames(x))
@@ -116,11 +101,11 @@ plotImportance <- function(x, scale = TRUE, alpha = 0.05, sig.only = FALSE,
         not.found
       ))
     }
-    lapply(match(type, colnames(x)), function(i) c(i, i + 1))
+    lapply(match(type, colnames(imp.mat)), function(i) c(i, i + 1))
   }
   
   imp.list <- lapply(cols, function(i) {
-    imp.df <- as.data.frame(x[, i])
+    imp.df <- as.data.frame(imp.mat[, i])
     colnames(imp.df) <- c("imp", "pval")
     imp.df$pred <- rownames(imp.df)
     imp.df$is.sig <- factor(imp.df$pval <= alpha)
@@ -137,7 +122,7 @@ plotImportance <- function(x, scale = TRUE, alpha = 0.05, sig.only = FALSE,
     ) + 
       ggplot2::geom_bar(stat = "identity") +
       ggplot2::coord_flip() + 
-      ggplot2::ggtitle(colnames(x)[i]) + 
+      ggplot2::ggtitle(colnames(imp.mat)[i]) + 
       ggplot2::scale_fill_manual(values = c("FALSE" = "black", "TRUE" = "red")) +
       ggplot2::theme(
         legend.position = "none",
@@ -148,4 +133,3 @@ plotImportance <- function(x, scale = TRUE, alpha = 0.05, sig.only = FALSE,
   imp.list$bottom <- "Importance"
   suppressWarnings(do.call(gridExtra::grid.arrange, imp.list))
 }
-

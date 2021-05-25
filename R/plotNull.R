@@ -1,8 +1,7 @@
 #' @title Plot Random Forest Importance Null Distributions
 #' @description Plot the Random Forest null distributions importance metrics, 
-#' observed values, and p-values for
-#' each predictor variable from the object produced by a 
-#' call to \code{\link{rfPermute}}.
+#' observed values, and p-values for each predictor variable from the 
+#' object produced by a call to \code{\link{rfPermute}}.
 #' 
 #' @param x An object produced by a call to \code{\link{rfPermute}}.
 #' @param preds a character vector of predictors to plot. If \code{NULL}, then 
@@ -24,21 +23,21 @@
 #' @examples
 #' # A regression model using the ozone example
 #' data(airquality)
-#' ozone.rfP <- rfPermute(
+#' ozone.rp <- rfPermute(
 #'   Ozone ~ ., data = airquality, ntree = 100, 
 #'   na.action = na.omit, nrep = 50, num.cores = 1
 #' )
 #'   
 #' # Plot the null distributions and observed values.
-#' plotNull(ozone.rfP) 
+#' plotNull(ozone.rp) 
 #' 
 #' @export
 #' 
 plotNull <- function(x, preds = NULL, imp.type = NULL, scale = TRUE, 
                      plot.type = c("density", "hist"), plot = TRUE) {
-  if(!inherits(x, "rfPermute")) stop("'x' is not of class 'rfPermute'")
-  imp <- importance(x, scale = scale)
-  avail.types <- colnames(x$importance)
+  if(!inherits(x, "rfPermute")) stop("'x' is not an rfPermute model")
+  imp <- randomForest::importance(as.randomForest(x))
+  avail.types <- colnames(imp)
   
   if(is.null(imp.type)) imp.type <- avail.types
   imp.type <- unique(imp.type)
@@ -61,31 +60,36 @@ plotNull <- function(x, preds = NULL, imp.type = NULL, scale = TRUE,
   
   plot.type <- match.arg(plot.type)
   g <- sapply(preds, function(pr) {
+    pval <- x$pval[pr, imp.type, sc]
+    labels <- stats::setNames(
+      paste0(names(pval), "\n(p = ", sprintf("%0.3f", pval), ")"),
+      names(pval)
+    )
+    
     df <- sapply(imp.type, function(i) x$null.dist[[sc]][pr, i, ]) %>% 
       as.data.frame() %>% 
-      tidyr::gather("imp.type", "importance")
+      tidyr::gather("imp.type", "importance") %>% 
+      dplyr::mutate(imp.type = factor(labels[imp.type], levels = labels))
     obs <- imp[pr, imp.type, drop = FALSE] %>% 
       as.data.frame() %>% 
       tibble::rownames_to_column("predictor") %>% 
-      tidyr::gather("imp.type", "importance", -.data$predictor)
+      tidyr::gather("imp.type", "importance", -.data$predictor) %>% 
+      dplyr::mutate(imp.type = factor(labels[imp.type], levels = labels))
     
-    pval <- x$pval[pr, imp.type, sc]
-    labels <- paste0(names(pval), "\n(p = ", sprintf("%0.3f", pval), ")")
-    levels(df$imp.type) <- levels(obs$imp.type) <- labels
-    
-    p <- ggplot2::ggplot(df, ggplot2::aes_string("importance"))
+    p <- ggplot2::ggplot(df, ggplot2::aes_string("importance")) 
     p <- p + if(plot.type == "hist") {
-      ggplot2::geom_histogram() 
-    } else {
-      ggplot2::geom_density()
-    }
-    p + ggplot2::xlab("Importance") + 
+        ggplot2::geom_histogram() 
+      } else {
+        ggplot2::geom_density()
+      } 
+    p <- p + 
+      ggplot2::xlab("Importance") + 
       ggplot2::ggtitle(pr) +
       ggplot2::geom_vline(
         ggplot2::aes_string(xintercept = "importance"), 
         color = "red", data = obs
       ) +
-      ggplot2::facet_wrap(~imp.type, scales = "free")
+      ggplot2::facet_wrap(~ imp.type, scales = "free")
   }, simplify = FALSE, USE.NAMES = TRUE)
   
   if(plot) for(p in g) print(p)

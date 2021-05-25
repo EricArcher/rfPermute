@@ -1,7 +1,7 @@
 #' @title Plot Vote Distribution
 #' @description Plot distribution of votes for each sample in each class.
 #' 
-#' @param rf an object inheriting from \code{\link{randomForest}}.
+#' @param x a \code{rfPermute} or \code{randomForest} model object.
 #' @param type either \code{area} for stacked continuous area plot or 
 #'   \code{bar} for discrete stacked bar chart. The latter is prefered for small 
 #'   numbers of cases. If not specified, a bar chart will be used if all 
@@ -24,8 +24,10 @@
 #' 
 #' @export
 #'
-plotVotes <- function(rf, type = NULL, freq.sep.line = TRUE, plot = TRUE) {  
-  if(rf$type != "classification") stop("'rf' must be a classification model")
+plotVotes <- function(x, type = NULL, freq.sep.line = TRUE, plot = TRUE) {  
+  rf <- as.randomForest(x)
+  if(rf$type == "regression") stop("'rf' must be of a classification model")
+  
   swfscMisc::plotAssignments(
     rf$votes, rf$y, 
     type = type, 

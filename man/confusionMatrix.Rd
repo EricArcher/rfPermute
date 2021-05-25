@@ -2,12 +2,15 @@
 % Please edit documentation in R/confusionMatrix.R
 \name{confusionMatrix}
 \alias{confusionMatrix}
+\alias{plotConfMat}
 \title{Confusion Matrix}
 \usage{
-confusionMatrix(rf, conf.level = 0.95, threshold = NULL, digits = 1)
+confusionMatrix(x, conf.level = 0.95, threshold = NULL, digits = 1)
+
+plotConfMat(x, title = NULL, plot = TRUE)
 }
 \arguments{
-\item{rf}{an object inheriting from \code{\link{randomForest}}.}
+\item{x}{a \code{rfPermute} or \code{randomForest} model object.}
 
 \item{conf.level}{confidence level for the \code{\link{binom.test}} confidence interval}
 
@@ -15,6 +18,10 @@ confusionMatrix(rf, conf.level = 0.95, threshold = NULL, digits = 1)
 
 \item{digits}{integer indicating the number of decimal places to round values 
 to.}
+
+\item{title}{a title for the plot.}
+
+\item{plot}{display the plot?}
 }
 \description{
 Generate a confusion matrix for Random Forest analyses with 
@@ -30,7 +37,6 @@ confusionMatrix(rf)
 
 }
 \seealso{
-\code{\link{classConfInt}}, \code{\link{exptdErrRate}}, 
 \code{\link{plotConfMat}}
 }
 \author{

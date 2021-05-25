@@ -4,10 +4,10 @@
 \alias{pctCorrect}
 \title{Percent Correctly Classified}
 \usage{
-pctCorrect(rf, pct = c(seq(0.8, 0.95, 0.05), 0.99))
+pctCorrect(x, pct = c(seq(0.8, 0.95, 0.05), 0.99))
 }
 \arguments{
-\item{rf}{a \code{\link[randomForest]{randomForest}} or \code{rfPermute} object.}
+\item{x}{a \code{rfPermte} or \code{randomForest} model object.}
 
 \item{pct}{vector of minimum percent of trees voting for each class. Can be 
 \code{0:1} or \code{0:100}.}

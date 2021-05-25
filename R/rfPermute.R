@@ -5,7 +5,9 @@
 #'   importance metrics for each predictor variable and p-value of observed.
 #'
 #' @param x,y,formula,data,subset,na.action,\dots See \code{\link{randomForest}} 
-#'   for definitions.
+#'   for definitions. In \code{as.randomForest} this is either a 
+#'   \code{randomForest} or \code{rfPermute} object to be converted to a
+#'   \code{randomForest} object.
 #' @param nrep Number of permutation replicates to run to construct 
 #'   null distribution and calculate p-values (default = 100).
 #' @param num.cores Number of CPUs to distribute permutation results over. 
@@ -18,55 +20,50 @@
 #'   \code{nrep} times, with a new Random Forest model built for each 
 #'   permutation step. 
 #'
-#' @return An \code{rfPermute} object which contains all of the components of a 
-#'   \code{randomForest} object plus:
-#'   \item{null.dist}{A list containing two three-dimensional arrays of null 
-#'     distributions for \code{unscaled} and \code{scaled} importance measures.} 
-#'   \item{pval}{A three dimensional array containing permutation p-values for 
-#'     \code{unscaled} and \code{scaled} importance measures.}
+#' @return An \code{rfPermute} object.
 #'
 #' @author Eric Archer \email{eric.archer@@noaa.gov}
-#' 
-#' @keywords tree classif regression
-#' 
-#' @seealso 
-#' \code{\link{plotNull}} for plotting null distributions from the \code{rfPermute} objects. \cr
-#' \code{\link{importance}} for extracting importance measures. \cr
-#' \code{\link{rp.combine}} for combining multiple \code{rfPermute} objects.\cr
-#' \code{\link{proximityPlot}} for plotting case proximities.\cr
-#' \code{\link{impHeatmap}} for plotting a heatmap of importance scores.\cr
-#' \code{\link{randomForest}}
 #'
 #' @examples
-#' # A regression model using the ozone example
+#' # A regression model predicting ozone levels
 #' data(airquality)
-#' ozone.rfP <- rfPermute(
-#'   Ozone ~ ., data = airquality, ntree = 100, 
-#'   na.action = na.omit, nrep = 50, num.cores = 1
-#' )
+#' ozone.rp <- rfPermute(Ozone ~ ., data = airquality, na.action = na.omit, ntree = 100, nrep = 50)
+#' ozone.rp
 #'   
-#' # Plot the null distributions and observed values.
-#' plotNull(ozone.rfP) 
-#'   
-#' # Plot the unscaled importance distributions and highlight significant predictors
-#' plotImportance(ozone.rfP, scale = FALSE)
-#'   
-#' # ... and the scaled measures
-#' plotImportance(ozone.rfP, scale = TRUE)
+#' # Plot the scaled importance distributions 
+#' # Significant (p <= 0.05) predictors are in red
+#' plotImportance(ozone.rp, scale = TRUE)
+#' 
+#' # Plot the importance null distributions and observed values for two of the predictors
+#' plotNull(ozone.rp, preds = c("Solar.R", "Month"))
 #'
-#' @importFrom magrittr %>% 
-#' @importFrom rlang .data
+#'
+#' # A classification model classifying cars to manual or automatic transmission 
+#' data(mtcars)
+#' 
+#' am.rp <- rfPermute(factor(am) ~ ., mtcars, ntree = 100, nrep = 50)
+#' summary(am.rp)
+#' 
+#' 
+#' plotImportance(am.rp, scale = TRUE, sig.only = TRUE)
+#' 
+#' 
+#'
 #' @export
 #' 
 rfPermute <- function(x, ...) UseMethod("rfPermute")
 
-
 #' @rdname rfPermute
-#' 
-#' @importFrom randomForest randomForest
 #' @export
 #' 
-rfPermute.default <- function(x, y, ..., nrep = 100, num.cores = 1) {  
+rfPermute.default <- function(x, y = NULL, ..., nrep = 100, num.cores = 1) {  
+  if(!is.numeric(nrep)) stop("'nrep' must be a number.")
+  nrep <- round(nrep, 0)
+  if(nrep < 1) stop("'nrep' must a positive value.")
+  
+  #run start
+  run.start <- Sys.time()
+  
   orig.call <- match.call()
   orig.call$nrep <- NULL
   orig.call$num.cores <- NULL
@@ -84,61 +81,66 @@ rfPermute.default <- function(x, y, ..., nrep = 100, num.cores = 1) {
   rf <- eval(rf.call)
   rf$call <- orig.call
   
-  # permutes 'y' in rf.call 'nrep' times and runs randomForest  
-  if(nrep > 0) {
-    # Setup number of cores
-    if(is.null(num.cores)) num.cores <- parallel::detectCores() - 1
-    if(is.na(num.cores)) num.cores <- 1
-    num.cores <- max(1, num.cores)
-    num.cores <- min(parallel::detectCores() - 1, num.cores)
-    
-    # Create list of permuted y values
-    ran.y <- lapply(1:nrep, function(i) sample(rf.call$y))
-    
-    call.x <- x
-    # Get importance scores for permutations
-    #  a list of 3-dimensional arrays of importance scores
-    cl <- swfscMisc::setupClusters(num.cores)
-    null.dist <- tryCatch({
-      if(is.null(cl)) { # Don't parallelize if num.cores == 1      
-        lapply(ran.y, .permFunc, call.x = call.x, perm.rf.call = rf.call)
-      } else { # Run random forest using parLapply
-        parallel::clusterEvalQ(cl, require(randomForest))
-        parallel::clusterExport(
-          cl = cl, 
-          varlist = c("call.x", "rf.call"), 
-          envir = environment()
-        )
-        parallel::parLapplyLB(
-          cl, ran.y, .permFunc, call.x = call.x, perm.rf.call = rf.call
-        )
-      }
-    }, finally = if(!is.null(cl)) parallel::stopCluster(cl) else NULL)
-    
-    # create and load null distribution arrays for each scaled and unscaled importances
-    rf$null.dist <- list(unscaled = .makeImpArray(rf$importance, nrep, NULL))
-    rf$null.dist$scaled <- rf$null.dist$unscaled
-    for(i in 1:nrep) {
-      rf$null.dist$unscaled[, , i] <- null.dist[[i]][, , "unscaled"]
-      rf$null.dist$scaled[, , i] <- null.dist[[i]][, , "scaled"]
+  # Permute 'y' in rf.call 'nrep' times and runs randomForest 
+  # Setup number of cores
+  if(is.null(num.cores)) num.cores <- parallel::detectCores() - 1
+  if(is.na(num.cores)) num.cores <- 1
+  num.cores <- max(1, num.cores)
+  num.cores <- min(parallel::detectCores() - 1, num.cores)
+  
+  # Create list of permuted y values
+  ran.y <- lapply(1:nrep, function(i) sample(rf.call$y))
+  
+  call.x <- x
+  # Get importance scores for permutations
+  #  a list of 3-dimensional arrays of importance scores
+  cl <- swfscMisc::setupClusters(num.cores)
+  null.dist.list <- tryCatch({
+    if(is.null(cl)) { # Don't parallelize if num.cores == 1      
+      lapply(ran.y, .permFunc, call.x = call.x, perm.rf.call = rf.call)
+    } else { # Run random forest using parLapply
+      parallel::clusterEvalQ(cl, require(randomForest))
+      parallel::clusterExport(
+        cl = cl, 
+        varlist = c("call.x", "rf.call"), 
+        envir = environment()
+      )
+      parallel::parLapplyLB(
+        cl, ran.y, .permFunc, call.x = call.x, perm.rf.call = rf.call
+      )
     }
-    
-    # calculate p-value of observed importance metrics
-    rf$pval <- .calcImpPval(rf) 
-    
-    class(rf) <- c("rfPermute", "randomForest")
+  }, finally = if(!is.null(cl)) parallel::stopCluster(cl) else NULL)
+  
+  # create and load null distribution arrays for each scaled and unscaled importances
+  null.dist <- list(unscaled = .makeImpArray(rf$importance, nrep, NULL))
+  null.dist$scaled <- null.dist$unscaled
+  for(i in 1:nrep) {
+    null.dist$unscaled[, , i] <- null.dist.list[[i]][, , "unscaled"]
+    null.dist$scaled[, , i] <- null.dist.list[[i]][, , "scaled"]
   }
   
-  return(rf)  
+  # calculate p-value of observed importance metrics
+  pval <- .calcImpPval(rf, null.dist)
+
+  result <- list(
+    rf = rf, 
+    null.dist = null.dist, 
+    pval = pval, 
+    nrep = nrep, 
+    start = run.start,
+    end = Sys.time()
+  )
+  class(result) <- "rfPermute"
+  result
 }
 
-
 #' @rdname rfPermute
-#' 
+#' @importFrom stats na.fail
 #' @export
 #' 
 rfPermute.formula <- function(formula, data = NULL, ..., subset, 
-                              na.action = stats::na.fail, nrep = 100) {
+                              na.action = na.fail, 
+                              nrep = 100, num.cores = 1) {
   if (!inherits(formula, "formula")) stop("method is only for formula objects")
   m <- match.call(expand.dots = FALSE)
   if (any(c("xtest", "ytest") %in% names(m))) {
@@ -148,8 +150,7 @@ rfPermute.formula <- function(formula, data = NULL, ..., subset,
   # extract formula terms
   names(m)[2] <- "formula"
   if (is.matrix(eval(m$data, parent.frame()))) m$data <- as.data.frame(data)
-  m$... <- NULL
-  m$nrep <- NULL
+  m$... <- m$nrep <- m$num.cores <- NULL
   m$na.action <- na.action
   m[[1]] <- as.name("model.frame")
   m <- eval(m, parent.frame())
@@ -157,16 +158,14 @@ rfPermute.formula <- function(formula, data = NULL, ..., subset,
   Terms <- attr(m, "terms")
   attr(Terms, "intercept") <- 0
   m <- stats::model.frame(
-    stats::terms(
-      stats::reformulate(attributes(Terms)$term.labels)
-    ), 
+    stats::terms(stats::reformulate(attributes(Terms)$term.labels)), 
     data.frame(m)
   )
   for (i in seq(along = ncol(m))) {
     if (is.ordered(m[[i]])) m[[i]] <- as.numeric(m[[i]])
   }
   
-  # run rfPermute
+  # run rfPermute.default
   rf.call <- match.call()
   rf.call[[1]] <- as.name("rfPermute")
   names(rf.call)[2:3] <- c("x", "y")
@@ -174,21 +173,65 @@ rfPermute.formula <- function(formula, data = NULL, ..., subset,
   rf.call$y <- y
   rf.call$subset <- rf.call$na.action <- NULL
   rf.call[-1] <- lapply(rf.call[-1], eval, envir = parent.frame())
-  rf <- eval(rf.call)
+  run.start <- Sys.time()
+  rp <- eval(rf.call)
   
   # reconstitute original randomForest call
   rf.call <- match.call()
   rf.call[[1]] <- as.name("randomForest")
-  rf$call <- rf.call
-  rf$call$nrep <- NULL
-  rf$terms <- Terms
-  if (!is.null(attr(m, "na.action"))) rf$na.action <- attr(m, "na.action")
+  rp$rf$call <- rf.call
+  rp$rf$terms <- Terms
+  if (!is.null(attr(m, "na.action"))) rp$rf$na.action <- attr(m, "na.action")
+  class(rp$rf) <- c("randomForest.formula", "randomForest")
   
-  class(rf) <- if(nrep > 0) {
-    c("rfPermute", "randomForest.formula", "randomForest")
-  } else {
-    c("randomForest.formula", "randomForest")
+  rp
+}
+
+#' @rdname rfPermute
+#' @export
+#' 
+as.randomForest <- function(x) {
+  if(inherits(x, "randomForest")) return(x)
+  if(inherits(x, "rfPermute")) return(x$rf)
+  stop("'x' is not a randomForest or rfPermute object.")
+}
+
+#' @rdname rfPermute
+#' @export
+#' 
+print.rfPermute <- function(x, ...) {
+  cat("An rfPermute model\n\n")
+  cat("               Type of random forest:", x$rf$type, "\n")
+  cat("                     Number of trees:", x$rf$ntree, "\n")
+  cat("No. of variables tried at each split:", x$rf$mtry, "\n")
+  cat("       No. of permutation replicates:", x$nrep, "\n")
+  if(!is.null(x$start)) {
+    cat("                          Start time:", format(x$start), "\n")
+    cat("                            End time:", format(x$end), "\n")
+    cat("                            Run time:", format(difftime(x$end, x$start)), "\n")
   }
   
-  return(rf)
+  if(x$rf$type == "regression") {
+    if (!is.null(x$mse)) {
+      cat("\n")
+      cat("          Mean of squared residuals:", x$rf$mse[length(x$mse)], "\n")
+      pct.var <- round(100 * x$rsq[length(x$rsq)], digits = 2)
+      cat("                    % Var explained:", pct.var, "\n")
+      if (!is.null(x$test$mse)) {
+        test.mse <- round(x$test$mse[length(x$test$mse)], digits = 2)
+        cat("                       Test set MSE:", test.mse, "\n")
+        pct.var.exp <- round(100 * x$test$rsq[length(x$test$rsq)], digits = 2)
+        cat("                    % Var explained:", pct.var.exp, "\n")
+      }
+    }
+    if (!is.null(x$coefs)) {
+      cat("\n")
+      cat("  Bias correction applied:\n")
+      cat("  Intercept:", x$coefs[1], "\n")
+      cat("      Slope:", x$coefs[2], "\n")
+    }
+  } else {
+    cat("\n")
+    print(confusionMatrix(x, digits = 2))
+  }
 }

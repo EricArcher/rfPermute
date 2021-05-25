@@ -12,6 +12,8 @@
 ## Description
 `rfPermute` estimates the significance of importance metrics for a Random Forest model by permuting the response variable. It will produce null distributions of importance metrics for each predictor variable and p-value of observed. The package also includes several summary and visualization functions for `randomForest` and `rfPermute` results.
 
+See `rfPermuteTutorial()` (under construction) in the package for a guide on running, summarizing, and diagnosing `rfPermute` and `randomForest` models.
+
 ## Contact
 * submit suggestions and bug-reports: <https://github.com/ericarcher/rfPermute/issues>
 * send a pull request: <https://github.com/ericarcher/rfPermute/>
@@ -37,39 +39,33 @@ devtools::install_github('EricArcher/rfPermute')
 ### Variable importance p-value estimation, summary, and visualization
 * `rfPermute` Estimate Permutation p-values for Random Forest Importance Metrics  
 * `importance` Extract rfPermute Importance Scores and p-values  
-* `plotImportance` Plot Random Forest Importance Distributions
 * `plotNull` Plot Random Forest Importance Null Distributions  
-* `impHeatmap` Importance Heatmap    
+* `plotImpHeatmap` Importance Heatmap    
 * `plotImpVarDist` Distribution of Important Variables  
 
 ### Random Forest model summary
+* `summary` Summarize rfPermute and randomForest models
 * `confusionMatrix` Confusion Matrix  
-* `classConfInt` Classification Confidence Intervals  
-* `exptdErrRate` Expected Error Rate  
-* `casePredictions` Return predictions and votes for training cases  
+* `casePredictions` Return predictions and votes for training cases 
 * `pctCorrect` Percent Correctly Classified  
 
 ### Random Forest model visualization and diagnostics
-* `plotRFtrace` Trace of cumulative error rates in forest  
-* `plotConfMat` Heatmap representation of Confusion Matrix  
-* `plotInbag` Distribution of sample inbag rates  
-* `plotOOBtimes` Distribution of sample OOB rates  
+* `plotBag` Distribution of sample inbag and OOB rates 
 * `plotPredictedProbs` Distribution of prediction assignment probabilities  
+* `plotProximity` Plot Random Forest Proximity Scores   
+* `plotTrace` Trace of cumulative error rates in forest  
 * `plotVotes` Vote Distribution    
-* `proximityPlot` Plot Random Forest Proximity Scores   
  
 ### Miscellaneous functions
-* `combine` Combine rfPermute Objects  
+* `combine` Combine rfPermute models  
 * `cleanRFdata` Clean Random Forest Input Data  
 
 ## Changelog
 
-### version 2.2.1 (devel)
+### version 2.5 (devel)
 
-* removed `rp.importance()` and `plot.rp.importance()` and replaced with 
-`importance()` and `plotImportance()`.
-* replaced black boxing significance indication in `impHeatmap()` with white
-diamonds.
+* __NOTE: v2.5 is a large redevelopment of the package. The structure of rfPermute model objects has changed and the name and functionality of several functions has also changed to make them more consistent. 
+A tutorial is available in the package as `rfPermuteTutorial()`.
 
 ### version 2.2 (on CRAN)
 
