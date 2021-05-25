@@ -10,9 +10,7 @@
 # rfPermute
 
 ## Description
-`rfPermute` estimates the significance of importance metrics for a Random Forest model by permuting the response variable. It will produce null distributions of importance metrics for each predictor variable and p-value of observed. The package also includes several summary and visualization functions for `randomForest` and `rfPermute` results.
-
-See `rfPermuteTutorial()` (under construction) in the package for a guide on running, summarizing, and diagnosing `rfPermute` and `randomForest` models.
+`rfPermute` estimates the significance of importance metrics for a Random Forest model by permuting the response variable. It will produce null distributions of importance metrics for each predictor variable and p-value of observed. The package also includes several summary and visualization functions for `randomForest` and `rfPermute` results. See `rfPermuteTutorial()` (under construction) in the package for a guide on running, summarizing, and diagnosing `rfPermute` and `randomForest` models.
 
 ## Contact
 * submit suggestions and bug-reports: <https://github.com/ericarcher/rfPermute/issues>
@@ -64,8 +62,8 @@ devtools::install_github('EricArcher/rfPermute')
 
 ### version 2.5 (devel)
 
-* __NOTE: v2.5 is a large redevelopment of the package. The structure of rfPermute model objects has changed and the name and functionality of several functions has also changed to make them more consistent. 
-A tutorial is available in the package as `rfPermuteTutorial()`.
+__NOTE__: v2.5 is a large redevelopment of the package. The structure of rfPermute model objects has changed make them incompatible with previous versions. Also, the name and functionality of several functions has changed to make them more consistent with one another.
+A tutorial (under construction) is available within the package as `rfPermuteTutorial()`.
 
 ### version 2.2 (on CRAN)
 
