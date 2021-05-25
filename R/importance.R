@@ -125,7 +125,7 @@ plotImportance <- function(x, plot.type = c("bar", "heatmap"), imp.type = NULL,
   if(!is.numeric(n) | n < 1) stop("'n' must be a number >= 1")
   n <- min(n, nrow(imp.mat))
   
-  imp.type <- imp.type[match(imp.type, colnames(imp.mat))]
+  imp.type <- colnames(imp.mat)[match(imp.type, colnames(imp.mat))]
   sc <- if(scale) "scaled" else "unscaled"
   if(is.null(alpha)) alpha <- -Inf
   
@@ -172,8 +172,7 @@ plotImportance <- function(x, plot.type = c("bar", "heatmap"), imp.type = NULL,
     imp.val <- if(rf$type == "regression") "%IncMSE" else "MeanDecreaseAccuracy"
     preds <- preds[order(imp.mat[, imp.val])]
     preds <- preds[1:n]
-    
-    imp.df <- data.frame(imp.mat[preds, ], check.names = FALSE)
+    imp.df <- data.frame(imp.mat[preds, imp.type, drop = FALSE], check.names = FALSE)
     if(ranks) for(i in imp.type) imp.df[[i]] <- rank(-imp.df[[i]])
     imp.df <- imp.df %>% 
       tibble::rownames_to_column("pred") %>% 
