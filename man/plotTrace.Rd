@@ -2,7 +2,7 @@
 % Please edit documentation in R/plotTrace.R
 \name{plotTrace}
 \alias{plotTrace}
-\title{OOB Trace}
+\title{Plot OOB Trace}
 \usage{
 plotTrace(x, plot = TRUE)
 }

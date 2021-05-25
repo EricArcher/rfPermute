@@ -27,7 +27,7 @@
 confusionMatrix <- function(x, conf.level = 0.95, 
                             threshold = NULL, digits = 1) {
   rf <- as.randomForest(x)
-  if(rf$type == "regression") stop("'rf' must be of a classification model")
+  if(rf$type != "classification") stop("'x' must be of a classification model")
   
   # Confusion matrix and counts
   cm <- .confMat(rf)

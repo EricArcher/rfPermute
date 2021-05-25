@@ -10,18 +10,27 @@
 
 plotImportance(
   x,
+  plot.type = c("bar", "heatmap"),
+  imp.type = NULL,
   scale = TRUE,
-  alpha = 0.05,
   sig.only = FALSE,
-  type = NULL,
+  alpha = 0.05,
   n = NULL,
-  main = NULL
+  ranks = TRUE,
+  xlab = NULL,
+  ylab = NULL,
+  main = NULL,
+  size = 3,
+  plot = TRUE
 )
 }
 \arguments{
-\item{x}{An object produced by a call to \code{rfPermute}.}
+\item{x}{for \code{importance}, an object produced by a call to 
+\code{rfPermute}. For \code{plotImportance}, either a \code{rfPermute} 
+or \code{randomForest} model object. If the latter, it must have been 
+run with \code{importance = TRUE}.}
 
-\item{scale}{For permutation based measures, should the measures be divided 
+\item{scale}{for permutation based measures, should the measures be divided 
 their "standard errors"?}
 
 \item{sort.by}{character vector giving the importance metric(s) or p-values 
@@ -32,26 +41,40 @@ classification models and \code{"\%IncMSE"} for regression models.}
 
 \item{...}{arguments to be passed to and from other methods.}
 
-\item{alpha}{Critical alpha to identify "significant" predictors.}
+\item{plot.type}{plot importances as a \code{bar} chart or \code{heatmap}?}
+
+\item{imp.type}{character vector listing which importance measures to plot.
+Can be class names (for classification models) or names of overall 
+importance measures (e.g., "MeanDecreaseAccuracy").}
 
 \item{sig.only}{Plot only the significant (<= \code{alpha}) predictors?}
 
-\item{type}{character vector listing which importance measures to plot.
-Can be class names or names of overall importance measures 
-(e.g., "MeanDecreaseAccuracy").}
+\item{alpha}{a number specifying the critical alpha for identifying 
+predictors with importance scores significantly different from random. 
+This parameter is only relevant if \code{rf} is a \code{\link{rfPermute}}
+object with p-values. Importance measures with p-values less than or 
+equal to \code{alpha} will be denoted in barcharts in red and in the
+heatmap by a white diamond. If set to \code{NULL}, significance is not 
+denoted.}
 
-\item{n}{Plot \code{n} most important predictors.}
+\item{n}{plot \code{n} most important predictors.}
 
-\item{main}{Main title for plot.}
+\item{ranks}{plot ranks instead of actual importance scores?}
+
+\item{xlab, ylab}{labels for the x and y axes.}
+
+\item{main}{main title for plot.}
+
+\item{size}{a value specifying the size of the significance diamond in the 
+heatmap if the p-value <= \code{alpha}.}
+
+\item{plot}{display the plot?}
 }
 \description{
-Extract a matrix of the observed importance scores
-  and p-values from the object produced by a call to \code{rfPermute}
-}
-\details{
-p-values can be given to the \code{sort.by} argument by adding 
-  '.pval' to the column name of the desired column from the \code{importance} 
-  element of the \code{rfPermute} object.
+The \code{importance} function extracts a matrix of 
+  the observed importance scores and p-values from the object 
+  produced by a call to \code{rfPermute}. \code{plotImportance} produces 
+  a visualization of importance scores as either a barchart or heatmap.
 }
 \examples{
 data(mtcars)

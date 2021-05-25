@@ -2,10 +2,12 @@
 #' @description Plot distribution of predictor variables on classes sorted 
 #'   by order of importance in model.
 #' 
-#' @param rf an object inheriting from \code{\link{randomForest}}.
+#' @param x a \code{rfPermute} or \code{randomForest} model object..
 #' @param df data.frame with predictors in \code{rf} model.
 #' @param class.col response column name in \code{df}.
 #' @param max.vars number of variables to plot (from most important to least).
+#' @param scale For permutation based importance measures, should they be divided 
+#'   their "standard errors"?
 #' @param plot display the plot?
 #'   
 #' @return the \code{ggplot2} object is invisibly returned.
@@ -28,7 +30,11 @@
 #' 
 #' @export
 #'
-plotImpVarDist <- function(rf, df, class.col, max.vars = 16, plot = TRUE) {
+plotImpVarDist <- function(x, df, class.col, max.vars = 16, scale = TRUE, 
+                           plot = TRUE) {
+  rf <- as.randomForest(x)
+  if(rf$type != "classification") stop("'x' must be of a classification model")
+  
   if(!class.col %in% colnames(df)) {
     stop("'class.col' = \"", class.col, "\" cannot be found in 'df'")
   }
@@ -39,7 +45,7 @@ plotImpVarDist <- function(rf, df, class.col, max.vars = 16, plot = TRUE) {
   } else {
     "MeanDecreaseGini"
   }
-  var.imp <- randomForest::importance(rf)[, imp.val]
+  var.imp <- randomForest::importance(rf, scale = scale)[, imp.val]
   var.imp <- names(sort(var.imp, decreasing = TRUE))
   max.vars <- min(c(length(var.imp), max.vars))
   var.imp <- var.imp[1:max.vars]

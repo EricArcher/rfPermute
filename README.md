@@ -38,7 +38,6 @@ devtools::install_github('EricArcher/rfPermute')
 * `rfPermute` Estimate Permutation p-values for Random Forest Importance Metrics  
 * `importance` Extract rfPermute Importance Scores and p-values  
 * `plotNull` Plot Random Forest Importance Null Distributions  
-* `plotImpHeatmap` Importance Heatmap    
 * `plotImpVarDist` Distribution of Important Variables  
 
 ### Random Forest model summary

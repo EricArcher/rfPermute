@@ -2,7 +2,7 @@
 #' @description Plot distributions of the fraction of trees that samples were
 #'   inbag or out-of-bag (OOB) in the Random Forest model.
 #' 
-#' @param rf an object inheriting from \code{\link{randomForest}}.
+#' @param x a \code{rfPermute} or \code{randomForest} model object..
 #' @param type plot the frequency samples were inbag (\code{"inbag"}) or
 #'   out-of-bag (\code{"oob"}).
 #' @param sampsize optional vector of sample sizes used in \code{rf} model.
@@ -25,8 +25,9 @@
 #' 
 #' @export
 #'
-plotBag <- function(rf, type = c("inbag", "oob"), sampsize = NULL, 
+plotBag <- function(x, type = c("inbag", "oob"), sampsize = NULL, 
                     bins = NULL, plot = TRUE) {
+  rf <- as.randomForest(x)
   type <- match.arg(type)
   pct <- rf$oob.times / rf$ntree
   label <- "inbag"

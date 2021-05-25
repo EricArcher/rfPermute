@@ -4,16 +4,10 @@
 \alias{plotBag}
 \title{Plot inbag or OOB distribution}
 \usage{
-plotBag(
-  rf,
-  type = c("inbag", "oob"),
-  sampsize = NULL,
-  bins = NULL,
-  plot = TRUE
-)
+plotBag(x, type = c("inbag", "oob"), sampsize = NULL, bins = NULL, plot = TRUE)
 }
 \arguments{
-\item{rf}{an object inheriting from \code{\link{randomForest}}.}
+\item{x}{a \code{rfPermute} or \code{randomForest} model object..}
 
 \item{type}{plot the frequency samples were inbag (\code{"inbag"}) or
 out-of-bag (\code{"oob"}).}

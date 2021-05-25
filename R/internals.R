@@ -54,9 +54,3 @@
   imp.arr[, , 2] <- .scaleImp(imp, impSD)
   return(imp.arr)
 }
-
-.hasImportance <- function(x) {
-  if(inherits(x, "randomForest")) return(!is.null(x$importance))
-  if(inherits(x, "rfPermute")) return(TRUE)
-  return(FALSE)
-}

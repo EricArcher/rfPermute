@@ -1,4 +1,4 @@
-#' @title OOB Trace
+#' @title Plot OOB Trace
 #' @description Plot trace of cumulative OOB error rate by number of trees
 #' 
 #' @param x a \code{rfPermute} or \code{randomForest} model object.

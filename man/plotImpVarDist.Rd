@@ -4,16 +4,19 @@
 \alias{plotImpVarDist}
 \title{Plot Important Variable Distribution}
 \usage{
-plotImpVarDist(rf, df, class.col, max.vars = 16, plot = TRUE)
+plotImpVarDist(x, df, class.col, max.vars = 16, scale = TRUE, plot = TRUE)
 }
 \arguments{
-\item{rf}{an object inheriting from \code{\link{randomForest}}.}
+\item{x}{a \code{rfPermute} or \code{randomForest} model object..}
 
 \item{df}{data.frame with predictors in \code{rf} model.}
 
 \item{class.col}{response column name in \code{df}.}
 
 \item{max.vars}{number of variables to plot (from most important to least).}
+
+\item{scale}{For permutation based importance measures, should they be divided 
+their "standard errors"?}
 
 \item{plot}{display the plot?}
 }
