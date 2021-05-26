@@ -6,7 +6,7 @@
 #' @param df data.frame with predictors in \code{rf} model.
 #' @param class.col response column name in \code{df}.
 #' @param imp.type character string representing importance type to use for 
-#'   sorting predictors. Defaults to \code{MeanDecreaseAccuracy}.
+#'   sorting predictors.
 #' @param max.vars number of variables to plot (from most important to least).
 #' @param scale For permutation based importance measures, should they be divided 
 #'   their "standard errors"?
@@ -16,9 +16,10 @@
 #'   
 #' @return the \code{ggplot2} object is invisibly returned.
 #' 
-#' @note If the model in \code{rf} was run with \code{importance = TRUE}, then
-#'   'MeanDecreaseAccuracy' is used as the importance measure. Otherwise,
-#'   'MeanDecreaseGini' is used.
+#' @note If the model in \code{x} is from \code{randomForest} and was run 
+#'   with \code{importance = TRUE}, then 'MeanDecreaseAccuracy' is used as 
+#'   the default importance measure for sorting. Otherwise, 'MeanDecreaseGini' 
+#'   is used.
 #' 
 #' @author Eric Archer \email{eric.archer@@noaa.gov}
 #' 
