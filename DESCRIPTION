@@ -44,7 +44,7 @@ Collate:
     casePredictions.R
     pctCorrect.R
     plotBag.R
-    plotImpVarDist.R
+    plotImpPreds.R
     plotNull.R
     plotPredictedProbs.R
     plotProximity.R

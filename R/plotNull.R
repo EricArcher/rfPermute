@@ -40,30 +40,29 @@ plotNull <- function(x, preds = NULL, imp.type = NULL, scale = TRUE,
   avail.types <- colnames(imp)
   
   if(is.null(imp.type)) imp.type <- avail.types
+  if(!is.character(imp.type)) stop("'imp.type' is not a character vector")
   imp.type <- unique(imp.type)
-  if(is.character(imp.type)) {
-   not.found <- imp.type[!(imp.type %in% avail.types)]
-   if(length(not.found) > 0) {
-     imp <- paste(not.found, collapse = ", ")
-     stop(paste("imp.type: ", imp, " is not in 'x'", sep = ""))
-   }
-  } else stop("'imp.type' is not a character vector")
+  not.found <- imp.type[!(imp.type %in% avail.types)]
+  if(length(not.found) > 0) {
+    not.found <- paste(not.found, collapse = ", ")
+    stop("imp.type:", not.found, "is not in 'x'")
+  }
   
   sc <- if(scale) "scaled" else "unscaled"
   
   if(is.null(preds)) preds <- rownames(imp)
-  preds.not.found <- setdiff(preds, rownames(imp))
-  if(length(preds.not.found) > 0) {
-    not.found <- paste(preds.not.found, collapse = ", ")
-    stop(paste("The following predictors could not be found:", not.found))
+  not.found <- setdiff(preds, rownames(imp))
+  if(length(not.found) > 0) {
+    not.found <- paste(not.found, collapse = ", ")
+    stop("The following predictors could not be found:", not.found)
   }
   
   plot.type <- match.arg(plot.type)
   g <- sapply(preds, function(pr) {
-    pval <- x$pval[pr, imp.type, sc]
+    pval <- x$pval[pr, imp.type, sc, drop = FALSE]
     labels <- stats::setNames(
-      paste0(names(pval), "\n(p = ", sprintf("%0.3f", pval), ")"),
-      names(pval)
+      paste0(imp.type, "\n(p = ", sprintf("%0.3f", pval), ")"),
+      imp.type
     )
     
     df <- sapply(imp.type, function(i) x$null.dist[[sc]][pr, i, ]) %>% 
@@ -77,10 +76,10 @@ plotNull <- function(x, preds = NULL, imp.type = NULL, scale = TRUE,
       dplyr::mutate(imp.type = factor(labels[imp.type], levels = labels))
     
     p <- ggplot2::ggplot(df, ggplot2::aes_string("importance")) 
-    p <- p + if(plot.type == "hist") {
-        ggplot2::geom_histogram() 
+    p <- if(plot.type == "hist") {
+        p + ggplot2::geom_histogram() + ggplot2::ylab("Count")
       } else {
-        ggplot2::geom_density()
+        p + ggplot2::geom_density() + ggplot2::ylab("Density")
       } 
     p <- p + 
       ggplot2::xlab("Importance") + 
