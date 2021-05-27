@@ -18,14 +18,19 @@ plotInbag(x, bins = 10, replace = TRUE, sampsize = NULL, plot = TRUE)
 \item{plot}{display the plot?}
 }
 \value{
-the \code{ggplot2} object is invisibly returned. If \code{sampsize} 
-  is not \code{NULL} and \code{rf} contains a classification model, the plot 
-  will display red vertical lines at the expected values for the classes 
-  based on their frequency and sample sizes.
+the \code{ggplot2} object is invisibly returned.
 }
 \description{
-Plot distributions of the fraction of trees that samples were
+Plot distribution of the fraction of trees that samples were
   inbag in the Random Forest model.
+}
+\note{
+Red vertical lines on the plot denote the expected inbag rate(s). 
+  These rates are based on the values of \code{replace} and 
+  \code{sampsize} supplied. If not specified, they are set to the 
+  \code{\link[randomForest]{randomForest}} defaults. If this is not the 
+  same as the arguments used to run the model, there will be a mismatch in 
+  the location of these indicator lines and the inbag frequency distribution.
 }
 \examples{
 library(randomForest)

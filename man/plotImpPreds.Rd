@@ -41,8 +41,8 @@ values (transparency) for points and violin plots.}
 the \code{ggplot2} object is invisibly returned.
 }
 \description{
-Plot distribution of predictor variables on classes sorted 
-  by order of importance in model.
+For classification models, plot distribution of predictor 
+  variables on classes sorted by order of importance in model.
 }
 \note{
 If the model in \code{x} is from \code{randomForest} and was run 

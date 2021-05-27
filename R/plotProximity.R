@@ -68,7 +68,6 @@ plotProximity <- function(x, dim.x = 1, dim.y = 2, class.cols = NULL,
                           label.alpha = 0.7, plot = TRUE) {
   
   rf <- as.randomForest(x)
-  #if(rf$type == "regression") stop("'rf' must be of a classification model")
   if(is.null(rf$proximity)) {
     stop("'rf' has no 'proximity' element. rerun with 'proximity = TRUE'")
   }

@@ -29,7 +29,7 @@ plot, or \code{"hist"} for histogram.}
 \item{plot}{display the plot?}
 }
 \value{
-A named list of the \code{ggplot} figures produced is invisbly returned.
+A named list of the \code{ggplot} figures produced is invisibly returned.
 }
 \description{
 Plot the Random Forest null distributions importance metrics, 
@@ -39,7 +39,7 @@ object produced by a call to \code{\link{rfPermute}}.
 \details{
 The function will generate an plot for each predictor, with facetted 
   importance metrics. The vertical red line shows the observed importance 
-  score and the p-value is given in the facet label.
+  score and the _p_-value is given in the facet label.
 }
 \examples{
 # A regression model using the ozone example

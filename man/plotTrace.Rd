@@ -2,7 +2,7 @@
 % Please edit documentation in R/plotTrace.R
 \name{plotTrace}
 \alias{plotTrace}
-\title{Plot OOB Trace}
+\title{Plot Trace}
 \usage{
 plotTrace(x, plot = TRUE)
 }
@@ -15,7 +15,8 @@ plotTrace(x, plot = TRUE)
 the \code{ggplot2} object is invisibly returned.
 }
 \description{
-Plot trace of cumulative OOB error rate by number of trees
+Plot trace of cumulative OOB (classification) or MSE 
+  (regression) error rate by number of trees.
 }
 \examples{
 library(randomForest)

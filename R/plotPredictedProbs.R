@@ -1,7 +1,8 @@
 #' @title Plot Predicted Probabilities
 #' @description Plot histogram of assignment probabilities to predicted class. 
 #'   This is used for determining if the model differentiates between correctly 
-#'   and incorrectly classified samples in terms of how well they ar classified.
+#'   and incorrectly classified samples in terms of how strongly they are 
+#'   classified.
 #' 
 #' @param x a \code{rfPermute} or \code{randomForest} model object.
 #' @param bins number of bins in histogram. Defaults to number of samples / 5.

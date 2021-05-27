@@ -24,7 +24,8 @@ will not be included in labels.}
 the \code{ggplot2} object is invisibly returned.
 }
 \description{
-Plot distribution of votes for each sample in each class.
+For classification models, plot distribution of votes for each 
+  sample in each class.
 }
 \examples{
 library(randomForest)

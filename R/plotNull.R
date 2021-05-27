@@ -14,9 +14,9 @@
 #' 
 #' @details The function will generate an plot for each predictor, with facetted 
 #'   importance metrics. The vertical red line shows the observed importance 
-#'   score and the p-value is given in the facet label. 
+#'   score and the _p_-value is given in the facet label. 
 #'   
-#' @return A named list of the \code{ggplot} figures produced is invisbly returned.
+#' @return A named list of the \code{ggplot} figures produced is invisibly returned.
 #'   
 #' @author Eric Archer \email{eric.archer@@noaa.gov}
 #' 

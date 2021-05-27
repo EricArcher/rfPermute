@@ -21,9 +21,10 @@ plotConfMat(x, title = NULL, plot = TRUE)
 \item{plot}{display the plot?}
 }
 \description{
-Generate a confusion matrix for Random Forest analyses with 
-  error rates translated into percent correctly classified, and columns for 
-  confidence intervals and expected classification rates (priors) added.
+Generate a confusion matrix for Random Forest classification 
+  models with error rates translated into percent correctly classified, 
+  and columns for confidence intervals and expected classification 
+  rates (priors) added.
 }
 \examples{
 library(randomForest)

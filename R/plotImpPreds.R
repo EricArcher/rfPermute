@@ -1,6 +1,6 @@
 #' @title Plot Important Predictor Distribution
-#' @description Plot distribution of predictor variables on classes sorted 
-#'   by order of importance in model.
+#' @description For classification models, plot distribution of predictor 
+#'   variables on classes sorted by order of importance in model.
 #' 
 #' @param x a \code{rfPermute} or \code{randomForest} model object..
 #' @param df data.frame with predictors in \code{rf} model.

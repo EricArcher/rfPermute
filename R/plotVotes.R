@@ -1,5 +1,6 @@
 #' @title Plot Vote Distribution
-#' @description Plot distribution of votes for each sample in each class.
+#' @description For classification models, plot distribution of votes for each 
+#'   sample in each class.
 #' 
 #' @param x a \code{rfPermute} or \code{randomForest} model object.
 #' @param type either \code{area} for stacked continuous area plot or 

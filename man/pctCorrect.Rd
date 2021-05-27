@@ -17,8 +17,9 @@ a matrix giving the percent of individuals correctly classified in
   each class and overall for each threshold value specified in \code{pct}.
 }
 \description{
-Calculate the percent of individuals correctly classified in 
-  a specified percent of trees in the forest.
+For classification models, calculate the percent of 
+  individuals correctly classified in a specified percent of trees in 
+  the forest.
 }
 \examples{
 library(randomForest)

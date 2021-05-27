@@ -1,6 +1,7 @@
 #' @title Percent Correctly Classified
-#' @description Calculate the percent of individuals correctly classified in 
-#'   a specified percent of trees in the forest.
+#' @description For classification models, calculate the percent of 
+#'   individuals correctly classified in a specified percent of trees in 
+#'   the forest.
 #' 
 #' @param x a \code{rfPermte} or \code{randomForest} model object.
 #' @param pct vector of minimum percent of trees voting for each class. Can be 

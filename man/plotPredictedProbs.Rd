@@ -19,7 +19,8 @@ the \code{ggplot2} object is invisibly returned.
 \description{
 Plot histogram of assignment probabilities to predicted class. 
   This is used for determining if the model differentiates between correctly 
-  and incorrectly classified samples in terms of how well they ar classified.
+  and incorrectly classified samples in terms of how strongly they are 
+  classified.
 }
 \examples{
 library(randomForest)

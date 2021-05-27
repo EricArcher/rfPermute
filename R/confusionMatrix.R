@@ -1,7 +1,8 @@
 #' @title Confusion Matrix
-#' @description Generate a confusion matrix for Random Forest analyses with 
-#'   error rates translated into percent correctly classified, and columns for 
-#'   confidence intervals and expected classification rates (priors) added.
+#' @description Generate a confusion matrix for Random Forest classification 
+#'   models with error rates translated into percent correctly classified, 
+#'   and columns for confidence intervals and expected classification 
+#'   rates (priors) added.
 #' 
 #' @param x a \code{rfPermute} or \code{randomForest} model object.
 #' @param conf.level confidence level for the \code{\link{binom.test}} confidence interval
