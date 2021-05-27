@@ -18,16 +18,17 @@
 #' cp <- casePredictions(rf)
 #' cp
 #'
-#' 
 #' @export
 #'
 casePredictions <- function(x) {    
   rf <- as.randomForest(x)
   if(rf$type != "classification") stop("'rf' must be a classification model")
 
+  id <- names(rf$y)
+  if(is.null(id)) id <- as.character(1:length(rf$y))
   df <- cbind(
     data.frame(
-      case.id = names(rf$y),
+      id = id,
       original = rf$y,
       predicted = rf$predicted,
       is.correct = rf$y == rf$predicted

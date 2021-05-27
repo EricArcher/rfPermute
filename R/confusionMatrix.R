@@ -6,8 +6,6 @@
 #' @param x a \code{rfPermute} or \code{randomForest} model object.
 #' @param conf.level confidence level for the \code{\link{binom.test}} confidence interval
 #' @param threshold threshold to test observed classification probability against.
-#' @param digits integer indicating the number of decimal places to round values 
-#'   to. 
 #' @param title a title for the plot.
 #' @param plot display the plot?
 #' 
@@ -24,8 +22,7 @@
 #' 
 #' @export
 #' 
-confusionMatrix <- function(x, conf.level = 0.95, 
-                            threshold = NULL, digits = 1) {
+confusionMatrix <- function(x, conf.level = 0.95, threshold = NULL) {
   rf <- as.randomForest(x)
   if(rf$type != "classification") stop("'x' must be of a classification model")
   
@@ -38,7 +35,7 @@ confusionMatrix <- function(x, conf.level = 0.95,
   correct.n <- c(correct.n, Overall = sum(correct.n))
   
   # Confidence intervals
-  ci <- sapply(
+  ci <- t(sapply(
     mapply(
       stats::binom.test, 
       x = correct.n, 
@@ -47,8 +44,8 @@ confusionMatrix <- function(x, conf.level = 0.95,
       SIMPLIFY = FALSE
     ),
     function(x) x$conf.int
-  )
-  rownames(ci) <- paste(c("LCI", "UCI"), conf.level, sep = "_")
+  ))
+  colnames(ci) <- paste(c("LCI", "UCI"), conf.level, sep = "_")
   
   # Expected error rates (priors)
   exp.err <- 1 - class.n / total.n
@@ -66,9 +63,9 @@ confusionMatrix <- function(x, conf.level = 0.95,
   
   cbind(
     rbind(cm, Overall = rep(NA, ncol(cm))), 
-    pct.correct = round((correct.n / all.n) * 100, digits = digits),
-    t(round(ci * 100, digits = digits)), 
-    prior = round((1 - prior) * 100, digits), 
+    pct.correct = (correct.n / all.n) * 100,
+    ci * 100, 
+    prior = (1 - prior) * 100, 
     class_p.value = 1 - stats::pbinom(correct.n, all.n, 1 - prior),
     prob.gt
   )

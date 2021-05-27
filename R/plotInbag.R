@@ -1,0 +1,78 @@
+#' @title Plot Inbag distribution
+#' @description Plot distributions of the fraction of trees that samples were
+#'   inbag in the Random Forest model.
+#' 
+#' @param x a \code{rfPermute} or \code{randomForest} model object..
+#' @param bins number of bins in histogram.
+#' @param replace was sampling done with or without replacement?
+#' @param sampsize sizes of samples drawn. Either a 
+#' @param plot display the plot?
+#'   
+#' @return the \code{ggplot2} object is invisibly returned. If \code{sampsize} 
+#'   is not \code{NULL} and \code{rf} contains a classification model, the plot 
+#'   will display red vertical lines at the expected values for the classes 
+#'   based on their frequency and sample sizes.
+#' 
+#' @author Eric Archer \email{eric.archer@@noaa.gov}
+#' 
+#' @examples
+#' library(randomForest)
+#' data(mtcars)
+#' 
+#' sampsize = c(5, 5)
+#' 
+#' rf <- randomForest(factor(am) ~ ., data = mtcars, ntree = 10)
+#' plotInbag(rf)
+#' 
+#' rf <- randomForest(factor(am) ~ ., data = mtcars, ntree = 1000)
+#' plotInbag(rf)
+#' 
+#' rf <- randomForest(factor(am) ~ ., data = mtcars, ntree = 10000)
+#' plotInbag(rf)
+#' 
+#' @export
+#'
+plotInbag <- function(x, bins = 10, replace = TRUE, sampsize = NULL, 
+                      plot = TRUE) {
+  rf <- as.randomForest(x)
+  
+  if(!is.null(sampsize)) {
+    length.good <- length(sampsize) == 1 | 
+      (rf$type == "classification" & length(sampsize) == length(unique(rf$y)))
+    if(!length.good) {
+      stop("sampsize' must be of length one or the number of classes in 'x'")
+    }
+  }
+  
+  pct <- ((rf$ntree - rf$oob.times) / rf$ntree) * 100
+  p <- ggplot2::ggplot(data.frame(pct = pct), ggplot2::aes_string("pct")) +
+    ggplot2::geom_histogram(bins = max(bins, floor(length(pct) / 5))) +
+    ggplot2::labs(
+      x = "Percent of trees where sample was inbag",
+      y = "Frequency"
+    )
+  
+  n <- length(rf$y)
+  if(is.null(sampsize)) sampsize <- if(replace) n else ceiling(0.632 * n)
+  
+  .pctPicked <- function(m) {
+    pct <- 1 - (1 - (1 / m)) ^ m
+    if(is.nan(pct)) rep(1 - (1 / exp(1)), length(m)) else pct
+  }
+  
+  exp.pct <- if(replace) {
+    if(length(sampsize) == 1) {
+      .pctPicked(sampsize) * 100
+    } else {
+      (as.vector((.pctPicked(sampsize) * sampsize)) / table(rf$y)) * 100
+    }
+  } else if(length(sampsize == 1)) {
+    (sampsize / n) * 100
+  } else {
+    as.vector(sampsize / table(rf$y)) * 100
+  }
+  p <- p + ggplot2::geom_vline(xintercept = exp.pct, color = "red")
+  
+  if(plot) print(p)
+  invisible(p)
+}

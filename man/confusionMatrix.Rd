@@ -5,7 +5,7 @@
 \alias{plotConfMat}
 \title{Confusion Matrix}
 \usage{
-confusionMatrix(x, conf.level = 0.95, threshold = NULL, digits = 1)
+confusionMatrix(x, conf.level = 0.95, threshold = NULL)
 
 plotConfMat(x, title = NULL, plot = TRUE)
 }
@@ -15,9 +15,6 @@ plotConfMat(x, title = NULL, plot = TRUE)
 \item{conf.level}{confidence level for the \code{\link{binom.test}} confidence interval}
 
 \item{threshold}{threshold to test observed classification probability against.}
-
-\item{digits}{integer indicating the number of decimal places to round values 
-to.}
 
 \item{title}{a title for the plot.}
 

@@ -10,7 +10,7 @@
 \usage{
 rfPermute(x, ...)
 
-\method{rfPermute}{default}(x, y = NULL, ..., nrep = 100, num.cores = 1)
+\method{rfPermute}{default}(x, y = NULL, ..., num.rep = 100, num.cores = 1)
 
 \method{rfPermute}{formula}(
   formula,
@@ -18,7 +18,7 @@ rfPermute(x, ...)
   ...,
   subset,
   na.action = na.fail,
-  nrep = 100,
+  num.rep = 100,
   num.cores = 1
 )
 
@@ -32,7 +32,7 @@ for definitions. In \code{as.randomForest} this is either a
 \code{randomForest} or \code{rfPermute} object to be converted to a
 \code{randomForest} object.}
 
-\item{nrep}{Number of permutation replicates to run to construct 
+\item{num.rep}{Number of permutation replicates to run to construct 
 null distribution and calculate p-values (default = 100).}
 
 \item{num.cores}{Number of CPUs to distribute permutation results over. 
@@ -51,13 +51,13 @@ Estimate significance of importance metrics for a Random Forest
 All other parameters are as defined in \code{randomForest.formula}. 
   A Random Forest model is first created as normal to calculate the observed 
   values of variable importance. The response variable is then permuted 
-  \code{nrep} times, with a new Random Forest model built for each 
+  \code{num.rep} times, with a new Random Forest model built for each 
   permutation step.
 }
 \examples{
 # A regression model predicting ozone levels
 data(airquality)
-ozone.rp <- rfPermute(Ozone ~ ., data = airquality, na.action = na.omit, ntree = 100, nrep = 50)
+ozone.rp <- rfPermute(Ozone ~ ., data = airquality, na.action = na.omit, ntree = 100, num.rep = 50)
 ozone.rp
   
 # Plot the scaled importance distributions 
@@ -71,7 +71,7 @@ plotNull(ozone.rp, preds = c("Solar.R", "Month"))
 # A classification model classifying cars to manual or automatic transmission 
 data(mtcars)
 
-am.rp <- rfPermute(factor(am) ~ ., mtcars, ntree = 100, nrep = 50)
+am.rp <- rfPermute(factor(am) ~ ., mtcars, ntree = 100, num.rep = 50)
 summary(am.rp)
 
 

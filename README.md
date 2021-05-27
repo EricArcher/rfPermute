@@ -47,14 +47,14 @@ devtools::install_github('EricArcher/rfPermute')
 * `pctCorrect` Percent Correctly Classified  
 
 ### Random Forest model visualization and diagnostics
-* `plotBag` Distribution of sample inbag and OOB rates 
+* `plotInbag` Distribution of sample inbag rates 
 * `plotPredictedProbs` Distribution of prediction assignment probabilities  
 * `plotProximity` Plot Random Forest Proximity Scores   
 * `plotTrace` Trace of cumulative error rates in forest  
 * `plotVotes` Vote Distribution    
  
 ### Miscellaneous functions
-* `combine` Combine rfPermute models  
+* `combineRP` Combine rfPermute models  
 * `cleanRFdata` Clean Random Forest Input Data  
 
 ## Changelog

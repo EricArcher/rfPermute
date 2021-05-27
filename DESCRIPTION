@@ -39,11 +39,11 @@ Collate:
     rfPermute.R
     summary.R
     importance.R
-    combine.R
+    combineRP.R
     confusionMatrix.R
     casePredictions.R
     pctCorrect.R
-    plotBag.R
+    plotInbag.R
     plotImpPreds.R
     plotNull.R
     plotPredictedProbs.R

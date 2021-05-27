@@ -26,7 +26,6 @@ rf <- randomForest(factor(am) ~ ., mtcars)
 cp <- casePredictions(rf)
 cp
 
-
 }
 \author{
 Eric Archer \email{eric.archer@noaa.gov}

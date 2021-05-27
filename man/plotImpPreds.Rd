@@ -25,7 +25,7 @@ plotImpPreds(
 \item{class.col}{response column name in \code{df}.}
 
 \item{imp.type}{character string representing importance type to use for 
-sorting predictors. Defaults to \code{MeanDecreaseAccuracy}.}
+sorting predictors.}
 
 \item{max.vars}{number of variables to plot (from most important to least).}
 
@@ -45,9 +45,10 @@ Plot distribution of predictor variables on classes sorted
   by order of importance in model.
 }
 \note{
-If the model in \code{rf} was run with \code{importance = TRUE}, then
-  'MeanDecreaseAccuracy' is used as the importance measure. Otherwise,
-  'MeanDecreaseGini' is used.
+If the model in \code{x} is from \code{randomForest} and was run 
+  with \code{importance = TRUE}, then 'MeanDecreaseAccuracy' is used as 
+  the default importance measure for sorting. Otherwise, 'MeanDecreaseGini' 
+  is used.
 }
 \examples{
 library(randomForest)
