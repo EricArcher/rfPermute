@@ -6,6 +6,7 @@
 \alias{rfPermute.formula}
 \alias{as.randomForest}
 \alias{print.rfPermute}
+\alias{predict.rfPermute}
 \title{Estimate Permutation p-values for Random Forest Importance Metrics}
 \usage{
 rfPermute(x, ...)
@@ -25,6 +26,8 @@ rfPermute(x, ...)
 as.randomForest(x)
 
 \method{print}{rfPermute}(x, ...)
+
+\method{predict}{rfPermute}(object, ...)
 }
 \arguments{
 \item{x, y, formula, data, subset, na.action, \dots}{See \code{\link{randomForest}} 
@@ -38,6 +41,9 @@ null distribution and calculate p-values (default = 100).}
 \item{num.cores}{Number of CPUs to distribute permutation results over. 
 Defaults to \code{NULL} which uses one fewer than the number of cores 
 reported by \code{\link[parallel]{detectCores}}.}
+
+\item{object}{an \code{rfPermute} model to be used for prediction. See
+\code{\link[randomForest]{predict.randomForest}}}
 }
 \value{
 An \code{rfPermute} object.

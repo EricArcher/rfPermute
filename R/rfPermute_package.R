@@ -16,5 +16,8 @@ rfPermuteTutorial <- function() {
 }
 
 .onAttach <- function(libname, pkgname) {
-  packageStartupMessage("Welcome to rfPermute. See `rfPermuteTutorial()` for a tutorial.")
+  packageStartupMessage(
+    "Welcome to rfPermute v", utils::packageVersion("rfPermute"), "\n",
+    "See rfPermuteTutorial() for a guide to the package."
+  )
 }

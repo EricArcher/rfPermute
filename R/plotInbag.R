@@ -70,7 +70,7 @@ plotInbag <- function(x, bins = 10, replace = TRUE, sampsize = NULL,
     } else {
       (as.vector((.pctPicked(sampsize) * sampsize)) / table(rf$y)) * 100
     }
-  } else if(length(sampsize == 1)) {
+  } else if(length(sampsize) == 1) {
     (sampsize / n) * 100
   } else {
     as.vector(sampsize / table(rf$y)) * 100

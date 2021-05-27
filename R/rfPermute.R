@@ -13,6 +13,8 @@
 #' @param num.cores Number of CPUs to distribute permutation results over. 
 #'   Defaults to \code{NULL} which uses one fewer than the number of cores 
 #'   reported by \code{\link[parallel]{detectCores}}.
+#' @param object an \code{rfPermute} model to be used for prediction. See
+#'   \code{\link[randomForest]{predict.randomForest}}
 #'
 #' @details All other parameters are as defined in \code{randomForest.formula}. 
 #'   A Random Forest model is first created as normal to calculate the observed 
@@ -237,3 +239,10 @@ print.rfPermute <- function(x, ...) {
   }
   options(op)
 }
+
+
+#' @rdname rfPermute
+#' @importFrom stats predict
+#' @export
+#' 
+predict.rfPermute <- function(object, ...) predict(as.randomForest(object), ...)

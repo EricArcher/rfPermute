@@ -37,6 +37,7 @@ plotPredictedProbs <- function(x, bins = 30, plot = TRUE) {
     ggplot2::ggplot(ggplot2::aes_string("prob", fill = "class")) +
     ggplot2::geom_histogram(bins = bins) +
     ggplot2::facet_wrap(~ predicted) +
+    ggplot2::labs(x = "Assignment probability", y = "Frequency") +
     ggplot2::theme(legend.title = ggplot2::element_blank())
   
   if(plot) print(p)
