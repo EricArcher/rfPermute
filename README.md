@@ -54,6 +54,7 @@ devtools::install_github('EricArcher/rfPermute')
  
 ### Miscellaneous functions
 * `combineRP` Combine rfPermute models  
+* `balancedSampsize` Balanced Sample Size
 * `cleanRFdata` Clean Random Forest Input Data  
 
 ## Changelog

@@ -50,6 +50,7 @@ Collate:
     plotProximity.R
     plotTrace.R
     plotVotes.R
+    balancedSampsize.R
     cleanRFdata.R
 LazyData: TRUE
 License: GPL (>= 2)
