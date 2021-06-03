@@ -55,6 +55,7 @@
 #' 
 rfPermute <- function(x, ...) UseMethod("rfPermute")
 
+
 #' @rdname rfPermute
 #' @export
 #' 
@@ -139,6 +140,7 @@ rfPermute.default <- function(x, y = NULL, ..., num.rep = 100, num.cores = 1) {
   result
 }
 
+
 #' @rdname rfPermute
 #' @importFrom stats na.fail
 #' @export
@@ -191,6 +193,7 @@ rfPermute.formula <- function(formula, data = NULL, ..., subset,
   rp
 }
 
+
 #' @rdname rfPermute
 #' @export
 #' 
@@ -199,6 +202,7 @@ as.randomForest <- function(x) {
   if(inherits(x, "rfPermute")) return(x$rf)
   stop("'x' is not a randomForest or rfPermute object.")
 }
+
 
 #' @rdname rfPermute
 #' @export

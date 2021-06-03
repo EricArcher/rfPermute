@@ -1,27 +1,35 @@
 #' @title Confusion Matrix
 #' @description Generate a confusion matrix for Random Forest classification 
 #'   models with error rates translated into percent correctly classified, 
-#'   and columns for confidence intervals and expected classification 
-#'   rates (priors) added.
+#'   and columns for confidence intervals added.
 #' 
 #' @param x a \code{rfPermute} or \code{randomForest} model object.
 #' @param conf.level confidence level for the \code{\link{binom.test}} 
 #'   confidence interval
 #' @param threshold threshold to test observed classification 
-#'   probability against.
+#'   probability against. Should be a number between 0 and 1. 
+#'   If not \code{NULL}, the output matrix will have extra 
+#'   columns giving the one-tailed probability that the true correct 
+#'   classification is >= \code{threshold}. 
 #' @param title a title for the plot.
 #' @param plot display the plot?
 #' 
 #' @author Eric Archer \email{eric.archer@@noaa.gov} 
 #' 
-#' @seealso \code{\link{plotConfMat}}
+#' @seealso \code{\link{classPriors}}
 #' 
 #' @examples
 #' library(randomForest)
 #' data(mtcars)
 #'
-#' rf <- randomForest(factor(am) ~ ., mtcars, importance = TRUE)
+#' rf <- randomForest(factor(am) ~ ., mtcars)
 #' confusionMatrix(rf)
+#' 
+#' confusionMatrix(rf, conf.level = 0.75)
+#' 
+#' confusionMatrix(rf, threshold = 0.7)
+#' confusionMatrix(rf, threshold = 0.8)
+#' confusionMatrix(rf, threshold = 0.95)
 #' 
 #' @export
 #' 
@@ -31,7 +39,7 @@ confusionMatrix <- function(x, conf.level = 0.95, threshold = NULL) {
   
   # Confusion matrix and counts
   cm <- .confMat(rf)
-  class.n <- colSums(cm)
+  class.n <- rowSums(cm)
   all.n <- c(class.n, Overall = sum(class.n))
   total.n <- sum(class.n)
   correct.n <- diag(cm)
@@ -44,21 +52,18 @@ confusionMatrix <- function(x, conf.level = 0.95, threshold = NULL) {
       x = correct.n, 
       n = all.n, 
       p = correct.n / all.n, 
+      conf.level = conf.level,
       SIMPLIFY = FALSE
     ),
     function(x) x$conf.int * 100
   ))
   colnames(ci) <- paste(c("LCI", "UCI"), conf.level, sep = "_")
   
-  # Expected error rates (priors)
-  exp.err <- 1 - class.n / total.n
-  prior <- c(exp.err, Overall = sum(exp.err * class.n) / total.n)
-  
   # Probability threshold
   prob.gt <- NULL
   if(!is.null(threshold)) {
     prob.gt <- lapply(threshold, function(p) {
-      stats::pbinom(correct.n, total.n, p) * 100
+      stats::pbinom(correct.n, total.n, p)
     })
     prob.gt <- do.call(cbind, prob.gt)
     colnames(prob.gt) <- paste0("Pr.gt_", threshold)
@@ -66,12 +71,10 @@ confusionMatrix <- function(x, conf.level = 0.95, threshold = NULL) {
   
   cm <- rbind(cm, Overall = rep(NA, ncol(cm)))
   pct.correct <- (correct.n / all.n) * 100
-  class_p.value <- 1 - stats::pbinom(correct.n, all.n, 1 - prior)
   cbind(
-    cm, pct.correct = pct.correct[rownames(cm)], 
-    ci[rownames(cm), , drop = FALSE], 
-    prior = ((1 - prior) * 100)[rownames(cm)], 
-    class_p.value = class_p.value[rownames(cm)],
+    cm, 
+    pct.correct = pct.correct[rownames(cm)], 
+    ci[rownames(cm), , drop = FALSE],
     prob.gt
   )
 }

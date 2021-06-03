@@ -16,7 +16,10 @@ plotConfMat(x, title = NULL, plot = TRUE)
 confidence interval}
 
 \item{threshold}{threshold to test observed classification 
-probability against.}
+probability against. Should be a number between 0 and 1. 
+If not \code{NULL}, the output matrix will have extra 
+columns giving the one-tailed probability that the true correct 
+classification is >= \code{threshold}.}
 
 \item{title}{a title for the plot.}
 
@@ -25,19 +28,24 @@ probability against.}
 \description{
 Generate a confusion matrix for Random Forest classification 
   models with error rates translated into percent correctly classified, 
-  and columns for confidence intervals and expected classification 
-  rates (priors) added.
+  and columns for confidence intervals added.
 }
 \examples{
 library(randomForest)
 data(mtcars)
 
-rf <- randomForest(factor(am) ~ ., mtcars, importance = TRUE)
+rf <- randomForest(factor(am) ~ ., mtcars)
 confusionMatrix(rf)
+
+confusionMatrix(rf, conf.level = 0.75)
+
+confusionMatrix(rf, threshold = 0.7)
+confusionMatrix(rf, threshold = 0.8)
+confusionMatrix(rf, threshold = 0.95)
 
 }
 \seealso{
-\code{\link{plotConfMat}}
+\code{\link{classPriors}}
 }
 \author{
 Eric Archer \email{eric.archer@noaa.gov}
