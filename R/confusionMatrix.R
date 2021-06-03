@@ -5,8 +5,10 @@
 #'   rates (priors) added.
 #' 
 #' @param x a \code{rfPermute} or \code{randomForest} model object.
-#' @param conf.level confidence level for the \code{\link{binom.test}} confidence interval
-#' @param threshold threshold to test observed classification probability against.
+#' @param conf.level confidence level for the \code{\link{binom.test}} 
+#'   confidence interval
+#' @param threshold threshold to test observed classification 
+#'   probability against.
 #' @param title a title for the plot.
 #' @param plot display the plot?
 #' 
@@ -44,7 +46,7 @@ confusionMatrix <- function(x, conf.level = 0.95, threshold = NULL) {
       p = correct.n / all.n, 
       SIMPLIFY = FALSE
     ),
-    function(x) x$conf.int
+    function(x) x$conf.int * 100
   ))
   colnames(ci) <- paste(c("LCI", "UCI"), conf.level, sep = "_")
   
@@ -62,12 +64,14 @@ confusionMatrix <- function(x, conf.level = 0.95, threshold = NULL) {
     colnames(prob.gt) <- paste0("Pr.gt_", threshold)
   }
   
+  cm <- rbind(cm, Overall = rep(NA, ncol(cm)))
+  pct.correct <- (correct.n / all.n) * 100
+  class_p.value <- 1 - stats::pbinom(correct.n, all.n, 1 - prior)
   cbind(
-    rbind(cm, Overall = rep(NA, ncol(cm))), 
-    pct.correct = (correct.n / all.n) * 100,
-    ci * 100, 
-    prior = (1 - prior) * 100, 
-    class_p.value = 1 - stats::pbinom(correct.n, all.n, 1 - prior),
+    cm, pct.correct = pct.correct[rownames(cm)], 
+    ci[rownames(cm), , drop = FALSE], 
+    prior = ((1 - prior) * 100)[rownames(cm)], 
+    class_p.value = class_p.value[rownames(cm)],
     prob.gt
   )
 }

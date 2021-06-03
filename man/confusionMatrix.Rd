@@ -12,9 +12,11 @@ plotConfMat(x, title = NULL, plot = TRUE)
 \arguments{
 \item{x}{a \code{rfPermute} or \code{randomForest} model object.}
 
-\item{conf.level}{confidence level for the \code{\link{binom.test}} confidence interval}
+\item{conf.level}{confidence level for the \code{\link{binom.test}} 
+confidence interval}
 
-\item{threshold}{threshold to test observed classification probability against.}
+\item{threshold}{threshold to test observed classification 
+probability against.}
 
 \item{title}{a title for the plot.}
 
