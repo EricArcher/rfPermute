@@ -30,9 +30,9 @@ plotVotes <- function(x, type = NULL, freq.sep.line = TRUE, plot = TRUE) {
   if(rf$type == "regression") stop("'rf' must be of a classification model")
   
   swfscMisc::plotAssignments(
-    rf$votes, rf$y, 
+    rf$votes * 100, rf$y, 
     type = type, 
-    ylab = "Proportion of votes", 
+    ylab = "Percent of votes", 
     freq.sep.line = freq.sep.line,
     plot = plot
   )

@@ -61,7 +61,7 @@ plotInbag <- function(x, bins = 10, replace = TRUE, sampsize = NULL,
   
   .pctPicked <- function(m) {
     pct <- 1 - (1 - (1 / m)) ^ m
-    if(is.nan(pct)) rep(1 - (1 / exp(1)), length(m)) else pct
+    sapply(pct, function(p) if(is.nan(p)) 1 - (1 / exp(1)) else p)
   }
   
   exp.pct <- if(replace) {

@@ -1,6 +1,6 @@
-#' @title Class priors
+#' @title Class Priors
 #' @description Compute the class classification priors and class-specific 
-#'   model binomial p-values.
+#'   model binomial p-values using these priors as null hypotheses.
 #' 
 #' @param x a \code{rfPermute} or \code{randomForest} model object.
 #' @param sampsize the vector of sample sizes used to construct the model. If 

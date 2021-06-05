@@ -2,7 +2,7 @@
 % Please edit documentation in R/classPriors.R
 \name{classPriors}
 \alias{classPriors}
-\title{Class priors}
+\title{Class Priors}
 \usage{
 classPriors(x, sampsize)
 }
@@ -15,7 +15,7 @@ provided, must have length equal to number of classes. If set to
 }
 \description{
 Compute the class classification priors and class-specific 
-  model binomial p-values.
+  model binomial p-values using these priors as null hypotheses.
 }
 \examples{
 library(randomForest)
