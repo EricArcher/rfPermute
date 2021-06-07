@@ -2,7 +2,7 @@
 #' @description For classification models, plot distribution of predictor 
 #'   variables on classes sorted by order of importance in model.
 #' 
-#' @param x a \code{rfPermute} or \code{randomForest} model object..
+#' @param x a \code{rfPermute} or \code{randomForest} model object.
 #' @param df data.frame with predictors in \code{rf} model.
 #' @param class.col response column name in \code{df}.
 #' @param imp.type character string representing importance type to use for 
@@ -73,7 +73,7 @@ plotImpPreds <- function(x, df, class.col, imp.type = NULL, max.vars = 16,
     dplyr::mutate(var = factor(.data$var, levels = imp.vars)) %>% 
     ggplot2::ggplot(ggplot2::aes_string(".class.", "value")) +
     ggplot2::geom_violin(alpha = violin.alpha) +
-    ggplot2::geom_jitter(size = size, alpha = point.alpha) +
+    ggplot2::geom_jitter(size = size, alpha = point.alpha, width = 0.25, height = 0) +
     ggplot2::facet_wrap(~ var, scales = "free_y") +
     ggplot2::labs(x = class.col, y = "Value") +
     ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1))  
