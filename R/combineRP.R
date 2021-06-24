@@ -37,7 +37,7 @@ combineRP <- function(...) {
   rf <- do.call(randomForest::combine, lapply(rp.list, as.randomForest))
   null.dist <- sapply(c("unscaled", "scaled"), function(sc) {
     do.call(
-      abind::abind, 
+      abind::abind,
       c(lapply(rp.list, function(x) x$null.dist[[sc]]), along = 3)
     )
   }, simplify = FALSE)

@@ -18,7 +18,7 @@ plotImpPreds(
 )
 }
 \arguments{
-\item{x}{a \code{rfPermute} or \code{randomForest} model object..}
+\item{x}{a \code{rfPermute} or \code{randomForest} model object.}
 
 \item{df}{data.frame with predictors in \code{rf} model.}
 
