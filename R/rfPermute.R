@@ -96,26 +96,41 @@ rfPermute.default <- function(x, y = NULL, ..., num.rep = 100, num.cores = 1) {
   
   # Create list of permuted y values
   ran.y <- lapply(1:num.rep, function(i) sample(rf.call$y))
-  
   call.x <- x
+  
   # Get importance scores for permutations
   #  a list of 3-dimensional arrays of importance scores
-  cl <- swfscMisc::setupClusters(num.cores)
-  null.dist.list <- tryCatch({
-    if(is.null(cl)) { # Don't parallelize if num.cores == 1      
-      lapply(ran.y, .permFunc, call.x = call.x, perm.rf.call = rf.call)
-    } else { # Run random forest using parLapply
-      parallel::clusterEvalQ(cl, require(randomForest))
-      parallel::clusterExport(
-        cl = cl, 
-        varlist = c("call.x", "rf.call"), 
-        envir = environment()
-      )
-      parallel::parLapplyLB(
-        cl, ran.y, .permFunc, call.x = call.x, perm.rf.call = rf.call
-      )
-    }
-  }, finally = if(!is.null(cl)) parallel::stopCluster(cl) else NULL)
+  max.cores <- parallel::detectCores() - 1
+  if(is.na(max.cores)) max.cores <- 1
+  if(max.cores < 1) max.cores <- 1
+  if(is.null(num.cores)) num.cores <- max.cores
+  if(num.cores > max.cores) num.cores <- max.cores
+  num.cores <- min(num.cores, max.cores)
+  
+  null.dist.list <- if(num.cores == 1) {   
+    lapply(ran.y, .permFunc, call.x = call.x, perm.rf.call = rf.call)
+  } else if(.Platform$OS.type == "windows") {
+    cl <- parallel::makePSOCKcluster(num.cores)
+    tryCatch({
+      if(is.null(cl)) NULL else {
+        parallel::clusterEvalQ(cl, require(randomForest))
+        parallel::clusterExport(
+          cl = cl, 
+          varlist = c("call.x", "rf.call"), 
+          envir = environment()
+        )
+        null.dist <- parallel::parLapplyLB(
+          cl, ran.y, .permFunc, call.x = call.x, perm.rf.call = rf.call
+        )
+        null.dist
+      }
+    }, finally = parallel::stopCluster(cl))
+  } else {
+    parallel::mclapply(
+      ran.y, .permFunc, call.x = call.x, perm.rf.call = rf.call, 
+      mc.cores = num.cores
+    )
+  }
   
   # create and load null distribution arrays for each scaled and unscaled importances
   null.dist <- list(unscaled = .makeImpArray(rf$importance, num.rep, NULL))
