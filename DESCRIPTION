@@ -15,21 +15,21 @@ BugReports: https://github.com/EricArcher/rfPermute/issues
 Depends:
     R (>= 4.0.0)
 Imports:
-    abind,
-    dplyr,
-    ggplot2,
+    abind (>= 1.4),
+    dplyr (>= 1.0),
+    ggplot2 (>= 3.3),
     grDevices,
     gridExtra,
-    magrittr,
+    magrittr (>= 2.0),
     methods,
     parallel,
-    randomForest,
+    randomForest (>= 4.6),
     rlang,
     scales,
     stats,
     swfscMisc (>= 1.5),
-    tibble,
-    tidyr,
+    tibble (>= 3.1),
+    tidyr (>= 1.1),
     utils
 Collate:
     rfPermute_package.R
