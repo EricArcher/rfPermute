@@ -6,3 +6,4 @@ rfPermute.Rcheck
 rfPermute test.R
 /_devel
 rfPermute.Rproj
+/revdep

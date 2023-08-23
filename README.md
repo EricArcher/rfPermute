@@ -59,11 +59,14 @@ devtools::install_github('EricArcher/rfPermute')
 
 ## Changelog
 
-### version 2.5.2 (devel)
+### version 2.5.3 (devel)
+
+### version 2.5.2 (CRAN)
 
 * fixed bug in plotImportance heatmap to now properly choose top rather than bottom `n` predictors.
+* update package documentation for CRAN
 
-### version 2.5.1 (CRAN)
+### version 2.5.1
 
 * added `pct.correct` argument to `plotTrace()`. Default is now to have y-axis as 1 - OOB error rate.
 

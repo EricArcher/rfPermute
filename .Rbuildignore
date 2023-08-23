@@ -10,3 +10,4 @@ tar.gz$
 ^appveyor\.yml$
 ^\.github$
 .DS_Store
+^revdep$
