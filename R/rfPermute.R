@@ -4,7 +4,7 @@
 #'   model by permuting the response variable. Produces null distribution of 
 #'   importance metrics for each predictor variable and p-value of observed.
 #'
-#' @param x,y,formula,data,subset,na.action,\dots See \code{\link{randomForest}} 
+#' @param x,y,formula,data,subset,na.action,\dots See \code{\link[randomForest]{randomForest}} 
 #'   for definitions. In \code{as.randomForest} this is either a 
 #'   \code{randomForest} or \code{rfPermute} object to be converted to a
 #'   \code{randomForest} object.

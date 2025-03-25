@@ -33,7 +33,7 @@ as.randomForest(x)
 rfPermuteTutorial()
 }
 \arguments{
-\item{x, y, formula, data, subset, na.action, \dots}{See \code{\link{randomForest}} 
+\item{x, y, formula, data, subset, na.action, \dots}{See \code{\link[randomForest]{randomForest}} 
 for definitions. In \code{as.randomForest} this is either a 
 \code{randomForest} or \code{rfPermute} object to be converted to a
 \code{randomForest} object.}

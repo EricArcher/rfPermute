@@ -59,11 +59,11 @@ devtools::install_github('EricArcher/rfPermute')
 
 ## Changelog
 
-### version 2.5.3 (devel)
+### version 2.5.4 (on CRAN)
 
 * fixed print.rfPermute output for regression models.  
 
-### version 2.5.2 (CRAN)
+### version 2.5.2
 
 * fixed bug in plotImportance heatmap to now properly choose top rather than bottom `n` predictors.
 * update package documentation for CRAN
