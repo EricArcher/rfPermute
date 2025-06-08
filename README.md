@@ -59,6 +59,10 @@ devtools::install_github('EricArcher/rfPermute')
 
 ## Changelog
 
+### version 2.5.5 (on CRAN)
+
+* move of package to SWFSC/rfPermute as main GitHub repository
+
 ### version 2.5.4 (on CRAN)
 
 * fixed print.rfPermute output for regression models.  
