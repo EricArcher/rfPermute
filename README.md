@@ -59,6 +59,10 @@ devtools::install_github('EricArcher/rfPermute')
 
 ## Changelog
 
+### version 2.5.6 (devel)
+
+* switched aes_string() for aes() in ggplot plots
+
 ### version 2.5.5 (on CRAN)
 
 * move of package to SWFSC/rfPermute as main GitHub repository
