@@ -72,7 +72,7 @@ plotInbag <- function(x, bins = 10, replace = TRUE, sampsize = NULL,
   pct <- ((rf$ntree - rf$oob.times) / rf$ntree) * 100
   bins <- max(bins, floor(length(pct) / 5))
   p <- data.frame(pct = pct) |> 
-    ggplot2::ggplot(ggplot2::aes_string("pct")) +
+    ggplot2::ggplot(ggplot2::aes(x = .data$pct)) +
     ggplot2::geom_histogram(bins = bins) +
     ggplot2::labs(
       x = "Percent of trees where sample was inbag",

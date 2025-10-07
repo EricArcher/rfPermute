@@ -109,8 +109,8 @@ plotConfMat <- function(x, title = NULL, plot = TRUE) {
       observed = stats::reorder(.data$observed, dplyr::desc(.data$observed)),
       predicted = factor(.data$predicted)
     ) |> 
-    ggplot2::ggplot(ggplot2::aes_string("predicted", "observed")) +
-    ggplot2::geom_raster(ggplot2::aes_string(fill = "prop")) +
+    ggplot2::ggplot(ggplot2::aes(x = .data$predicted, y = .data$observed)) +
+    ggplot2::geom_raster(ggplot2::aes(fill = .data$prop)) +
     ggplot2::scale_fill_viridis_c(
       option = "magma", 
       direction = -1, 
