@@ -51,6 +51,7 @@ devtools::install_github('EricArcher/rfPermute')
 * `plotProximity` Plot Random Forest Proximity Scores   
 * `plotTrace` Trace of cumulative error rates in forest  
 * `plotVotes` Vote Distribution    
+* `rfROC` Receiver Operator Curve
  
 ### Miscellaneous functions
 * `combineRP` Combine rfPermute models  
@@ -62,6 +63,7 @@ devtools::install_github('EricArcher/rfPermute')
 ### version 2.5.6 (devel)
 
 * switched aes_string() for aes() in ggplot plots
+* added rfROC()
 
 ### version 2.5.5 (on CRAN)
 

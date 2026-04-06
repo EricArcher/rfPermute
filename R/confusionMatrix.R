@@ -72,6 +72,7 @@ confusionMatrix <- function(x, conf.level = 0.95, threshold = NULL) {
   cm <- rbind(cm, Overall = rep(NA, ncol(cm)))
   pct.correct <- (correct.n / all.n) * 100
   cbind(
+    n = all.n,
     cm, 
     pct.correct = pct.correct[rownames(cm)], 
     ci[rownames(cm), , drop = FALSE],
@@ -121,7 +122,8 @@ plotConfMat <- function(x, title = NULL, plot = TRUE) {
     ggplot2::guides(fill = ggplot2::guide_colorbar(title = "Proportion")) +
     ggplot2::theme(
       axis.text.x.top = ggplot2::element_text(angle = 45, hjust = 0),
-      panel.background = ggplot2::element_blank()
+      panel.background = ggplot2::element_blank(),
+      legend.key.height = ggplot2::unit(1, 'null')
     )
   
   if(plot) print(p)

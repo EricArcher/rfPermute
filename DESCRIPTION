@@ -22,6 +22,7 @@ Imports:
     gridExtra,
     methods,
     parallel,
+    pROC,
     randomForest (>= 4.6),
     rlang,
     scales,
@@ -51,6 +52,7 @@ Collate:
     plotVotes.R
     balancedSampsize.R
     cleanRFdata.R
+    rfROC.R
 LazyData: TRUE
 License: GPL (>= 2)
 Encoding: UTF-8
