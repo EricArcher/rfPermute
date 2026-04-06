@@ -62,7 +62,7 @@ devtools::install_github('EricArcher/rfPermute')
 
 ### version 2.5.6 (devel)
 
-* switched aes_string() for aes() in ggplot plots
+* switched aes_string() and aes_() for aes() in ggplot plots
 * added rfROC()
 
 ### version 2.5.5 (on CRAN)

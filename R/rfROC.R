@@ -67,7 +67,8 @@ rfROC <- function(x, plot = TRUE) {
         ) |> 
         dplyr::select(.data$class, dplyr::everything())
     })
-  )
+  ) |> 
+    tibble::remove_rownames()
   
   p <- do.call(
     rbind,
@@ -98,6 +99,8 @@ rfROC <- function(x, plot = TRUE) {
     ggplot2::theme_minimal() +
     ggplot2::theme(legend.key.height = ggplot2::unit(1, "null")) 
   if(plot) plot(p)
+  
+  print(smry)
   
   invisible(list(
     roc = sapply(roc.list, function(x) x$roc, simplify = FALSE),
