@@ -64,6 +64,8 @@ devtools::install_github('EricArcher/rfPermute')
 
 * switched aes_string() and aes_() for aes() in ggplot plots
 * added rfROC()
+* fixed sampsize bug in plotInbag() when replace = TRUE
+* changed plotInbag() to plot one panel per class for classification models when sampsize is specified by class
 
 ### version 2.5.5 (on CRAN)
 
