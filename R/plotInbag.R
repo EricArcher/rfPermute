@@ -88,7 +88,7 @@ plotInbag <- function(x, bins = 10, replace = TRUE, sampsize = NULL,
   # create histograms
   p <- obs.pct |> 
     ggplot2::ggplot(ggplot2::aes(x = .data$pct)) +
-    ggplot2::geom_histogram(bins = max(bins, floor(k / 5))) +
+    ggplot2::geom_histogram(bins = bins) +
     ggplot2::labs(
       x = "Percent of trees where sample was inbag",
       y = "Frequency"
@@ -98,7 +98,7 @@ plotInbag <- function(x, bins = 10, replace = TRUE, sampsize = NULL,
       data = exp.pct, 
       color = "red"
     )
-  if(length(sampsize) > 1) p <- p + ggplot2::facet_wrap(~.data$group, scales = 'free_x')
+  if(length(sampsize) > 1) p <- p + ggplot2::facet_wrap(~.data$group, scales = 'free')
   
   # plot histograms
   if(plot) print(p)
@@ -129,5 +129,5 @@ plotInbag <- function(x, bins = 10, replace = TRUE, sampsize = NULL,
   message('Percent inbag summary:')
   print(inbag.smry)
   
-  invisible(p)
+  invisible(list(plot = p, smry = inbag.smry))
 }
