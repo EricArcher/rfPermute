@@ -66,6 +66,7 @@ devtools::install_github('EricArcher/rfPermute')
 * added rfROC()
 * fixed sampsize bug in plotInbag() when replace = TRUE
 * changed plotInbag() to plot one panel per class for classification models when sampsize is specified by class
+* updated null distribution `randomForest()` calls to explicitly set `proximity`, `do.trace`, `keep.forest`, and `keep.inbag` arguments to `FALSE` to save memory space in each replicate.
 
 ### version 2.5.5 (on CRAN)
 
