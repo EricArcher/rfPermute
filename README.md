@@ -60,7 +60,7 @@ devtools::install_github('EricArcher/rfPermute')
 
 ## Changelog
 
-### version 2.5.6 (devel)
+### version 2.5.6 (on CRAN)
 
 * switched aes_string() and aes_() for aes() in ggplot plots
 * added rfROC()
@@ -68,7 +68,7 @@ devtools::install_github('EricArcher/rfPermute')
 * changed plotInbag() to plot one panel per class for classification models when sampsize is specified by class
 * updated null distribution `randomForest()` calls to explicitly set `proximity`, `do.trace`, `keep.forest`, and `keep.inbag` arguments to `FALSE` to save memory space in each replicate.
 
-### version 2.5.5 (on CRAN)
+### version 2.5.5
 
 * move of package to SWFSC/rfPermute as main GitHub repository
 

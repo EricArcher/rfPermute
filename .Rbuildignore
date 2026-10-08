@@ -12,3 +12,4 @@ tar.gz$
 .DS_Store
 ^revdep$
 ^CRAN-SUBMISSION$
+^cran-comments\.md$
